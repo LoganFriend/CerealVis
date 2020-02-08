@@ -1,0 +1,20 @@
+{
+    "name": "EMGVis",
+    "version": "0.1.0",
+    "description": "An electron app made to read in and display EMG sensor data from an Arduino Uno.",
+    "main": "main.js",
+    "scripts": {
+        "start": "electron .",
+        "pack": "build --dir",
+        "dist": "build",
+        "postinstall": "install-app-deps"
+    },
+    "repository": "https://github.com/LoganFriend/EMGVis",
+    "author": "Logan Friend",
+    "license": "MIT",
+    "devDependencies": {
+        "electron": "^1.8.8",
+        "electron-builder": "20.2.0",
+        "electron-reload": "^1.5.0"
+    }
+}
