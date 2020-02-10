@@ -10,10 +10,10 @@
     "author": "Logan Friend",
     "license": "MIT",
     "devDependencies": {
+        "electron": "^8.0.0",
         "electron-rebuild": "^1.10.0"
     },
     "dependencies": {
-        "electron": "^8.0.0",
         "serialport": "^8.0.7"
     }
 }
