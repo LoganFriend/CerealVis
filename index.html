@@ -2,7 +2,6 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello p5.js!</title>
     <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
     <!-- uncomment lines below to include extra p5 libraries -->
     <!--<script language="javascript" src="libraries/p5.dom.js"></script>-->
@@ -11,27 +10,7 @@
     <style> body {padding: 0; margin: 0; overflow-x:hidden; overflow-y: hidden} </style>
   </head>
   <body>
-    <textarea rows="30" cols="50" id="incomingData"></textarea>
-    <script>
-      //load serialport module
-      serialport = require('serialport');
-      const Readline = serialport.parsers.Readline;
 
-      //initialize serialport with 9600 baudrate.
-      var sp = new serialport('COM8', {
-        baudRate: 9600,
-      });
-        
-      //parse incoming data line-by-line from serial port.
-      const parser = sp.pipe(new Readline({ delimiter: '\r\n' }));
-      parser.on('data', addText);
-
-      //append incoming data to the textarea.
-      function addText(event) {
-        document.getElementById("incomingData").value += "\n"+event;
-        document.getElementById("incomingData").scrollTop = document.getElementById("incomingData").scrollHeight 
-      }
-    </script>
     
   </body>
   
