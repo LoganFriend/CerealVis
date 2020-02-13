@@ -14,7 +14,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --env=jsdom",
     "rebuild": ".\\node_modules\\.bin\\electron-rebuild.cmd",
     "electron-start": "electron .",
     "preelectron-pack": "npm run build",

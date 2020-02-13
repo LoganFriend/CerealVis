@@ -15,9 +15,9 @@ function createWindow() {
 
   // and load the index.html of the app.
   //Use this for development
-  win.loadURL("http://localhost:3000");
+  //win.loadURL("http://localhost:3000");
   //Use this for the build
-  //win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
+  win.loadURL(`file://${path.join(__dirname, '../build/index.html')}`);
 
   // Open the DevTools.
   //win.webContents.openDevTools();
@@ -47,3 +47,4 @@ app.on("activate", () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+
