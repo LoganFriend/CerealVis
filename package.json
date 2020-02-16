@@ -6,7 +6,6 @@
   "build": {
     "appId": "nonExistentID",
     "files": [
-      "build/**/*",
       "node_modules/**/*"
     ],
     "directories": {
@@ -27,9 +26,9 @@
   "scripts": {
     "rebuild": ".\\node_modules\\.bin\\electron-rebuild.cmd",
     "start": "electron .",
-    "pack": "build --dir",
-    "dist": "build",
-    "postinstall": "install-app-deps"
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "repository": "https://github.com/LoganFriend/CerealVis",
   "license": "MIT"

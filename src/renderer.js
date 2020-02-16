@@ -2,9 +2,9 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-let closebtn = document.getElementById('closebtn');
+let closebtn = document.getElementById("closebtn");
 
-closebtn.addEventListener('click', (e) => {
+closebtn.addEventListener("click", e => {
   e.preventDefault();
   window.closeCurrentWindow();
 });
