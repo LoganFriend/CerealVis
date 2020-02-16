@@ -7,13 +7,16 @@
   "private": true,
   "scripts": {
     "start": "electron .",
-    "rebuild-mac": "$(npm bin)/electron-rebuild", 
-    "rebuild-win": ".\\node_modules\\.bin\\electron-rebuild.cmd", 
-    "pack": "electron-builder --dir", 
+    "rebuild-mac": "$(npm bin)/electron-rebuild",
+    "rebuild-win": ".\\node_modules\\.bin\\electron-rebuild.cmd",
+    "pack": "electron-builder --dir",
     "dist": "electron-builder",
     "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
+    "chart.js": "^2.9.3",
+    "chartjs-plugin-streaming": "^1.8.0",
+    "moment": "^2.24.0",
     "serialport": "^8.0.7"
   },
   "devDependencies": {
