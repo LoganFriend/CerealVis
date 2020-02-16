@@ -1,8 +1,24 @@
 {
   "name": "CerealVis",
   "version": "0.1.0",
+  "repository": "https://github.com/LoganFriend/CerealVis",
+  "license": "MIT",
   "main": "main.js",
   "private": true,
+  "scripts": {
+    "start": "electron .",
+    "rebuild": ".\\node_modules\\.bin\\electron-rebuild.cmd",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=release-builds",
+    "package-win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=release-builds"
+  },
+  "dependencies": {
+    "serialport": "^8.0.7"
+  },
+  "devDependencies": {
+    "electron": "^8.0.0",
+    "electron-packager": "^14.2.1",
+    "electron-rebuild": "^1.10.0"
+  },
   "build": {
     "appId": "nonExistentID",
     "files": [
@@ -13,23 +29,5 @@
     },
     "win": {},
     "mac": {}
-  },
-  "dependencies": {
-    "serialport": "^8.0.7"
-  },
-  "devDependencies": {
-    "electron": "^8.0.0",
-    "electron-builder": "^22.3.2",
-    "electron-rebuild": "^1.10.0",
-    "electron-reload": "^1.5.0"
-  },
-  "scripts": {
-    "rebuild": ".\\node_modules\\.bin\\electron-rebuild.cmd",
-    "start": "electron .",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder",
-    "postinstall": "electron-builder install-app-deps"
-  },
-  "repository": "https://github.com/LoganFriend/CerealVis",
-  "license": "MIT"
+  }
 }

@@ -1,12 +1,6 @@
 // Modules to control application life and create native browser window
 const { app, BrowserWindow } = require('electron')
 
-// Live reload module which watches `public` folder
-require('electron-reload')(__dirname, {
-    // Note that the path to electron may vary according to the main file
-    electron: require(`${__dirname}/node_modules/electron`)
-})
-
 const path = require('path')
 const url = require('url')
 
