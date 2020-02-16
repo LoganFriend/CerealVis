@@ -7,16 +7,32 @@
   "private": true,
   "scripts": {
     "start": "electron .",
-    "rebuild": ".\\node_modules\\.bin\\electron-rebuild.cmd",
-    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --prune=true --out=dist",
-    "package-win": "electron-packager . --overwrite --platform=win32 --arch=x64 --prune=true --out=dist"
+    "rebuild-mac": "$(npm bin)/electron-rebuild", 
+    "rebuild-win": ".\\node_modules\\.bin\\electron-rebuild.cmd", 
+    "pack": "electron-builder --dir", 
+    "dist": "electron-builder",
+    "postinstall": "electron-builder install-app-deps"
   },
   "dependencies": {
     "serialport": "^8.0.7"
   },
   "devDependencies": {
     "electron": "^8.0.0",
-    "electron-packager": "^14.2.1",
+    "electron-builder": "^22.3.2",
     "electron-rebuild": "^1.10.0"
+  },
+  "build": {
+    "appId": "CerealVis",
+    "files": [
+      "src/**/*",
+      "public/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
+    },
+    "win": {},
+    "mac": {}
   }
 }
