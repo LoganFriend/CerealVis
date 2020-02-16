@@ -11,12 +11,6 @@ window.closeCurrentWindow = function(){
   window.close();
 }
 
-//EXTRA
-randomScalingFactor = function() {
-	return (Math.random() > 0.5 ? 1.0 : -1.0) * Math.round(Math.random() * 100);
-}
-
-
 //SERIALPORT
 //-------------------------------------------------------------------------------------------------
 const serialport = require("serialport");
@@ -28,17 +22,12 @@ addText = function(event) {
   console.log(event);
 }
 
-addToChart = function() {
-
-}
-
 //initialize serialport with 9600 baudrate.
 connectSerial = function(port){
   var sp = new serialport(port, {
     baudRate: 9600
   });
 
-  //Port is in flowing mode
   const parser = sp.pipe(new Readline({ delimiter: "\r\n" }));
   //parser.on("data", addText);
   return parser

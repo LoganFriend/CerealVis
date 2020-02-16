@@ -86,48 +86,9 @@ function onRefresh(chart, data) {
 		dataset.data.push({
       x: Date.now(),
       y: data
-			//y: randomScalingFactor()
 		});
 	});
 }
-
-/*
-document.getElementById('randomizeData').addEventListener('click', function() {
-	config.data.datasets.forEach(function(dataset) {
-		dataset.data.forEach(function(dataObj) {
-			dataObj.y = randomScalingFactor();
-		});
-	});
-	window.myChart.update();
-});
-
-
-document.getElementById('addDataset').addEventListener('click', function() {
-	var colorName = colorNames[config.data.datasets.length % colorNames.length];
-	var newColor = chartColors[colorName];
-	var newDataset = {
-		label: 'Dataset ' + (config.data.datasets.length + 1),
-		backgroundColor: color(newColor).alpha(0.5).rgbString(),
-		borderColor: newColor,
-		fill: false,
-		lineTension: 0,
-		data: []
-	};
-
-	config.data.datasets.push(newDataset);
-	window.myChart.update();
-});
-
-document.getElementById('removeDataset').addEventListener('click', function() {
-	config.data.datasets.pop();
-	window.myChart.update();
-});
-
-document.getElementById('addData').addEventListener('click', function() {
-	onRefresh(window.myChart);
-	window.myChart.update();
-});
-*/
 
 //SERIALPORT
 //-------------------------------------------------------------------------------------------------
