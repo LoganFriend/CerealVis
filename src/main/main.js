@@ -19,12 +19,12 @@ function createWindow() {
         contextIsolation: true, // protect against prototype pollution
         enableRemoteModule: false, // turn off remote
         webPreferences: {
-            preload: path.join(app.getAppPath(), 'src/preload.js') //Use a preload script
+            preload: path.join(app.getAppPath(), 'src/renderer/preload.js') //Use a preload script
         }
     })
 
     // Load the index.html of the app
-    mainWindow.loadFile(path.join(__dirname, "public", "index.html"));
+    mainWindow.loadFile(path.join(app.getAppPath(), "public/index.html"));
 
     // Open the DevTools on start
     mainWindow.webContents.openDevTools()
