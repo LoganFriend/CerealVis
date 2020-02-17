@@ -4,6 +4,12 @@ const { app, BrowserWindow } = require('electron')
 const path = require('path')
 const url = require('url')
 
+//Add Live reloading
+require('electron-reload')(app.getAppPath(), {
+    // Note that the path to electron may vary according to the main file
+    electron: require(`${app.getAppPath()}/node_modules/electron`)
+});
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected
 let mainWindow
