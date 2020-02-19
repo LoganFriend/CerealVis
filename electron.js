@@ -58,21 +58,18 @@ app.on("activate", function() {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
+// In this section you can include the rest of your app's specific main process
 // code. You can also put them in separate files and require them here.
+//-------------------------------------------------------------------------------------------------
 
 //SerialPort
-
 const serialport = require("serialport");
 const Readline = serialport.parsers.Readline;
 
-connectSerial = function(port) {
-  var sp = new serialport(port, {
-    baudRate: 9600
-  });
+connectSerial = function(port, baudRate) {
+  var sp = new serialport(port, baudRate);
 
   const parser = sp.pipe(new Readline({ delimiter: "\r\n" }));
-  //parser.on("data", addText);
   return parser;
 };
 
@@ -96,7 +93,7 @@ ipcMain.on("run", (event, arg) => {
   };
 
   console.log(arg.Port);
-  parser = connectSerial(arg.Port);
+  parser = connectSerial(arg.Port, arg.BaudRate);
   parser.on("data", streamtochart);
   
 });

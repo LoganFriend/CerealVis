@@ -1,35 +1,9 @@
-// import React from 'react';
-// import logo from './logo.svg';
-// import './App.css';
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
-
-// export default App;
-
 import React, { Component } from "react";
 import "./app.css";
 
 import { Line } from "react-chartjs-2";
 import "chartjs-plugin-streaming";
+import { getDefaultNormalizer } from "@testing-library/react";
 
 class LineChart extends React.Component {
   constructor(props) {
@@ -59,23 +33,6 @@ class LineChart extends React.Component {
               {
                 type: "realtime",
                 realtime: {
-                  // onRefresh: function(chart, data) {
-                  //   chart.data.datasets.forEach(function(dataset) {
-                  //     dataset.data.push({
-                  //       x: Date.now(),
-                  //       y: Math.random()
-                  //     });
-                  //   });
-                  // },
-                  onReceive: function(event) {
-                    window.myChart.config.data.datasets[event.index].data.push({
-                      x: event.timestamp,
-                      y: event.value
-                    });
-                    window.myChart.update({
-                      preservation: true
-                    });
-                  },
                   delay: 2000
                 }
               }
@@ -86,8 +43,6 @@ class LineChart extends React.Component {
     );
 
     window.ipcRenderer.on("datastream", (event, arg) => {
-      console.log(arg);
-
       this.linechart.props.data.datasets.forEach(function(dataset) {
         dataset.data.push({
           x: Date.now(),
@@ -95,8 +50,7 @@ class LineChart extends React.Component {
         });
       });
     });
-
-    // This binding is necessary to make `this` work in the callback
+    
   }
   render() {
     return this.linechart;
