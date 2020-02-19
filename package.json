@@ -18,7 +18,7 @@
     "win": {},
     "mac": {}
   },
-  "main": "electron.js",
+  "main": "public/electron.js",
   "homepage": "./",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
