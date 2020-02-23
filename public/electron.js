@@ -63,37 +63,31 @@ app.on("activate", function() {
 //-------------------------------------------------------------------------------------------------
 
 //SerialPort
-const serialport = require("serialport");
-const Readline = serialport.parsers.Readline;
-
-connectSerial = function(port, baudRate) {
-  var sp = new serialport(port, baudRate);
-
-  const parser = sp.pipe(new Readline({ delimiter: "\r\n" }));
-  return parser;
-};
+//-------------------------------------------------------------------------------------------------
+const sp = require("./serialport");
+serial = new sp.SerialPortClass();
 
 //IPC Channels
+//-------------------------------------------------------------------------------------------------
 
-ipcMain.on("asynchronous-message", (event, arg) => {
-  console.log(arg); // prints "ping"
-  event.reply("asynchronous-reply", "pong");
+ipcMain.on("ping", (event, arg) => {
+  console.log("ping"); // prints "ping"
+  event.reply("pong");
 });
 
 ipcMain.on("log", (event, arg) => {
   console.log(arg);
 });
 
-
-
 ipcMain.on("run", (event, arg) => {
-
   streamtochart = function(data) {
     event.reply("datastream", data);
   };
 
-  console.log(arg.Port);
-  parser = connectSerial(arg.Port, arg.BaudRate);
-  parser.on("data", streamtochart);
-  
+  serial.Connect(streamtochart);
 });
+
+ipcMain.on("close", (event, arg) => {
+  serial.Close();
+});
+//-------------------------------------------------------------------------------------------------
