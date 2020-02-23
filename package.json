@@ -1,19 +1,74 @@
 {
-    "name": "EMGVis",
-    "version": "0.1.0",
-    "description": "An electron app made to read in and display EMG sensor data from an Arduino Uno.",
-    "main": "main.js",
-    "scripts": {
-        "start": "electron ."
+  "name": "CerealVis",
+  "version": "0.1.0",
+  "private": true,
+  "description": "CerealVis",
+  "author": "Logan Friend",
+  "build": {
+    "appId": "CerealVis",
+    "files": [
+      "src/**/*",
+      "public/**/*",
+      "node_modules/**/*"
+    ],
+    "directories": {
+      "buildResources": "assets",
+      "output": "dist"
     },
-    "repository": "https://github.com/LoganFriend/EMGVis",
-    "author": "Logan Friend",
-    "license": "MIT",
-    "devDependencies": {
-        "electron": "^8.0.0",
-        "electron-rebuild": "^1.10.0"
-    },
-    "dependencies": {
-        "serialport": "^8.0.7"
-    }
+    "win": {},
+    "mac": {}
+  },
+  "main": "public/electron.js",
+  "homepage": "./",
+  "dependencies": {
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.4.0",
+    "@testing-library/user-event": "^7.2.1",
+    "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
+    "chartjs-plugin-streaming": "^1.8.0",
+    "cross-env": "^7.0.0",
+    "electron-is-dev": "^1.1.0",
+    "install": "^0.13.0",
+    "npm": "^6.13.7",
+    "react": "^16.12.0",
+    "react-bootstrap": "^1.0.0-beta.16",
+    "react-chartjs-2": "^2.9.0",
+    "react-dom": "^16.12.0",
+    "react-scripts": "3.4.0",
+    "serialport": "^8.0.7"
+  },
+  "devDependencies": {
+    "concurrently": "^5.1.0",
+    "electron": "^8.0.1",
+    "electron-builder": "^22.3.2",
+    "electron-rebuild": "^1.10.0",
+    "wait-on": "^4.0.0"
+  },
+  "scripts": {
+    "rebuild-mac": "$(npm bin)/electron-rebuild",
+    "rebuild-win": ".\\node_modules\\.bin\\electron-rebuild.cmd",
+    "react-start": "react-scripts start",
+    "react-build": "react-scripts build",
+    "react-eject": "react-scripts eject",
+    "electron-build": "electron-builder",
+    "release": "npm run react-build && electron-builder --publish=always",
+    "build": "npm run react-build && npm run electron-build",
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
 }
