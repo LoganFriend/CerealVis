@@ -80,11 +80,10 @@ ipcMain.on("log", (event, arg) => {
 });
 
 ipcMain.on("run", (event, arg) => {
-  streamtochart = function(data) {
-    event.reply("datastream", data);
-  };
-
-  serial.Connect(streamtochart);
+  // serial.AutoConnect(event); // automatically finds and connects to an arduino
+  // serial.PrintPortList(); // prints out all of the non-undefined port information
+  serial.ManualConnect(event, "COM3"); // manual connection made with com3 port (proof of concept only)
+  serial.DataGate();
 });
 
 ipcMain.on("close", (event, arg) => {
