@@ -8,8 +8,8 @@ let mainWindow;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: 900,
-    height: 680,
+    width: 1350,
+    height: 800,
     nodeIntegration: false, // is default value after Electron v5
     contextIsolation: true, // protect against prototype pollution
     enableRemoteModule: false, // turn off remote
