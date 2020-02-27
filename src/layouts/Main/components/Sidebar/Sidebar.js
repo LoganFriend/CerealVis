@@ -12,11 +12,11 @@ import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import SettingsIcon from '@material-ui/icons/Settings';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 
-import { Profile, SidebarNav, UpgradePlan } from './components';
+import { Profile, SidebarNav} from './components';
 
 const useStyles = makeStyles(theme => ({
   drawer: {
-    width: 240,
+    width: 75, //was 240
     [theme.breakpoints.up('lg')]: {
       marginTop: 64,
       height: 'calc(100% - 64px)'
@@ -44,22 +44,27 @@ const Sidebar = props => {
 
   const pages = [
     {
-      title: 'Dashboard',
+      //title: 'Dashboard',
       href: '/dashboard',
       icon: <DashboardIcon />
     },
     {
-      title: 'Users',
+      //title: 'Users',
       href: '/users',
       icon: <PeopleIcon />
     },
     {
-      title: 'Account',
+      //title: 'Icons',
+      href: '/icons',
+      icon: <ImageIcon />
+    },
+    {
+      //title: 'Account',
       href: '/account',
       icon: <AccountBoxIcon />
     },
     {
-      title: 'Settings',
+      //title: 'Settings',
       href: '/settings',
       icon: <SettingsIcon />
     }
@@ -82,8 +87,7 @@ const Sidebar = props => {
         <SidebarNav
           className={classes.nav}
           pages={pages}
-        />
-
+        /> 
       </div>
     </Drawer>
   );
