@@ -84,7 +84,7 @@ ipcMain.on("run", (event, arg) => {
     event.reply("datastream", data);
   };
 
-  console.log(serial.Connect(streamtochart));
+  console.log(serial.Connect(streamtochart, "COM3"));
   serial.DataGate();
 });
 
