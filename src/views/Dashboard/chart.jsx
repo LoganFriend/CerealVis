@@ -42,6 +42,25 @@ class LineChart extends React.Component {
         });
       });
     });
+
+    /*setInterval(function() {
+      this.linechart.props.data.datasets.forEach(function(dataset) {
+        dataset.data.push({
+          x: Date.now(),
+          y: Math.random(1005)
+        });
+      });
+    }, 2500);*/
+
+    /*window.ipcRenderer.on("datastream", (event, arg) => {
+      this.linechart.props.data.datasets.forEach(function(dataset) {
+        dataset.data.push({
+          x: Date.now(),
+          y: Math.random(1005)
+        });
+      });
+    });*/
+
   }
   render() {
     return this.linechart;

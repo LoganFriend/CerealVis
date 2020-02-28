@@ -11,14 +11,6 @@ export const data = {
   ]
 };
 
-window.ipcRenderer.on("datastream", (event, arg) => {
-  this.data.datasets.forEach(function(dataset) {
-    data.push({
-      label: arg
-    });
-  });
-});
-
 export const options = {
   responsive: true,
   maintainAspectRatio: false,
