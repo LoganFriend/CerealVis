@@ -12,46 +12,54 @@ class SerialPortClass {
   }
 
   async CreatePortList() {
-    await SerialPort.list().then(
-      ports => {
-        ports.forEach(p => {
-          if (p.manufacturer != undefined) {
-            this.possible_ports.push({ manufacturer: p.manufacturer, path: p.path });
-          }
-        });
+    // this function creates an array of available ports
+    // before anything is added to the array, the array is cleared
+    this.possible_ports = [];
+    var ports = await SerialPort.list();
+    for (var i = 0; i < ports.length; i++) {
+      if (ports[i].manufacturer != undefined) {
+        this.possible_ports.push({ manufacturer: ports[i].manufacturer, path: ports[i].path });
       }
-    );
+    }
   }
 
-  PrintPortList() {
-    this.possible_ports.forEach(port => {
-      console.log(port.manufacturer, port.path);
-    });
+  GetPortList() {
+    // this function returns the array of available ports
+    return this.possible_ports;
   }
 
-  AutoConnect(event) {
-    this.possible_ports.forEach(port => {
-      if (port.manufacturer.includes("Arduino")) {
-        this.port = new SerialPort(port.path, { baudRate: this.baudRate });
-        console.log("Connecting to port: " + port.path + "...");
+  Connect(event, path = "AUTO") {
+    // this function attempts to create a connection with a specified port
+    // if no port is specified the function attempts to create a connection with an arduino module
+    // returns true when a was connection made, false when a connection was not made
+    var valid_port = false;
+
+    for (var i = 0; i < this.possible_ports.length; i++) {
+      if (path == "AUTO") {
+        if (this.possible_ports[i].manufacturer.includes("Arduino")) {
+          path = this.possible_ports[i].path;
+          valid_port = true;
+          break;
+        }
+      } else {
+        if (this.possible_ports[i].path == path) {
+          valid_port = true;
+          break;
+        }
       }
-    });
+    }
 
-    this.parser = this.port.pipe(new Readline({ delimiter: "\r\n" }));
-    this.parser.on("data", (data) => {
-      event.reply("datastream", data);
-    });
+    if (valid_port) {
+      this.port = new SerialPort(path, { baudRate: this.baudRate });
+      this.parser = this.port.pipe(new Readline({ delimiter: "\r\n" }));
+      this.parser.on("data", event);
+      return true;
+    }
+
+    return false;
   }
 
-  ManualConnect(event, path) {
-    this.port = new SerialPort(path, { baudRate: this.baudRate });
-    this.parser = this.port.pipe(new Readline({ delimiter: "\r\n" }));
-    this.parser.on("data", (data) => {
-      event.reply("datastream", data);
-    });
-  }
-
-  Close() {
+  Disconnect() {
     this.port.write("q");
     this.port.close(err => {
         console.log('port closed', err);
