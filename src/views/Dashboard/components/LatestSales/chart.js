@@ -2,19 +2,22 @@ import palette from 'theme/palette';
 
 export const data = {
   labels: ['1:00', '2:00', '3:00', '4:00', '6:00', '7:00'],
+  
   datasets: [
     {
       label: 'This year',
-      backgroundColor: palette.primary.main,
-      data: [18, 5, 19, 27, 29, 19, 20]
-    },
-    {
-      label: 'Last year',
-      backgroundColor: palette.neutral,
-      data: [11, 20, 12, 29, 30, 25, 13]
+      backgroundColor: palette.primary.main
     }
   ]
 };
+
+window.ipcRenderer.on("datastream", (event, arg) => {
+  this.data.datasets.forEach(function(dataset) {
+    data.push({
+      label: arg
+    });
+  });
+});
 
 export const options = {
   responsive: true,
