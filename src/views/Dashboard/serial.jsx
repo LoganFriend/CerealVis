@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import {Button} from '@material-ui/core';
 
 function sendcommand(e) {
   e.preventDefault();
@@ -14,9 +15,9 @@ class SerialButton extends Component {
   }
   render() {
     return (
-      <button className="btn-primary m-2" onClick={this.sendcommand}>
-        Start Serial Connection
-      </button>
+      <Button variant="contained" color="primary" onClick={this.sendcommand}>
+      Start Serial Connection
+    </Button>
     );
   }
 }

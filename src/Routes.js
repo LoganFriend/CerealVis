@@ -32,12 +32,12 @@ const Routes = () => {
         layout={MainLayout}
         path="/dashboard"
       />
-      <RouteWithLayout>
+      {/* <RouteWithLayout>
         component={LineChart}
         exact
         layout={MainLayout}
         path="chart.jsx"
-      </RouteWithLayout>
+      </RouteWithLayout> */}
       <RouteWithLayout
         component={UserListView}
         exact
