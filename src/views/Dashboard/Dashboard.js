@@ -13,6 +13,9 @@ import {
   LatestOrders
 } from './components';
 
+import LineChart from './chart.jsx';
+import SerialButton from './serial.jsx';
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
@@ -71,7 +74,8 @@ const Dashboard = () => {
           xl={9}
           xs={12}
         >
-          <LatestSales />
+          <SerialButton />
+          <LineChart />
         </Grid>
         <Grid
           item
