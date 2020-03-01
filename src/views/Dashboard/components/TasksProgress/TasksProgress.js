@@ -58,11 +58,12 @@ const TasksProgress = props => {
               className={classes.title}
               color="textSecondary"
               gutterBottom
-              variant="body2"
+              variant="h3"
+              align="center"
             >
               AVERAGE
             </Typography>
-            <Typography variant="h3">125</Typography>
+            <Typography variant="h1" align="center">125</Typography>
           </Grid>
           
         </Grid>

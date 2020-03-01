@@ -8,9 +8,14 @@ export default {
   white,
   primary: {
     contrastText: white,
-    dark: colors.indigo[900],
-    main: colors.indigo[500],
-    light: colors.indigo[100]
+    dark: "#81d4fa", //color of button when hover 
+    main: "#03a9f4",
+    light: "#115293"
+
+    //Default:
+    //dark: colors.indigo[900],
+    //main: colors.indigo[500],
+    //light: colors.indigo[100]
   },
   secondary: {
     contrastText: white,

@@ -60,11 +60,12 @@ const TotalUsers = props => {
               className={classes.title}
               color="textSecondary"
               gutterBottom
-              variant="body2"
+              variant="h3"
+              align="center"
             >
               MINIMUM
             </Typography>
-            <Typography variant="h3">80</Typography>
+            <Typography variant="h1" align="center">80</Typography>
           </Grid>
         </Grid>
         <div className={classes.difference}>

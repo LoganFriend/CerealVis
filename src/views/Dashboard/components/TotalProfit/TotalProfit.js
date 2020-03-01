@@ -50,13 +50,13 @@ const TotalProfit = props => {
               className={classes.title}
               color="inherit"
               gutterBottom
-              variant="body2"
+              variant="body1"
             >
               TOTAL PROFIT
             </Typography>
             <Typography
               color="inherit"
-              variant="h3"
+              variant="h1"
             >
               $23,200
             </Typography>

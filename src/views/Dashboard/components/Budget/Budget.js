@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
     display: 'flex'
   },
   title: {
-    fontWeight: 700
+    fontWeight: 1000
   },
   avatar: {
     backgroundColor: theme.palette.error.main,
@@ -60,11 +60,12 @@ const Budget = props => {
               className={classes.title}
               color="textSecondary"
               gutterBottom
-              variant="body2"
+              variant="h3"
+              align="center"
             >
               MAXIMUM
             </Typography>
-            <Typography variant="h3">150</Typography>
+            <Typography variant="h1" align="center">150 </Typography>
           </Grid>
         </Grid>
       </CardContent>
