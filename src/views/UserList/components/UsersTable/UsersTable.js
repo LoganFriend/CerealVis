@@ -115,7 +115,6 @@ const UsersTable = props => {
                     />
                   </TableCell>
                   <TableCell>Name</TableCell>
-                  <TableCell>Email</TableCell>
                   <TableCell>Location</TableCell>
                   <TableCell>Phone</TableCell>
                   <TableCell>Registration date</TableCell>
@@ -139,16 +138,10 @@ const UsersTable = props => {
                     </TableCell>
                     <TableCell>
                       <div className={classes.nameContainer}>
-                        <Avatar
-                          className={classes.avatar}
-                          src={user.avatarUrl}
-                        >
-                          {getInitials(user.name)}
-                        </Avatar>
                         <Typography variant="body1">{user.name}</Typography>
                       </div>
                     </TableCell>
-                    <TableCell>{user.email}</TableCell>
+                   
                     <TableCell>
                       {user.address.city}, {user.address.state},{' '}
                       {user.address.country}
