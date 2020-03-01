@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Redirect } from 'react-router-dom';
+import { Switch, Redirect, Route } from 'react-router-dom';
 
 import { RouteWithLayout } from './components';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
@@ -16,6 +16,7 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView
 } from './views';
+import LineChart from 'components/chart';
 
 const Routes = () => {
   return (
@@ -31,6 +32,12 @@ const Routes = () => {
         layout={MainLayout}
         path="/dashboard"
       />
+      {/* <RouteWithLayout>
+        component={LineChart}
+        exact
+        layout={MainLayout}
+        path="chart.jsx"
+      </RouteWithLayout> */}
       <RouteWithLayout
         component={UserListView}
         exact

@@ -13,7 +13,7 @@ class SerialPortClass {
       ports => {
         ports.forEach(p => {
           if (p.manufacturer != undefined) {
-            if (p.manufacturer.includes("Silicon Labs")) {
+            if (p.manufacturer.includes("Silicon Labs") || p.manufacturer.includes("Arduino")) {
               this.port = new SerialPort(p.path, { baudRate: 9600 });
               console.log("Attemptng to connect to port " + p.path + "...");
             }

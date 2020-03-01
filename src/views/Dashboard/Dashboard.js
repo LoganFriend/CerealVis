@@ -1,6 +1,6 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Grid } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 
 import {
   Budget,
@@ -12,6 +12,9 @@ import {
   LatestProducts,
   LatestOrders
 } from './components';
+
+import LineChart from './chart.jsx';
+import SerialButton from './serial.jsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -66,12 +69,17 @@ const Dashboard = () => {
         </Grid>
         <Grid
           item
-          lg={12}
+          lg={11}
           md={12}
           xl={9}
           xs={12}
         >
-          <LatestSales />
+          <SerialButton />
+          <Container maxWidth="lg">
+
+          <LineChart />
+          </Container>
+          
         </Grid>
         <Grid
           item

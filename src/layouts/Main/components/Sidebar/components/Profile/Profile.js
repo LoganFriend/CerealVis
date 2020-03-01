@@ -13,8 +13,8 @@ const useStyles = makeStyles(theme => ({
     minHeight: 'fit-content'
   },
   avatar: {
-    width: 60,
-    height: 60
+    width: 50,
+    height: 50
   },
   name: {
     marginTop: theme.spacing(1)
@@ -27,9 +27,7 @@ const Profile = props => {
   const classes = useStyles();
 
   const user = {
-    //name: 'Shen Zhi',
-    //avatar: '/images/avatars/avatar_11.png',
-    //bio: 'Brain Director'
+    avatar: '/images/avatars/avatar_11.png',
   };
 
   return (
