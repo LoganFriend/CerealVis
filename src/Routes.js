@@ -23,7 +23,7 @@ const Routes = () => {
       <RouteWithLayout
         component={DashboardView}
         exact
-        layout={MainLayout}
+        layout={MinimalLayout}
         path="/dashboard"
       />
       <RouteWithLayout
