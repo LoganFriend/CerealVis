@@ -16,7 +16,6 @@ import {
   SignIn as SignInView,
   NotFound as NotFoundView
 } from './views';
-import LineChart from 'components/chart';
 
 const Routes = () => {
   return (
@@ -32,12 +31,6 @@ const Routes = () => {
         layout={MainLayout}
         path="/dashboard"
       />
-      {/* <RouteWithLayout>
-        component={LineChart}
-        exact
-        layout={MainLayout}
-        path="chart.jsx"
-      </RouteWithLayout> */}
       <RouteWithLayout
         component={UserListView}
         exact
