@@ -22,7 +22,6 @@ import {
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 import mockData from './data';
-import { StatusBullet } from 'components';
 
 const useStyles = makeStyles(theme => ({
   root: {},
@@ -111,14 +110,7 @@ const LatestOrders = props => {
                       {moment(order.createdAt).format('DD/MM/YYYY')}
                     </TableCell>
                     <TableCell>
-                      <div className={classes.statusContainer}>
-                        <StatusBullet
-                          className={classes.status}
-                          color={statusColors[order.status]}
-                          size="sm"
-                        />
-                        {order.status}
-                      </div>
+                      
                     </TableCell>
                   </TableRow>
                 ))}
