@@ -12,10 +12,9 @@ class LineChart extends Component {
           datasets: [
             {
               label: "Dataset 1",
-              borderColor: "rgb(139,0,139)",
-              backgroundColor: "rgba(123,104,238, 0.5)",
-              lineTension: 0,
-              borderDash: [8, 4]
+              borderColor: "#0277bd",
+              backgroundColor: "#fbfcfd",
+              lineTension: 0
             }
           ]
         }}

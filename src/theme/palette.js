@@ -8,9 +8,9 @@ export default {
   white,
   primary: {
     contrastText: white,
-    dark: "#81d4fa", //color of button when hover 
+    dark: "#0277bd", //color of button when hover 
     main: "#03a9f4",
-    light: "#115293"
+    light: "#b3e5fc"
 
     //Default:
     //dark: colors.indigo[900],
@@ -53,8 +53,8 @@ export default {
     link: colors.blue[600]
   },
   background: {
-    default: '#F4F6F8',
-    paper: white
+    default: "#FBFCFD",
+    paper: white //card's color
   },
   icon: colors.blueGrey[600],
   divider: colors.grey[200]
