@@ -7,10 +7,6 @@ import {
   TotalUsers,
   TasksProgress,
   TotalProfit,
-  LatestSales,
-  UsersByDevice,
-  LatestProducts,
-  LatestOrders
 } from './components';
 
 import LineChart from './chart.jsx';
