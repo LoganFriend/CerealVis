@@ -1,7 +1,6 @@
 import React from 'react';
 import { Switch, Redirect } from 'react-router-dom';
 
-import { RouteWithLayout } from './components';
 import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 
 import {
@@ -10,6 +9,30 @@ import {
   Icons as IconsView,
   Settings as SettingsView,
 } from './views';
+
+
+import { Route } from 'react-router-dom';
+import PropTypes from 'prop-types';
+const RouteWithLayout = props => {
+  const { layout: Layout, component: Component, ...rest } = props;
+
+  return (
+    <Route
+      {...rest}
+      render={matchProps => (
+        <Layout>
+          <Component {...matchProps} />
+        </Layout>
+      )}
+    />
+  );
+};
+
+RouteWithLayout.propTypes = {
+  component: PropTypes.any.isRequired,
+  layout: PropTypes.any.isRequired,
+  path: PropTypes.string
+};
 
 const Routes = () => {
   return (
