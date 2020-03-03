@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Line } from "react-chartjs-2";
 import "chartjs-plugin-streaming";
+import "moment";
+import moment from "moment";
 
 class LineChart extends Component {
   constructor(props) {
@@ -23,13 +25,12 @@ class LineChart extends Component {
           scales: {
             xAxes: [
               {
-                type: "realtime",
-                realtime: {
-                  delay: 2000
-                },
                 type: "time",
                 time: {
                   unit: "second"
+                },
+                realtime: {
+                  delay: 2000
                 }
               }
             ]
