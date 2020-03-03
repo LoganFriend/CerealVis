@@ -1,6 +1,7 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, BrowserWindow, ipcMain, Menu } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
+Menu.setApplicationMenu(null);
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected
@@ -16,7 +17,8 @@ function createWindow() {
     webPreferences: {
       preload: path.join(app.getAppPath(), "./src/app-preload.js") //Use a preload script
     }
-  });
+  })
+  ;
 
   mainWindow.loadURL(
     isDev
