@@ -9,6 +9,7 @@
     "files": [
       "src/**/*",
       "public/**/*",
+      "build/**/*",
       "node_modules/**/*"
     ],
     "directories": {
