@@ -1,19 +1,15 @@
 import React from 'react';
-import { Switch, Redirect } from 'react-router-dom';
-
-import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
-
-import {
-  Dashboard as DashboardView,
-  UserList as UserListView,
-  Icons as IconsView,
-  Settings as SettingsView,
-} from './views';
-
-
 import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
-const RouteWithLayout = props => {
+
+//Routes Simplifies the process of transitioning between views, and allows you to pass the Layout component that surrounds said view.
+//Takes: 
+// - Layout Component as layout
+// - View Component as component
+// - Any extra variables specific to the react-router-dom module
+// - path defined for that view.
+
+const Routes = props => {
   const { layout: Layout, component: Component, ...rest } = props;
 
   return (
@@ -28,46 +24,10 @@ const RouteWithLayout = props => {
   );
 };
 
-RouteWithLayout.propTypes = {
+Routes.propTypes = {
   component: PropTypes.any.isRequired,
   layout: PropTypes.any.isRequired,
   path: PropTypes.string
-};
-
-const Routes = () => {
-  return (
-    <Switch>
-      <Redirect
-        exact
-        from="/"
-        to="/dashboard"
-      />
-      <RouteWithLayout
-        component={DashboardView}
-        exact
-        layout={MainLayout}
-        path="/dashboard"
-      />
-      <RouteWithLayout
-        component={UserListView}
-        exact
-        layout={MainLayout}
-        path="/users"
-      />
-      <RouteWithLayout
-        component={IconsView}
-        exact
-        layout={MainLayout}
-        path="/icons"
-      />
-      <RouteWithLayout
-        component={SettingsView}
-        exact
-        layout={MainLayout}
-        path="/settings"
-      />
-    </Switch>
-  );
 };
 
 export default Routes;
