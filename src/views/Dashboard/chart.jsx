@@ -26,6 +26,10 @@ class LineChart extends React.Component {
                 type: "realtime",
                 realtime: {
                   delay: 2000
+                },
+                type: "time",
+                time: {
+                  unit: "second"
                 }
               }
             ]
