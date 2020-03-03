@@ -7,10 +7,9 @@ import {
   TotalUsers,
   TasksProgress,
   TotalProfit,
+  LineChart,
+  Serial
 } from './components';
-
-import LineChart from './chart.jsx';
-import SerialButton from './serial.jsx';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -70,7 +69,7 @@ const Dashboard = () => {
           xl={9}
           xs={12}
         >
-          <SerialButton />
+          <Serial />
           <Container maxWidth="lg">
 
           <LineChart />

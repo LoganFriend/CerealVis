@@ -31,11 +31,11 @@
     "chartjs-plugin-streaming": "^1.8.0",
     "cross-env": "^7.0.0",
     "electron-is-dev": "^1.1.0",
-    "history": "^4.9.0",
+    "history": "^4.10.1",
     "install": "^0.13.0",
     "moment": "^2.24.0",
-    "npm": "^6.13.7",
     "node-sass": "^4.12.0",
+    "npm": "^6.13.7",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
     "react-chartjs-2": "^2.7.6",
@@ -58,11 +58,11 @@
     "rebuild-win": ".\\node_modules\\.bin\\electron-rebuild.cmd",
     "react-start": "react-scripts start",
     "react-build": "react-scripts build",
-    "react-eject": "react-scripts eject",
     "electron-build": "electron-builder",
     "release": "npm run react-build && electron-builder --publish=always",
     "build": "npm run react-build && npm run electron-build",
-    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\""
+    "start": "concurrently \"cross-env BROWSER=none npm run react-start\" \"wait-on http://localhost:3000 && electron .\"",
+    "postinstall": "electron-builder install-app-deps"
   },
   "eslintConfig": {
     "extends": "react-app"
