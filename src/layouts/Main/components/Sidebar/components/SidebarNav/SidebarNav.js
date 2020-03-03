@@ -72,7 +72,6 @@ const SidebarNav = props => {
             to={page.href}
           >
             <div className={classes.icon}>{page.icon}</div>
-            {page.title}
           </Button>
         </ListItem>
       ))}

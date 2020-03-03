@@ -8,7 +8,6 @@ import {
   Card,
   CardActions,
   CardContent,
-  Avatar,
   Checkbox,
   Table,
   TableBody,

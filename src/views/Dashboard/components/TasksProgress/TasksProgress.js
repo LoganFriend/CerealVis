@@ -7,10 +7,8 @@ import {
   CardContent,
   Grid,
   Typography,
-  Avatar,
-  LinearProgress
 } from '@material-ui/core';
-import InsertChartIcon from '@material-ui/icons/InsertChartOutlined';
+
 
 const useStyles = makeStyles(theme => ({
   root: {
