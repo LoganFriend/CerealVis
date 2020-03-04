@@ -1,16 +1,16 @@
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
-import clsx from 'clsx';
-import { makeStyles, useTheme } from '@material-ui/styles';
-import { useMediaQuery } from '@material-ui/core';
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { makeStyles, useTheme } from "@material-ui/styles";
+import { useMediaQuery } from "@material-ui/core";
 
-import { Sidebar, Topbar, Footer } from './components';
+import { Sidebar, Topbar, Footer } from "./components";
 
 const useStyles = makeStyles(theme => ({
   root: {
     paddingTop: 56,
-    height: '100%',
-    [theme.breakpoints.up('sm')]: {
+    height: "100%",
+    [theme.breakpoints.up("sm")]: {
       paddingTop: 64
     }
   },
@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     paddingLeft: 100
   },
   content: {
-    height: '100%'
+    height: "100%"
   }
 }));
 
@@ -27,7 +27,7 @@ const Main = props => {
 
   const classes = useStyles();
   const theme = useTheme();
-  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'), {
+  const isDesktop = useMediaQuery(theme.breakpoints.up("lg"), {
     defaultMatches: true
   });
 
@@ -51,11 +51,11 @@ const Main = props => {
       })}
     >
       <Topbar onSidebarOpen={handleSidebarOpen} />
-      <Sidebar
+      {/* <Sidebar
         onClose={handleSidebarClose}
         open={shouldOpenSidebar}
         variant={isDesktop ? 'persistent' : 'temporary'}
-      />
+      /> */}
       <main className={classes.content}>
         {children}
         <Footer />
