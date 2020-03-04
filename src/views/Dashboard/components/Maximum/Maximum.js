@@ -1,16 +1,16 @@
-import React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
-import { Card, CardContent, Grid, Typography} from '@material-ui/core';
+import React from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/styles";
+import { Card, CardContent, Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100%'
+    height: "100%"
   },
   content: {
-    alignItems: 'center',
-    display: 'flex'
+    alignItems: "center",
+    display: "flex"
   },
   title: {
     fontWeight: 1000
@@ -26,8 +26,8 @@ const useStyles = makeStyles(theme => ({
   },
   difference: {
     marginTop: theme.spacing(2),
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center"
   },
   differenceIcon: {
     color: theme.palette.error.dark
@@ -38,21 +38,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Budget = props => {
+const Maximum = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent>
-        <Grid
-          container
-          justify="center"
-        >
+        <Grid container justify="center">
           <Grid item>
             <Typography
               className={classes.title}
@@ -63,7 +57,9 @@ const Budget = props => {
             >
               MAXIMUM
             </Typography>
-            <Typography variant="h1" align="center">150 </Typography>
+            <Typography variant="h1" align="center">
+              150{" "}
+            </Typography>
           </Grid>
         </Grid>
       </CardContent>
@@ -71,8 +67,8 @@ const Budget = props => {
   );
 };
 
-Budget.propTypes = {
+Maximum.propTypes = {
   className: PropTypes.string
 };
 
-export default Budget;
+export default Maximum;
