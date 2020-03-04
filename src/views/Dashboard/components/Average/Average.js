@@ -1,22 +1,16 @@
-import React from 'react';
-import clsx from 'clsx';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/styles';
-import {
-  Card,
-  CardContent,
-  Grid,
-  Typography,
-} from '@material-ui/core';
-
+import React from "react";
+import clsx from "clsx";
+import PropTypes from "prop-types";
+import { makeStyles } from "@material-ui/styles";
+import { Card, CardContent, Grid, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    height: '100%'
+    height: "100%"
   },
   content: {
-    alignItems: 'center',
-    display: 'flex'
+    alignItems: "center",
+    display: "flex"
   },
   title: {
     fontWeight: 700
@@ -36,21 +30,15 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const TasksProgress = props => {
+const Average = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
 
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent>
-        <Grid
-          container
-          justify="center"
-        >
+        <Grid container justify="center">
           <Grid item>
             <Typography
               className={classes.title}
@@ -61,18 +49,18 @@ const TasksProgress = props => {
             >
               AVERAGE
             </Typography>
-            <Typography variant="h1" align="center">125</Typography>
+            <Typography variant="h1" align="center">
+              125
+            </Typography>
           </Grid>
-          
         </Grid>
-        
       </CardContent>
     </Card>
   );
 };
 
-TasksProgress.propTypes = {
+Average.propTypes = {
   className: PropTypes.string
 };
 
-export default TasksProgress;
+export default Average;

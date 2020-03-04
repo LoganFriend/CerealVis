@@ -5,7 +5,7 @@ import { Grid, Container } from "@material-ui/core";
 import {
   Maximum,
   TotalUsers,
-  TasksProgress,
+  Average,
   TotalProfit,
   LineChart,
   Serial
@@ -30,7 +30,7 @@ const Dashboard = () => {
           <TotalUsers />
         </Grid>
         <Grid item lg={3} sm={6} xl={3} xs={12}>
-          <TasksProgress />
+          <Average />
         </Grid>
         <Grid item lg={3} sm={6} xl={3} xs={12}>
           <TotalProfit />
