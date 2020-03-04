@@ -4,10 +4,14 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Toolbar } from '@material-ui/core';
+import SettingsIcon from '@material-ui/icons/Settings';
 
 const useStyles = makeStyles(() => ({
   root: {
     boxShadow: 'none'
+  },
+  flexGrow: {
+    flexGrow: 1
   }
 }));
 
@@ -30,6 +34,13 @@ const Topbar = props => {
             src="/images/logos/logo.svg"
           />
         </RouterLink>
+
+        <div className={classes.flexGrow} />
+        
+        <RouterLink to="/settings">
+          <SettingsIcon />
+        </RouterLink>
+
       </Toolbar>
     </AppBar>
   );

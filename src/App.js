@@ -35,25 +35,25 @@ export default class App extends Component {
             <Routes
               component={DashboardView}
               exact
-              layout={MainLayout}
+              layout={MinimalLayout}
               path="/dashboard"
             />
             <Routes
               component={UserListView}
               exact
-              layout={MainLayout}
+              layout={MinimalLayout}
               path="/users"
             />
             <Routes
               component={IconsView}
               exact
-              layout={MainLayout}
+              layout={MinimalLayout}
               path="/icons"
             />
             <Routes
               component={SettingsView}
               exact
-              layout={MainLayout}
+              layout={MinimalLayout}
               path="/settings"
             />
           </Switch>
