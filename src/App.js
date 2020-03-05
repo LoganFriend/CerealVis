@@ -1,7 +1,6 @@
 //Core Imports + Routing Support
 import React, { Component } from 'react';
-import { createBrowserHistory } from 'history';
-import { Switch, Redirect, HashRouter } from 'react-router-dom';
+import { Switch, Redirect, MemoryRouter } from 'react-router-dom';
 import Routes from './Routes';
 
 //Theme Imports
@@ -19,13 +18,11 @@ import {
   Settings as SettingsView,
 } from './views';
 
-const browserHistory = createBrowserHistory();
-
 export default class App extends Component {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        <HashRouter history={browserHistory}>
+        <MemoryRouter>
           <Switch>
             <Redirect
               exact
@@ -57,7 +54,7 @@ export default class App extends Component {
               path="/settings"
             />
           </Switch>
-        </HashRouter>
+        </MemoryRouter>
       </ThemeProvider>
     );
   }

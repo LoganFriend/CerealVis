@@ -32,7 +32,6 @@
     "chartjs-plugin-streaming": "^1.8.0",
     "cross-env": "^7.0.0",
     "electron-is-dev": "^1.1.0",
-    "history": "^4.10.1",
     "install": "^0.13.0",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
