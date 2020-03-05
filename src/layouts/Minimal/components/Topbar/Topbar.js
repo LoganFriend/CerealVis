@@ -4,6 +4,9 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { AppBar, Toolbar, Button, colors } from "@material-ui/core";
+import SettingsIcon from "@material-ui/icons/Settings";
+import GroupIcon from "@material-ui/icons/Group";
+import HomeIcon from "@material-ui/icons/Home";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -16,7 +19,8 @@ const useStyles = makeStyles(theme => ({
     color: colors.grey[50],
     textTransform: "none",
     fontWeight: theme.typography.fontWeightLight,
-    fontSize: 20
+    fontSize: 20,
+    margin: 10
   }
 }));
 
@@ -39,21 +43,15 @@ const Topbar = props => {
         <div className={classes.flexGrow} />
 
         <RouterLink to="/">
-          <Button className={classes.Button} activeClassName={classes.active}>
-            Home
-          </Button>
+          <HomeIcon className={classes.Button}></HomeIcon>
         </RouterLink>
 
         <RouterLink to="/users">
-          <Button className={classes.Button} activeClassName={classes.active}>
-            Users
-          </Button>
+          <GroupIcon className={classes.Button}></GroupIcon>
         </RouterLink>
 
         <RouterLink to="/settings">
-          <Button className={classes.Button} activeClassName={classes.active}>
-            Settings
-          </Button>
+          <SettingsIcon className={classes.Button}></SettingsIcon>
         </RouterLink>
       </Toolbar>
     </AppBar>
