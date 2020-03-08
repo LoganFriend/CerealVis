@@ -14,7 +14,6 @@ import { Main as MainLayout, Minimal as MinimalLayout } from './layouts';
 import {
   Dashboard as DashboardView,
   UserList as UserListView,
-  Icons as IconsView,
   Settings as SettingsView,
 } from './views';
 
@@ -40,12 +39,6 @@ export default class App extends Component {
               exact
               layout={MinimalLayout}
               path="/users"
-            />
-            <Routes
-              component={IconsView}
-              exact
-              layout={MinimalLayout}
-              path="/icons"
             />
             <Routes
               component={SettingsView}
