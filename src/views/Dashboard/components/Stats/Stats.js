@@ -17,28 +17,30 @@ const Stats = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
 
+  var newVal = 0;
+
   const [Max, setMax] = useState(0);
   const [Min, setMin] = useState(0);
   const [Avg, setAvg] = useState(0);
   const [count, setCount] = useState(0);
   const [sum, setSum] = useState(0);
 
-//   window.ipcRenderer.on("datastream", (event, arg) => {
-//     var newVal = Math.floor(arg / 1024 * 100)
-//     setCount(count + 1)
-//     setSum(sum + newVal)
+  window.ipcRenderer.once("datastream", (event, arg) => {
+    newVal = Math.floor(arg / 1024 * 100)
+    setCount(count + 1)
+    setSum(sum + newVal)
 
-//     //Decide if there should be new min or max
-//     if(newVal > Max){
-//         setMax(newVal)
-//     }
-//     else if(newVal < Min){
-//         setMin(newVal)
-//     }
-//     //Calc Avg
-//     setAvg(Math.floor(sum / count))
-     
-//   });
+    //Decide if there should be new min or max
+    if(newVal > Max){
+        setMax(newVal)
+    }
+    else if(newVal < Min){
+        setMin(newVal)
+    }
+    //Calc Avg
+    setAvg(Math.floor(sum / count))    
+
+  });
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
