@@ -1,14 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
 
-function connect(e) {
-  e.preventDefault();
-  var args = new Object();
-  args.cmd = "connect";
-  args.port = "AUTO";
-  window.ipcRenderer.send("serialport", args);
-}
-
 function startstop(e) {
   e.preventDefault();
 
