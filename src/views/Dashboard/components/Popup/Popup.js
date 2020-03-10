@@ -54,18 +54,23 @@ class PopUp extends Component {
   render() {
     return (
       <div>
-        <Button className="button" onClick={this.openModal}>
-          Popup
-        </Button>
         <Popup
           open={this.state.open}
           closeOnDocumentClick
           onClose={this.closeModal}
         >
           <div className="modal">
-            <Button className="button" color="primary" onClick={this.connect}>
-              Search
-            </Button>
+            <div className="header">Connect to your device to continue</div>
+            <div className="actions">
+              <Button
+                className="button"
+                color="primary"
+                variant="contained"
+                onClick={this.connect}
+              >
+                Search
+              </Button>
+            </div>
             <a className="close" onClick={this.closeModal}>
               &times;
             </a>

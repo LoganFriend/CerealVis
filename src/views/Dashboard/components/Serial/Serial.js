@@ -42,7 +42,12 @@ class SerialButton extends Component {
   render() {
     return (
       <div>
-        <Button variant="contained" color="primary" onClick={this.startstop}>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.startstop}
+          className="button"
+        >
           {this.state.text}
         </Button>
       </div>
