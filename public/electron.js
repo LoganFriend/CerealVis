@@ -72,25 +72,27 @@ serial = new sp.SerialPortClass();
 //IPC Channels
 //-------------------------------------------------------------------------------------------------
 
-ipcMain.on("ping", (event, arg) => {
-  console.log("ping"); // prints "ping"
-  event.reply("pong");
-});
-
 ipcMain.on("log", (event, arg) => {
   console.log(arg);
 });
 
-ipcMain.on("run", (event, arg) => {
+ipcMain.on("serialport", (event, arg) => {
+  
   streamtochart = function(data) {
     event.reply("datastream", data);
   };
 
-  console.log(serial.Connect(streamtochart, "COM3"));
-  serial.DataGate();
+  if(arg.cmd=="connect"){
+    console.log(serial.Connect(streamtochart, arg.port));
+  }
+  if(arg.cmd=="toggle"){
+    serial.DataGate();
+  }
+  
+  
 });
 
 ipcMain.on("close", (event, arg) => {
-  serial.Close();
+  serial.Disconnect();
 });
 //-------------------------------------------------------------------------------------------------

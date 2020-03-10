@@ -36,7 +36,7 @@ class SerialPortClass {
 
     for (var i = 0; i < this.possible_ports.length; i++) {
       if (path == "AUTO") {
-        if (this.possible_ports[i].manufacturer.includes("Arduino")) {
+        if (this.possible_ports[i].manufacturer.includes("Silicon Labs")) {
           path = this.possible_ports[i].path;
           valid_port = true;
           break;
