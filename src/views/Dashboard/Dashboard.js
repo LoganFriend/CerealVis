@@ -8,7 +8,8 @@ import {
   Average,
   TotalProfit,
   LineChart,
-  Serial
+  Serial,
+  Popup
 } from "./components";
 
 const useStyles = makeStyles(theme => ({
@@ -37,6 +38,7 @@ const Dashboard = () => {
         </Grid>
         <Grid item lg={11} md={12} xl={9} xs={12}>
           <Serial />
+          <Popup />
           <Container maxWidth="lg">
             <LineChart />
           </Container>
