@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Button} from '@material-ui/core';
+import { Button } from "@material-ui/core";
 
 
 function connect(e) {
