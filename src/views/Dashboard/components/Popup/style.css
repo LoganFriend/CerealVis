@@ -1,22 +1,17 @@
-.modal {
-  font-size: 12px;
-}
 .modal > .header {
   width: 100%;
-  border-bottom: 1px solid gray;
-  font-size: 18px;
+  font-size: 20px;
   text-align: center;
   padding: 5px;
+  font-family: sans-serif;
 }
-.modal > .content {
-  width: 100%;
-  padding: 10px 5px;
-}
+
 .modal > .actions {
   width: 100%;
   padding: 10px 5px;
   margin: auto;
   text-align: center;
+  font-family: sans-serif;
 }
 .modal > .close {
   cursor: pointer;

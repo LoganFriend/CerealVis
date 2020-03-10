@@ -1,57 +1,54 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
 
-
 function connect(e) {
   e.preventDefault();
-  var args = new Object(); 
+  var args = new Object();
   args.cmd = "connect";
-  args.port = "AUTO"
+  args.port = "AUTO";
   window.ipcRenderer.send("serialport", args);
 }
 
 function startstop(e) {
   e.preventDefault();
 
-  var args = new Object(); 
+  var args = new Object();
   args.cmd = "toggle";
 
-  if(this.state.text === "Start"){
+  if (this.state.text === "Start") {
     this.setState({
       text: "Stop"
-    })
-  }
-  else{
+    });
+  } else {
     this.setState({
       text: "Start"
-    })
+    });
   }
 
   window.ipcRenderer.send("serialport", args);
-  
 }
 
 class SerialButton extends Component {
-
   constructor(props) {
     super(props);
 
     this.state = {
       text: "Start"
-    }
-    this.connect = connect.bind(this)
-    this.startstop = startstop.bind(this)
-
+    };
+    this.connect = connect.bind(this);
+    this.startstop = startstop.bind(this);
   }
-  
+
   render() {
     return (
       <div>
-        <Button variant="contained" color="primary" onClick={this.connect}>
-        Connect
-        </Button>
-        <Button variant="contained" color="primary" onClick={this.startstop}>
-        {this.state.text}
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.startstop}
+          className="button"
+        >
+          {this.state.text}
         </Button>
       </div>
     );
