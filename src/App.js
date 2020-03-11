@@ -9,7 +9,7 @@ import theme from "./theme";
 import "react-perfect-scrollbar/dist/css/styles.css";
 import "./assets/scss/index.scss";
 
-import { Main as MainLayout, Minimal as MinimalLayout } from "./layouts";
+import { Minimal as MinimalLayout } from "./layouts";
 
 import {
   Dashboard as DashboardView,

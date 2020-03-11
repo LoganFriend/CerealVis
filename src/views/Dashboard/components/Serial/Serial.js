@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
 
+
 function startstop(e) {
   e.preventDefault();
 
-  var args = new Object();
+  var args = {}
   args.cmd = "toggle";
 
   if (this.state.text === "Start") {
@@ -27,7 +28,6 @@ class SerialButton extends Component {
     this.state = {
       text: "Start"
     };
-    this.connect = connect.bind(this);
     this.startstop = startstop.bind(this);
   }
 
