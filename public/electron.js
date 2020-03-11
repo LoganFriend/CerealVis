@@ -82,14 +82,13 @@ ipcMain.on("serialport", (event, arg) => {
     event.reply("datastream", data);
   };
 
-  if(arg.cmd=="connect"){
+  if (arg.cmd == "connect") {
     console.log(serial.Connect(streamtochart, arg.port));
-  }
-  if(arg.cmd=="toggle"){
-    serial.DataGate();
-  }
-  
-  
+  } else if (arg.cmd == "toggle_on") {
+    serial.Start();
+  } else if (arg.cmd == "toggle_off") {
+    serial.Stop();
+  } 
 });
 
 ipcMain.on("close", (event, arg) => {

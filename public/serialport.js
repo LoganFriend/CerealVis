@@ -1,12 +1,9 @@
-
 const SerialPort = require("serialport");
 const Readline = require("@serialport/parser-readline");
 
 class SerialPortClass {
   constructor() {
     this.baudRate = 9600;
-    this.port;
-    this.parser;
     this.possible_ports = [];
     this.CreatePortList();
   }
@@ -28,7 +25,7 @@ class SerialPortClass {
     return this.possible_ports;
   }
 
-  Connect(event, path = "AUTO") {
+  Connect(event, path = "AUTO", config = [10, 1.0]) {
     // this function attempts to create a connection with a specified port
     // if no port is specified the function attempts to create a connection with an arduino module
     // returns true when a was connection made, false when a connection was not made
@@ -36,7 +33,8 @@ class SerialPortClass {
 
     for (var i = 0; i < this.possible_ports.length; i++) {
       if (path == "AUTO") {
-        if (this.possible_ports[i].manufacturer.includes("Silicon Labs")) {
+        if (this.possible_ports[i].manufacturer.includes("Arduino") ||
+          this.possible_ports[i].manufacturer.includes("Silicon Labs")) {
           path = this.possible_ports[i].path;
           valid_port = true;
           break;
@@ -53,6 +51,7 @@ class SerialPortClass {
       this.port = new SerialPort(path, { baudRate: this.baudRate });
       this.parser = this.port.pipe(new Readline({ delimiter: "\r\n" }));
       this.parser.on("data", event);
+      this.SetConfig(config);
       return true;
     }
 
@@ -67,24 +66,19 @@ class SerialPortClass {
     this.parser = null;
   }
 
-  DataGate() {
+  Start() {
     this.port.write("g");
-    console.log("Allow / Stop Data Flow");
+    console.log("Start Data Flow");
   }
 
-  SetFrequency(frequency) {
-    this.port.write("f " + frequency);
-    console.log("Frequency: " + frequency);
+  Stop() {
+    this.port.write("p");
+    console.log("Stop Data Flow");
   }
 
-  SetMultiplier(multiplier) {
-    this.port.write("m " + multiplier);
-    console.log("Multiplier: " + multiplier);
-  }
-
-  SetMaxReading(max_reading) {
-    this.port.write("x " + max_reading);
-    console.log("Max Reading: " + max_reading);
+  SetConfig(config) {
+    this.port.write(config[0] + "," + config[1]);
+    console.log("Frequency : Multiplier => " + config[0] + " : " + config[1]);
   }
 }
 

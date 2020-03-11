@@ -6,13 +6,14 @@ function startstop(e) {
   e.preventDefault();
 
   var args = {}
-  args.cmd = "toggle";
 
   if (this.state.text === "Start") {
+    args.cmd = "toggle_on";
     this.setState({
       text: "Stop"
     });
   } else {
+    args.cmd = "toggle_off";
     this.setState({
       text: "Start"
     });
