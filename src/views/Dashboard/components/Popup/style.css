@@ -1,18 +1,24 @@
+.popup-content {
+  width: 33.33% !important;
+  height: 20% !important;
+}
+
 .modal > .header {
   width: 100%;
   font-size: 20px;
   text-align: center;
-  padding: 5px;
+  padding: 20px 5px;
   font-family: sans-serif;
 }
 
 .modal > .actions {
   width: 100%;
-  padding: 10px 5px;
+  padding: 5px 5px;
   margin: auto;
   text-align: center;
   font-family: sans-serif;
 }
+
 .modal > .close {
   cursor: pointer;
   position: absolute;

@@ -34,12 +34,12 @@ class PopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
-      text: "Start"
+      open: true
     };
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
+
     this.connect = connect.bind(this);
     this.startstop = startstop.bind(this);
   }
@@ -53,30 +53,25 @@ class PopUp extends Component {
 
   render() {
     return (
-      <div>
-        <Popup
-          open={this.state.open}
-          closeOnDocumentClick
-          onClose={this.closeModal}
-        >
-          <div className="modal">
-            <div className="header">Connect to your device to continue</div>
-            <div className="actions">
-              <Button
-                className="button"
-                color="primary"
-                variant="contained"
-                onClick={this.connect}
-              >
-                Search
-              </Button>
-            </div>
-            <a className="close" onClick={this.closeModal}>
-              &times;
-            </a>
+      <Popup
+        open={this.state.open}
+        closeOnDocumentClick
+        onClose={this.closeModal}
+      >
+        <div className="modal">
+          <div className="header">Connect to your device to continue</div>
+          <div className="actions">
+            <Button
+              className="button"
+              color="primary"
+              variant="contained"
+              onClick={this.connect}
+            >
+              Search devices
+            </Button>
           </div>
-        </Popup>
-      </div>
+        </div>
+      </Popup>
     );
   }
 }
