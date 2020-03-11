@@ -20,6 +20,12 @@ class LineChart extends Component {
         }}
         options={{
           scales: {
+            yAxes: [{
+              ticks: {
+                Min: 0,
+                Max: 100
+              }
+            }],
             xAxes: [
               {
                 type: "time",
@@ -31,7 +37,8 @@ class LineChart extends Component {
                 }
               }
             ]
-          }
+          },
+          events: []
         }}
       />
     );
@@ -40,28 +47,10 @@ class LineChart extends Component {
       this.linechart.props.data.datasets.forEach(function(dataset) {
         dataset.data.push({
           x: Date.now(),
-          y: arg
+          y: Math.floor(arg / 1024 * 100)
         });
       });
     });
-
-    /*setInterval(function() {
-      this.linechart.props.data.datasets.forEach(function(dataset) {
-        dataset.data.push({
-          x: Date.now(),
-          y: Math.random(1005)
-        });
-      });
-    }, 2500);*/
-
-    /*window.ipcRenderer.on("datastream", (event, arg) => {
-      this.linechart.props.data.datasets.forEach(function(dataset) {
-        dataset.data.push({
-          x: Date.now(),
-          y: Math.random(1005)
-        });
-      });
-    });*/
 
   }
   render() {

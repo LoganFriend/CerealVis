@@ -1,16 +1,9 @@
 import React from "react";
 import { makeStyles } from "@material-ui/styles";
-import { Grid, Container } from "@material-ui/core";
+import { Grid, Paper, Tabs, Tab } from "@material-ui/core";
 
-import {
-  Maximum,
-  Minimum,
-  Average,
-  TotalProfit,
-  LineChart,
-  Serial,
-  P5
-} from "./components";
+import { LineChart, Serial, Stats, Popup } from "./components";
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -18,36 +11,33 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 const Dashboard = () => {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Paper elevation={0} className={classes.root}>
+
+      <Serial />
+      <Popup />
+
       <Grid container spacing={4}>
-        <Grid item lg={3} sm={6} xl={3} xs={12}>
-          <Maximum />
+        <Grid item xs={2}>
+          <Stats />
         </Grid>
-        <Grid item lg={3} sm={6} xl={3} xs={12}>
-          <Minimum />
-        </Grid>
-        <Grid item lg={3} sm={6} xl={3} xs={12}>
-          <Average />
-        </Grid>
-        <Grid item lg={3} sm={6} xl={3} xs={12}>
-          <TotalProfit />
-        </Grid>
-        <Grid item lg={11} md={12} xl={9} xs={12}>
-          <Serial />
-          <Container maxWidth="lg">
-            <LineChart />
-          </Container>
-        </Grid>
-        <Grid item lg={4} md={6} xl={3} xs={12}>
-          <P5 />
+        <Grid item xs={10}>
+          <LineChart />
         </Grid>
       </Grid>
-    </div>
+    </Paper>
   );
+  
 };
 
-export default Dashboard;
+
+window.ipcRenderer.on("datastream", (event, arg) => {
+  console.log(arg);
+});
+
+
+export default Dashboard

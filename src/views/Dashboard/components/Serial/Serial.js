@@ -1,23 +1,48 @@
 import React, { Component } from "react";
-import {Button} from '@material-ui/core';
+import { Button } from "@material-ui/core";
 
-function sendcommand(e) {
+
+function startstop(e) {
   e.preventDefault();
-  console.log("IPC: run");
-  window.ipcRenderer.send("run");
+
+  var args = {}
+  args.cmd = "toggle";
+
+  if (this.state.text === "Start") {
+    this.setState({
+      text: "Stop"
+    });
+  } else {
+    this.setState({
+      text: "Start"
+    });
+  }
+
+  window.ipcRenderer.send("serialport", args);
 }
 
 class SerialButton extends Component {
   constructor(props) {
     super(props);
-    // This binding is necessary to make `this` work in the callback
-    this.sendcommand = sendcommand.bind(this);
+
+    this.state = {
+      text: "Start"
+    };
+    this.startstop = startstop.bind(this);
   }
+
   render() {
     return (
-      <Button variant="contained" color="primary" onClick={this.sendcommand}>
-      Start Serial Connection
-    </Button>
+      <div>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.startstop}
+          className="button"
+        >
+          {this.state.text}
+        </Button>
+      </div>
     );
   }
 }

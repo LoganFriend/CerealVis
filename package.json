@@ -43,6 +43,7 @@
     "react-perfect-scrollbar": "^1.5.3",
     "react-router-dom": "^5.0.1",
     "react-scripts": "^3.0.1",
+    "reactjs-popup": "^1.5.0",
     "serialport": "^8.0.7"
   },
   "devDependencies": {

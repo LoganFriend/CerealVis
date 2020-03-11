@@ -3,14 +3,14 @@ import { Link as RouterLink } from "react-router-dom";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { AppBar, Toolbar, Button, colors } from "@material-ui/core";
+import { AppBar, Toolbar, colors } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import GroupIcon from "@material-ui/icons/Group";
 import HomeIcon from "@material-ui/icons/Home";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: "none"
+    
   },
   flexGrow: {
     flexGrow: 1
@@ -36,20 +36,17 @@ const Topbar = props => {
       color="primary"
       position="fixed"
     >
-      <Toolbar>
+      <Toolbar variant="dense">
         <RouterLink to="/">
           <img alt="Logo" src="/images/logos/logo.svg" />
         </RouterLink>
         <div className={classes.flexGrow} />
-
         <RouterLink to="/">
           <HomeIcon className={classes.Button}></HomeIcon>
         </RouterLink>
-
         <RouterLink to="/users">
           <GroupIcon className={classes.Button}></GroupIcon>
         </RouterLink>
-
         <RouterLink to="/settings">
           <SettingsIcon className={classes.Button}></SettingsIcon>
         </RouterLink>
