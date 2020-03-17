@@ -2,7 +2,7 @@ import React from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Grid, Paper, Tabs, Tab } from "@material-ui/core";
 
-import { LineChart, Serial, Stats, Popup } from "./components";
+import { LineChart, Serial, Stats, Popup, P5 } from "./components";
 
 
 const useStyles = makeStyles(theme => ({
@@ -20,6 +20,7 @@ const Dashboard = () => {
 
       <Serial />
       <Popup />
+      
 
       <Grid container spacing={4}>
         <Grid item xs={2}>
@@ -28,16 +29,14 @@ const Dashboard = () => {
         <Grid item xs={10}>
           <LineChart />
         </Grid>
+        <Grid item xs={12}>
+          <P5 />
+        </Grid>
       </Grid>
     </Paper>
   );
   
 };
-
-
-window.ipcRenderer.on("datastream", (event, arg) => {
-  console.log(arg);
-});
 
 
 export default Dashboard
