@@ -4,6 +4,7 @@ const Readline = require("@serialport/parser-readline");
 class SerialPortClass {
   constructor() {
     this.baudRate = 9600;
+    this.currentPath = null;
     this.possible_ports = [];
     this.CreatePortList();
   }
@@ -47,11 +48,17 @@ class SerialPortClass {
       }
     }
 
+    if (this.currentPath == path) {
+      console.log("Connection with port already has already been established");
+      return false;
+    }
+
     if (valid_port) {
       this.port = new SerialPort(path, { baudRate: this.baudRate });
       this.parser = this.port.pipe(new Readline({ delimiter: "\r\n" }));
       this.parser.on("data", event);
       this.SetConfig(config);
+      this.currentPath = path;
       return true;
     }
 
@@ -59,11 +66,10 @@ class SerialPortClass {
   }
 
   Disconnect() {
-    this.port.write("q");
-    this.port.close(err => {
-        console.log('port closed', err);
-    });
+    this.port.write("p");
+    this.port = null;
     this.parser = null;
+    console.log("Port closed");
   }
 
   Start() {
