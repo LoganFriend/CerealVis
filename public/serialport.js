@@ -66,6 +66,11 @@ class SerialPortClass {
   }
 
   Disconnect() {
+    if (this.port == null) {
+      console.log("No port established");
+      return;
+    }
+
     this.port.write("p");
     this.port = null;
     this.parser = null;

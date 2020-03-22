@@ -98,4 +98,4 @@ ipcMain.on("close", (event, arg) => {
 
 app.on('window-all-closed', () => {
   serial.Disconnect();
-})
+});
