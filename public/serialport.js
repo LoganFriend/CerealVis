@@ -7,6 +7,13 @@ class SerialPortClass {
     this.currentPath = null;
     this.possible_ports = [];
     this.CreatePortList();
+    this.connected = () => {
+      if (this.port == null) {
+        console.log("No port established");
+        return false;
+      }
+      return true;
+    }
   }
 
   async CreatePortList() {
@@ -66,11 +73,7 @@ class SerialPortClass {
   }
 
   Disconnect() {
-    if (this.port == null) {
-      console.log("No port established");
-      return;
-    }
-
+    if (!this.connected()) return;
     this.port.write("p");
     this.port = null;
     this.parser = null;
@@ -78,16 +81,19 @@ class SerialPortClass {
   }
 
   Start() {
+    if (!this.connected()) return;
     this.port.write("g");
     console.log("Start Data Flow");
   }
 
   Stop() {
+    if (!this.connected()) return;
     this.port.write("p");
     console.log("Stop Data Flow");
   }
 
   SetConfig(config) {
+    if (!this.connected()) return;
     this.port.write(config[0] + "," + config[1]);
     console.log("Frequency : Multiplier => " + config[0] + " : " + config[1]);
   }
