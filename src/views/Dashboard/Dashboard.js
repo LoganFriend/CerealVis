@@ -4,20 +4,17 @@ import { Grid, Paper, Tabs, Tab } from "@material-ui/core";
 
 import { LineChart, Serial, Stats, Popup } from "./components";
 
-
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
   }
 }));
 
-
 const Dashboard = () => {
   const classes = useStyles();
 
   return (
     <Paper elevation={0} className={classes.root}>
-
       <Serial />
       <Popup />
 
@@ -31,13 +28,10 @@ const Dashboard = () => {
       </Grid>
     </Paper>
   );
-  
 };
-
 
 // window.ipcRenderer.on("datastream", (event, arg) => {
 //   console.log(arg);
 // });
 
-
-export default Dashboard
+export default Dashboard;
