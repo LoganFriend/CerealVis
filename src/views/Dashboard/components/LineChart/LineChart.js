@@ -1,61 +1,85 @@
-import React, { Component } from "react";
-import { Line } from "react-chartjs-2";
+import React, { useEffect, useRef, useState } from 'react';
+import Chartjs from 'chart.js';
 import "chartjs-plugin-streaming";
 
-class LineChart extends Component {
-  constructor(props) {
-    super(props);
+let points = [];
 
-    this.linechart = (
-      <Line
-        data={{
-          datasets: [
-            {
-              label: "Dataset 1",
-              borderColor: "#0277bd",
-              backgroundColor: "#fbfcfd",
-              lineTension: 0
-            }
-          ]
-        }}
-        options={{
-          scales: {
-            yAxes: [{
-              ticks: {
-                Min: 0,
-                Max: 100
-              }
-            }],
-            xAxes: [
-              {
-                type: "time",
-                time: {
-                  unit: "second"
-                },
-                realtime: {
-                  delay: 1000
-                }
-              }
-            ]
-          },
-          events: []
-        }}
-      />
-    );
+const chartConfig = {
+  type: 'line',
+  data: {
+    datasets: [{
+      label: "Dataset 1",
+      borderColor: "#0277bd",
+      backgroundColor: "#fbfcfd",
+      data: points
+    }]
+  },
+  options: {
+    animation: false,
+    spanGaps: true,
+    elements: {
+      line: {
+        tension: 0,
+        stepped: false,
+        borderDash: []
+      },
+      point: {
+        radius: 0
+      }
+    },
+    scales: {
+      yAxes: [{
+        ticks: {
+          suggestedMin: 0,
+          suggestedMax: 100
+        }
+      }],
+      xAxes: [{
+        type: "time",
+        time: {
+          unit: "second"
+        },
+        realtime: {
+          delay: 2000
+        }
+      }]
+    }
+  }
+};
 
-    window.ipcRenderer.on("datastream", (event, arg) => {
-      this.linechart.props.data.datasets.forEach(function(dataset) {
-        dataset.data.push({
-          x: Date.now(),
-          y: Math.floor(arg / 1024 * 100)
-        });
+const Chart = () => {
+  const chartContainer = useRef(null);
+  var chartInstance = useState(null);
+
+  useEffect(() => {
+    if (chartContainer && chartContainer.current) {
+      chartInstance = new Chartjs(chartContainer.current, chartConfig);
+    }
+
+    window.ipcRenderer.on("datastream", (event, arg) => {  
+      points.push({
+        x: Date.now(),
+        y: Math.floor(arg / 1024 * 100)
       });
-    });
 
+      // if (points.length > 15) {
+      //   points.shift();
+      // }
+
+      // updateData(points);
+    });
+  }, [chartContainer]);
+
+  const updateData = (arg) => {
+    chartInstance.data.datasets[0].data = arg;
+    chartInstance.update();
   }
-  render() {
-    return this.linechart;
-  }
+
+  return (
+    <div>
+      <canvas ref={chartContainer} />
+    </div>
+  );
 }
 
-export default LineChart;
+export default Chart;
