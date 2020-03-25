@@ -84,9 +84,9 @@ ipcMain.on("serialport", (event, arg) => {
 
   if (arg.cmd == "connect") {
     console.log(serial.Connect(streamtochart, arg.port));
-  } else if (arg.cmd == "toggle_on") {
+  } else if (arg.cmd == "start") {
     serial.Start();
-  } else if (arg.cmd == "toggle_off") {
+  } else if (arg.cmd == "stop") {
     serial.Stop();
   } 
 });

@@ -23,13 +23,10 @@ const Dashboard = () => {
       
 
       <Grid container spacing={4}>
-        <Grid item xs={2}>
-          
-        </Grid>
-        <Grid item xs={10}>
+        <Grid item xs={8}>
           <LineChart />
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={4}>
           <P5 />
         </Grid>
       </Grid>

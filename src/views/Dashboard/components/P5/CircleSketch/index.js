@@ -7,7 +7,7 @@ function base(s) {
     s.onSetAppState = () => {}
 
     s.setup = function() {
-        s.createCanvas(900, 300)
+        s.createCanvas(200, 300)
     }
 
     s.draw = function() {

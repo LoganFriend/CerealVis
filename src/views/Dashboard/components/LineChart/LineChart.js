@@ -43,7 +43,8 @@ const chartConfig = {
           delay: 2000
         }
       }]
-    }
+    },
+    events: []
   }
 };
 

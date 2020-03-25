@@ -15,12 +15,12 @@ function startstop(e) {
   var args = {}
 
   if (this.state.text === "Start") {
-    args.cmd = "toggle_on";
+    args.cmd = "start";
     this.setState({
       text: "Stop"
     });
   } else {
-    args.cmd = "toggle_off";
+    args.cmd = "stop";
     this.setState({
       text: "Start"
     });
@@ -36,21 +36,13 @@ class SerialButton extends Component {
     this.state = {
       text: "Start"
     };
-    this.connect = connect.bind(this);
     this.startstop = startstop.bind(this);
   }
 
   render() {
     return (
       <div>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.connect}
-          className="button"
-        >
-          connect
-        </Button>
+
         <Button
           variant="contained"
           color="primary"
