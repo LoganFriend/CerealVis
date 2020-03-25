@@ -1,5 +1,7 @@
+#include <Random>
+
 #define MAX 300
-#define MIN 5
+#define MIN 30
 
 int frequency = 10;
 float multiplier = 1.0f;
@@ -23,8 +25,8 @@ void loop()
 
     for(int i = 0; i < frequency; i++)
     {
-      final_reading += analogRead(A0) * multiplier;
-      delay(2);
+      final_reading += random(1024) * multiplier;
+      delay(15);
     }
 
     final_reading /= frequency;
