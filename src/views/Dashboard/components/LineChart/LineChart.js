@@ -33,7 +33,7 @@ class LineChart extends Component {
                   unit: "second"
                 },
                 realtime: {
-                  delay: 2000
+                  delay: 1000
                 }
               }
             ]
