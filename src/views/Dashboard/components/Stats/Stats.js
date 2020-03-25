@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
@@ -14,6 +14,9 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Stats = props => {
+
+  
+
   const { className, ...rest } = props;
   const classes = useStyles();
 
@@ -25,22 +28,24 @@ const Stats = props => {
   const [count, setCount] = useState(0);
   const [sum, setSum] = useState(0);
 
-  window.ipcRenderer.once("datastream", (event, arg) => {
-    newVal = Math.floor(arg / 1024 * 100)
-    setCount(count + 1)
-    setSum(sum + newVal)
-
-    //Decide if there should be new min or max
-    if(newVal > Max){
-        setMax(newVal)
-    }
-    else if(newVal < Min){
-        setMin(newVal)
-    }
-    //Calc Avg
-    setAvg(Math.floor(sum / count))    
-
-  });
+  useEffect(() => {
+    window.ipcRenderer.on("datastream", (event, arg) => {
+      newVal = Math.floor(arg / 1024 * 100)
+      setCount(count + 1)
+      setSum(sum + newVal)
+  
+      //Decide if there should be new min or max
+      if(newVal > Max){
+          setMax(newVal)
+      }
+      else if(newVal < Min){
+          setMin(newVal)
+      }
+      //Calc Avg
+      setAvg(Math.floor(sum / count))    
+  
+    });
+  }, [])
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
