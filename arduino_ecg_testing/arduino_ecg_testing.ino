@@ -1,16 +1,15 @@
 #include <Random>
 
 #define MAX 300
-#define BAUD 9600
+#define MIN 5
 
 int frequency = 10;
-int max_reading = 1005;
-byte multiplier = 1;
+float multiplier = 1.0f;
 bool allow_data = false;
  
 void setup()
 {
-  Serial.begin(BAUD);
+  Serial.begin(9600);
 }
 
 void loop()
@@ -27,10 +26,10 @@ void loop()
     for(int i = 0; i < frequency; i++)
     {
       final_reading += random(1024) * multiplier;
-      delay(50);
+      delay(2);
     }
 
-    final_reading = constrain(final_reading / frequency, 0, max_reading);
+    final_reading /= frequency;
 
     Serial.println(final_reading);
   }
@@ -40,46 +39,28 @@ void serialEvent()
 {
   String raw_input = Serial.readString();
 
-  int command_index = 0;
-  for (char i : raw_input)
+  switch (raw_input[0])
   {
-    if (i == ' ')
+    case 'g': allow_data = true; break;
+    case 'p': allow_data= false; break;
+    case 'q': Serial.end(); break;
+    default: Set_Config(raw_input);
+  }
+}
+
+void Set_Config(String input)
+{
+  int index = 0;
+  
+  for (char i : input)
+  {
+    if (i == ',')
     {
+      frequency = constrain(input.substring(0, index).toInt(), MIN, MAX);
       break;
     }
-    command_index++;
+    index++;
   }
-
-  String command = raw_input.substring(0, command_index);
-
-  if (command[0] == 'f')
-  {
-   frequency = Get_Value(raw_input, command_index + 1);
-  }
-  else if (command[0] == 'm')
-  {
-    multiplier = Get_Value(raw_input, command_index + 1);
-  }
-  else if (command[0] == 'x')
-  {
-    max_reading = Get_Value(raw_input, command_index + 1);
-  }
-  else if (command[0] == 'g')
-  {
-    data_gate();
-  }
-  else if (command[0] == 'q')
-  {
-    Serial.end();
-  }
-}
-
-int Get_Value(String input, int index)
-{
-  return input.substring(index, input.length()).toInt();
-}
-
-void data_gate()
-{
-  allow_data = (allow_data) ? false : true;
+  
+  multiplier = input.substring(index + 1, input.length()).toFloat();
 }
