@@ -26,7 +26,7 @@ class SerialPortClass {
     return this.possible_ports;
   }
 
-  Connect(event, path = "AUTO", config = [10, 1.0]) {
+  Connect(event, path = "AUTO", config = [30, 1.0]) {
     // this function attempts to create a connection with a specified port
     // if no port is specified the function attempts to create a connection with an arduino module
     // returns true when a was connection made, false when a connection was not made

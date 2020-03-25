@@ -35,9 +35,9 @@ const Dashboard = () => {
 };
 
 
-window.ipcRenderer.on("datastream", (event, arg) => {
-  console.log(arg);
-});
+// window.ipcRenderer.on("datastream", (event, arg) => {
+//   console.log(arg);
+// });
 
 
 export default Dashboard
