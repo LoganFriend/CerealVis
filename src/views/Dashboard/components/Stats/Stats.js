@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
@@ -17,30 +17,60 @@ const Stats = props => {
   const { className, ...rest } = props;
   const classes = useStyles();
 
-  var newVal = 0;
+  // var newVal = 0;
 
-  const [Max, setMax] = useState(0);
-  const [Min, setMin] = useState(0);
-  const [Avg, setAvg] = useState(0);
-  const [count, setCount] = useState(0);
-  const [sum, setSum] = useState(0);
+  // var [Max, setMax] = useState(0);
+  // var  = useState(0);
+  // var [Avg, setAvg] = useState(0);
+  // var  = useState(0);
+  // var [sum, setSum] = useState(0);
 
-  window.ipcRenderer.once("datastream", (event, arg) => {
-    newVal = Math.floor(arg / 1024 * 100)
-    setCount(count + 1)
-    setSum(sum + newVal)
+  var [max, setMax] = useState(0);
+  var [current, setCurrent] = useState(0);
+  var [avg, setAvg] = useState(0);
+  // var [min, setMin] = useState(0);
+  var sum = 0;
+  var count = 0;
 
-    //Decide if there should be new min or max
-    if(newVal > Max){
-        setMax(newVal)
-    }
-    else if(newVal < Min){
-        setMin(newVal)
-    }
-    //Calc Avg
-    setAvg(Math.floor(sum / count))    
+  useEffect(() => {
+    window.ipcRenderer.on("datastream", (event, arg) => {
+      count++;
 
-  });
+      current = Math.floor(arg / 1024 * 100);
+      setCurrent(current);
+    
+      sum += current;
+
+      if (current > max) {
+        max = current;
+        setMax(max);
+      }
+      // else if (current < min) {
+      //   min = current;
+      //   setMin(min);
+      // }
+
+      avg = Math.floor(sum / count);
+      setAvg(avg);
+
+
+      // values.current = Math.floor(arg / 1024 * 100);
+      // values.count++;
+      // values.sum += values.current;
+
+      // if (values.min === -1) values.min = values.current;
+
+      // //Decide if there should be new min or max
+      // if (values.current > values.max) {
+      //     values.max = values.current;
+      // } else if(values.current < values.min) {
+      //     values.min = values.current;
+      // }
+      // //Calc Avg
+      // values.avg = (Math.floor(values.sum / values.count));
+      // console.log(values.current, values.avg, values.max)
+    });
+}, []);
 
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
@@ -57,7 +87,7 @@ const Stats = props => {
               MAXIMUM
             </Typography>
             <Typography variant="h1" align="center">
-            {Max}{"%"}
+            {max}{"%"}
             </Typography>
           </Grid>
           <Grid item xs>
@@ -68,10 +98,10 @@ const Stats = props => {
               variant="h6"
               align="center"
             >
-              MINIMUM
+              CURRENT
             </Typography>
             <Typography variant="h1" align="center">
-            {Min}{"%"}
+            {current}{"%"}
             </Typography>
           </Grid>
           <Grid item xs>
@@ -85,7 +115,7 @@ const Stats = props => {
               AVERAGE
             </Typography>
             <Typography variant="h1" align="center">
-            {Avg}{"%"}
+            {avg}{"%"}
             </Typography>
           </Grid>
         </Grid>
