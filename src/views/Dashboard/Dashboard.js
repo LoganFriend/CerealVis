@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { LineChart, Serial, Stats, Popup } from "./components";
+import { LineChart, Serial, Stats, Popup, P5 } from "./components";
 import {
   Grid,
   Paper,
@@ -89,6 +89,10 @@ const Dashboard = () => {
           <Grid container spacing={4}>
             <Grid item xs={2}>
               <Stats />
+            </Grid>
+
+            <Grid item xs={10}>
+              <P5 />
             </Grid>
           </Grid>
         </TabPanel>
