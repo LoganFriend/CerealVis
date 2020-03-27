@@ -1,28 +1,22 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
 
-function connect(e) {
-  e.preventDefault();
-  var args = new Object();
-  args.cmd = "connect";
-  args.port = "AUTO";
-  window.ipcRenderer.send("serialport", args);
-}
-
 function startstop(e) {
   e.preventDefault();
 
-  var args = {}
+  var args = {};
 
   if (this.state.text === "Start") {
     args.cmd = "start";
     this.setState({
-      text: "Stop"
+      text: "Stop",
+      color: "secondary"
     });
   } else {
     args.cmd = "stop";
     this.setState({
-      text: "Start"
+      text: "Start",
+      color: "primary"
     });
   }
 
@@ -34,24 +28,26 @@ class SerialButton extends Component {
     super(props);
 
     this.state = {
-      text: "Start"
+      text: "Start",
+      color: "primary"
     };
     this.startstop = startstop.bind(this);
   }
 
   render() {
     return (
-      <div>
-
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.startstop}
-          className="button"
-        >
-          {this.state.text}
-        </Button>
-      </div>
+      <Button
+        variant="contained"
+        color={this.state.color}
+        onClick={this.startstop}
+        size="large"
+        style={{
+          marginBottom: 10,
+          marginTop: 0
+        }}
+      >
+        {this.state.text}
+      </Button>
     );
   }
 }
