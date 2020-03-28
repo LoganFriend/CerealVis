@@ -9,25 +9,17 @@ function connect(e) {
   args.cmd = "connect";
   args.port = "AUTO";
   window.ipcRenderer.send("serialport", args);
-}
 
-function startstop(e) {
-  e.preventDefault();
+  window.ipcRenderer.on("serialport", (event, arg) => {
+    console.log(arg);
+    console.log(typeof arg);
 
-  var args = new Object();
-  args.cmd = "toggle";
-
-  if (this.state.text === "Start") {
-    this.setState({
-      text: "Stop"
-    });
-  } else {
-    this.setState({
-      text: "Start"
-    });
-  }
-
-  window.ipcRenderer.send("serialport", args);
+    if (arg) {
+      this.closeModal();
+    } else {
+      console.log("connection error...!");
+    }
+  });
 }
 
 class PopUp extends Component {
@@ -41,7 +33,6 @@ class PopUp extends Component {
     this.closeModal = this.closeModal.bind(this);
 
     this.connect = connect.bind(this);
-    this.startstop = startstop.bind(this);
   }
 
   openModal() {
