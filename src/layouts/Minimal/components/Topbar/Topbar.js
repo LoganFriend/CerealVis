@@ -9,9 +9,7 @@ import GroupIcon from "@material-ui/icons/Group";
 import HomeIcon from "@material-ui/icons/Home";
 
 const useStyles = makeStyles(theme => ({
-  root: {
-    
-  },
+  root: {},
   flexGrow: {
     flexGrow: 1
   },
@@ -19,7 +17,7 @@ const useStyles = makeStyles(theme => ({
     color: colors.grey[50],
     textTransform: "none",
     fontWeight: theme.typography.fontWeightLight,
-    fontSize: 20,
+    fontSize: 25,
     margin: 10
   }
 }));

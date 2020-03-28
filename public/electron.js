@@ -17,8 +17,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(app.getAppPath(), "./src/app-preload.js") //Use a preload script
     }
-  })
-  ;
+  });
 
   mainWindow.loadURL(
     isDev
@@ -77,18 +76,19 @@ ipcMain.on("log", (event, arg) => {
 });
 
 ipcMain.on("serialport", (event, arg) => {
-  
   streamtochart = function(data) {
     event.reply("datastream", data);
   };
 
   if (arg.cmd == "connect") {
-    console.log(serial.Connect(streamtochart, arg.port));
+    var bool;
+    bool = serial.Connect(streamtochart, arg.port);
+    event.reply("serialport", bool);
   } else if (arg.cmd == "start") {
     serial.Start();
   } else if (arg.cmd == "stop") {
     serial.Stop();
-  } 
+  }
 });
 
 ipcMain.on("close", (event, arg) => {
@@ -96,6 +96,6 @@ ipcMain.on("close", (event, arg) => {
 });
 //-------------------------------------------------------------------------------------------------
 
-app.on('window-all-closed', () => {
+app.on("window-all-closed", () => {
   serial.Disconnect();
 });
