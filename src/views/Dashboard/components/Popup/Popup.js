@@ -9,7 +9,17 @@ function connect(e) {
   args.cmd = "connect";
   args.port = "AUTO";
   window.ipcRenderer.send("serialport", args);
-  this.closeModal(e);
+
+  window.ipcRenderer.on("serialport", (event, arg) => {
+    console.log(arg);
+    console.log(typeof arg);
+
+    if (arg) {
+      this.closeModal();
+    } else {
+      console.log("connection error...!");
+    }
+  });
 }
 
 class PopUp extends Component {
