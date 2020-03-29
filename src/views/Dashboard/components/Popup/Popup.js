@@ -9,11 +9,15 @@ function getdevices() {
   window.ipcRenderer.send("serialport", args);
 }
 
-function connect(e) {
+function connect(e, path) {
   e.preventDefault();
   var args = new Object();
   args.cmd = "connect";
-  args.port = "AUTO";
+  if (path != null) {
+    args.port = "AUTO";
+  } else {
+    args.port = path;
+  }
   window.ipcRenderer.send("serialport", args);
 
   window.ipcRenderer.on("serialport", (event, arg) => {
@@ -85,7 +89,14 @@ class PopUp extends Component {
             <ul>
               {Object.keys(this.devices).map((keyName, i) => (
                 <li key={i}>
-                  <span>key: {i} Name: {this.devices[keyName].manufacturer}</span>
+                  <Button
+                  className="button"
+                  color="primary"
+                  variant="contained"
+                  onClick={this.connect}
+                  >
+                    {this.devices[keyName].manufacturer}
+                  </Button>
                 </li>
               ))}
             </ul>
