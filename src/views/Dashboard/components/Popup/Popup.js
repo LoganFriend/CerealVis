@@ -7,17 +7,6 @@ function getdevices() {
   var args = {};
   args.cmd = "getportlist";
   window.ipcRenderer.send("serialport", args);
-  console.log("sent");
-}
-
-function convertDevicesObjectToArray(devicesObject) {
-  var devicesManufacturers = [devicesObject.length];
-  var devicesPaths = [devicesObject.length];
-  for (var i = 0; i < devicesObject.length; i++) {
-    devicesManufacturers[i] = devicesObject[i].manufacturer;
-    devicesPaths[i] = devicesObject[i].path;
-  }
-  return devicesManufacturers;
 }
 
 function connect(e) {
@@ -46,15 +35,10 @@ class PopUp extends Component {
       open: true
     };
 
-    this.devices = null;
-    this.deivceItems = null;
+    this.devices = '';
 
     window.ipcRenderer.on("serialport", (event, args) => {
-      this.devices = convertDevicesObjectToArray(args);
-      this.deviceItems = this.devices.map((devices) =>
-        <li>{this.devices}</li>
-      );
-      console.log("received");
+      this.devices = args;
       console.log(this.devices);
       this.forceUpdate();
     });
@@ -68,7 +52,6 @@ class PopUp extends Component {
 
     this.connect = connect.bind(this);
     this.getdevices = getdevices.bind(this);
-    this.convertDevicesObjectToArray = convertDevicesObjectToArray.bind(this);
   }
 
   openModal() {
@@ -100,7 +83,11 @@ class PopUp extends Component {
           <div>
             Devices
             <ul>
-              {this.deviceItems}
+              {Object.keys(this.devices).map((keyName, i) => (
+                <li key={i}>
+                  <span>key: {i} Name: {this.devices[keyName].manufacturer}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
