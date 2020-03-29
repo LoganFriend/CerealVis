@@ -17,6 +17,7 @@ function connect(e) {
     if (arg) {
       this.closeModal();
     } else {
+      this.setState({ msg: "Please, try again" });
       console.log("connection error...!");
     }
   });
@@ -26,7 +27,8 @@ class PopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true
+      open: true,
+      msg: "Connect to your device to continue"
     };
 
     this.openModal = this.openModal.bind(this);
@@ -50,7 +52,7 @@ class PopUp extends Component {
         onClose={this.closeModal}
       >
         <div className="modal">
-          <div className="header">Connect to your device to continue</div>
+          <div className="header">{this.state.msg}</div>
           <div className="actions">
             <Button
               className="button"
