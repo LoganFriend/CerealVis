@@ -9,8 +9,7 @@ function getdevices() {
   window.ipcRenderer.send("serialport", args);
 }
 
-function connect(e, path) {
-  e.preventDefault();
+function connect(path) {
   var args = new Object();
   args.cmd = "connect";
   if (path != null) {
@@ -84,22 +83,19 @@ class PopUp extends Component {
               Search devices
             </Button>
           </div>
-          <div>
-            Devices
-            <ul>
-              {Object.keys(this.devices).map((keyName, i) => (
-                <li key={i}>
-                  <Button
-                  className="button"
-                  color="primary"
-                  variant="contained"
-                  onClick={this.connect}
-                  >
-                    {this.devices[keyName].manufacturer}
-                  </Button>
-                </li>
-              ))}
-            </ul>
+          <div className="devices">
+            {Object.keys(this.devices).map((keyName, i) => (
+              <div key={i}>
+                <Button
+                className="button"
+                color="primary"
+                variant="contained"
+                onClick={() => this.connect(this.devices[keyName].path)}
+                >
+                  {this.devices[keyName].manufacturer} on {this.devices[keyName].path}
+                </Button>
+              </div>
+            ))}
           </div>
         </div>
       </Popup>
