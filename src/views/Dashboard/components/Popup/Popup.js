@@ -10,11 +10,12 @@ function getdevices() {
 }
 
 function connect(path) {
-  var args = new Object();
+  var args = {};
   args.cmd = "connect";
-  if (path != null) {
+  if (path == null) {
     args.port = "AUTO";
   } else {
+    console.log(path);
     args.port = path;
   }
   window.ipcRenderer.send("serialport", args);
@@ -26,6 +27,7 @@ function connect(path) {
     if (arg) {
       this.closeModal();
     } else {
+      this.setState({ msg: "Please, try again" });
       console.log("connection error...!");
     }
   });
@@ -35,7 +37,8 @@ class PopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true
+      open: true,
+      msg: "Connect to your device to continue"
     };
 
     this.devices = '';
@@ -72,7 +75,7 @@ class PopUp extends Component {
         onClose={this.closeModal}
       >
         <div className="modal">
-          <div className="header">Connect to your device to continue</div>
+          <div className="header">{this.state.msg}</div>
           <div className="actions">
             <Button
               className="button"
@@ -85,11 +88,15 @@ class PopUp extends Component {
           </div>
           <div className="devices">
             {Object.keys(this.devices).map((keyName, i) => (
+              
               <div key={i}>
                 <Button
                 className="button"
                 color="primary"
                 variant="contained"
+
+                // this creates some performance issues as a different function reference
+                // for connect is created for each device in the list
                 onClick={() => this.connect(this.devices[keyName].path)}
                 >
                   {this.devices[keyName].manufacturer} on {this.devices[keyName].path}
