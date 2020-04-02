@@ -22,7 +22,6 @@ function connect(path) {
 
   window.ipcRenderer.on("serialport", (event, arg) => {
     console.log(arg);
-    console.log(typeof arg);
 
     if (arg) {
       this.closeModal();
@@ -41,7 +40,7 @@ class PopUp extends Component {
       msg: "Connect to your device to continue"
     };
 
-    this.devices = '';
+    this.devices = "";
 
     window.ipcRenderer.on("serialport", (event, args) => {
       this.devices = args;
@@ -51,7 +50,7 @@ class PopUp extends Component {
 
     window.ipcRenderer.on("datastream", (event, args) => {
       this.setState({ open: false });
-    })
+    });
 
     this.openModal = this.openModal.bind(this);
     this.closeModal = this.closeModal.bind(this);
@@ -88,18 +87,17 @@ class PopUp extends Component {
           </div>
           <div className="devices">
             {Object.keys(this.devices).map((keyName, i) => (
-              
               <div key={i}>
                 <Button
-                className="button"
-                color="primary"
-                variant="contained"
-
-                // this creates some performance issues as a different function reference
-                // for connect is created for each device in the list
-                onClick={() => this.connect(this.devices[keyName].path)}
+                  className="button"
+                  color="primary"
+                  variant="contained"
+                  // this creates some performance issues as a different function reference
+                  // for connect is created for each device in the list
+                  onClick={() => this.connect(this.devices[keyName].path)}
                 >
-                  {this.devices[keyName].manufacturer} on {this.devices[keyName].path}
+                  {this.devices[keyName].manufacturer} on{" "}
+                  {this.devices[keyName].path}
                 </Button>
               </div>
             ))}
