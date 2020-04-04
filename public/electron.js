@@ -88,6 +88,10 @@ ipcMain.on("serialport", (event, arg) => {
     serial.Start();
   } else if (arg.cmd == "toggle_off") {
     serial.Stop();
+  } else if (arg.cmd == "getportlist") {
+    event.reply("serialport", serial.GetPortList());
+  } else if (arg.cmd == "disconnect") {
+    serial.Disconnect();
   }
 });
 

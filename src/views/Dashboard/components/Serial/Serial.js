@@ -23,6 +23,12 @@ function startstop(e) {
   window.ipcRenderer.send("serialport", args);
 }
 
+function disconnect() {
+  var args = {};
+  args.cmd = "disconnect";
+  window.ipcRenderer.send("serialport", args);
+}
+
 class SerialButton extends Component {
   constructor(props) {
     super(props);
@@ -31,23 +37,40 @@ class SerialButton extends Component {
       text: "Start",
       color: "primary"
     };
+
     this.startstop = startstop.bind(this);
+    this.disconnect = disconnect.bind(this);
   }
 
   render() {
     return (
-      <Button
-        variant="contained"
-        color={this.state.color}
-        onClick={this.startstop}
-        size="large"
-        style={{
-          marginBottom: 10,
-          marginTop: 0
-        }}
-      >
-        {this.state.text}
-      </Button>
+      <div>
+        <Button
+          variant="contained"
+          color={this.state.color}
+          onClick={this.startstop}
+          size="large"
+          style={{
+            marginBottom: 10,
+            marginTop: 0
+          }}
+        >
+          {this.state.text}
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={this.disconnect}
+          size="large"
+          style={{
+            marginBottom: 10,
+            marginTop: 0,
+            marginLeft: 5
+          }}
+        >
+          Disconnect
+        </Button>
+      </div>
     );
   }
 }
