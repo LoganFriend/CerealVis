@@ -36,8 +36,8 @@ class PopUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      open: true,
-      msg: "Connect to your device to continue"
+      open: false,
+      msg: "Connect to your device to continue",
     };
 
     this.devices = "";
