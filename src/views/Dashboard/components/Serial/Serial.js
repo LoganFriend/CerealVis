@@ -35,7 +35,7 @@ class SerialButton extends Component {
       color: "primary"
     };
     this.startstop = startstop.bind(this);
-    this.test = SnackBarMessage;
+    this.snackbar = SnackBarMessage;
   }
 
   render() {
@@ -48,9 +48,9 @@ class SerialButton extends Component {
           onClick={() => {
             var message = this.startstop(null);
             if (message == "start") {
-              this.test("Starting data flow.");
+              this.snackbar("Starting data flow.");
             } else {
-              this.test("Stopping data flow.")
+              this.snackbar("Stopping data flow.")
             }
           }}
           size="large"
