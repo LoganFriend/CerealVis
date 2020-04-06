@@ -13,7 +13,7 @@ class SerialPortClass {
         return false;
       }
       return true;
-    }
+    };
   }
 
   async CreatePortList() {
@@ -23,7 +23,10 @@ class SerialPortClass {
     var ports = await SerialPort.list();
     for (var i = 0; i < ports.length; i++) {
       if (ports[i].manufacturer != undefined) {
-        this.possible_ports.push({ manufacturer: ports[i].manufacturer, path: ports[i].path });
+        this.possible_ports.push({
+          manufacturer: ports[i].manufacturer,
+          path: ports[i].path,
+        });
       }
     }
   }
@@ -41,8 +44,10 @@ class SerialPortClass {
 
     for (var i = 0; i < this.possible_ports.length; i++) {
       if (path == "AUTO") {
-        if (this.possible_ports[i].manufacturer.includes("Arduino") ||
-          this.possible_ports[i].manufacturer.includes("Silicon Labs")) {
+        if (
+          this.possible_ports[i].manufacturer.includes("Arduino") ||
+          this.possible_ports[i].manufacturer.includes("Silicon Labs")
+        ) {
           path = this.possible_ports[i].path;
           valid_port = true;
           break;

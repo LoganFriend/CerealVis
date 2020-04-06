@@ -63,7 +63,7 @@ function connect(path) {
 
   // it also waits for a boolean to verify the connection
   // was made sucessfully and will close the pop up if it was
-  window.ipcRenderer.on("serialport", (event, arg) => {
+  window.ipcRenderer.once("serialport", (event, arg) => {
     arg ? this.closeModal() : this.setState({ msg: "Please, try again" });
   });
 }
