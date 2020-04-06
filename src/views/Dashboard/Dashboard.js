@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { LineChart, Serial, Stats, Popup, P5 } from "./components";
+import { LineChart, Serial, Stats, Popup, P5, SnackBar } from "./components";
 import {
   Grid,
   Paper,
@@ -11,6 +11,8 @@ import {
   Typography,
   Box
 } from "@material-ui/core";
+
+import "./components/SnackBar/style.css";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -100,9 +102,5 @@ const Dashboard = () => {
     </Paper>
   );
 };
-
-// window.ipcRenderer.on("datastream", (event, arg) => {
-//   console.log(arg);
-// });
 
 export default Dashboard;

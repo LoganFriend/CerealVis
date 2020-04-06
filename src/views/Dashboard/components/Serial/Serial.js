@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
+import SnackBarMessage from "../SnackBar"
 
 function startstop(e) {
-  e.preventDefault();
+  if (e != null)
+    e.preventDefault();
 
   var args = {};
 
@@ -21,6 +23,7 @@ function startstop(e) {
   }
 
   window.ipcRenderer.send("serialport", args);
+  return args.cmd;
 }
 
 class SerialButton extends Component {
@@ -32,22 +35,33 @@ class SerialButton extends Component {
       color: "primary"
     };
     this.startstop = startstop.bind(this);
+    this.snackbar = SnackBarMessage;
   }
 
   render() {
     return (
-      <Button
-        variant="contained"
-        color={this.state.color}
-        onClick={this.startstop}
-        size="large"
-        style={{
-          marginBottom: 10,
-          marginTop: 0
-        }}
-      >
-        {this.state.text}
-      </Button>
+      <div>
+        <div id="snackbar"></div>
+        <Button
+          variant="contained"
+          color={this.state.color}
+          onClick={() => {
+            var message = this.startstop(null);
+            if (message == "start") {
+              this.snackbar("Starting data flow.");
+            } else {
+              this.snackbar("Stopping data flow.")
+            }
+          }}
+          size="large"
+          style={{
+            marginBottom: 10,
+            marginTop: 0
+          }}
+        >
+          {this.state.text}
+        </Button>
+      </div>
     );
   }
 }
