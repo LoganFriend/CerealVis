@@ -9,16 +9,16 @@ import {
   Tab,
   AppBar,
   Typography,
-  Box
+  Box,
 } from "@material-ui/core";
 
 import "./components/SnackBar/style.css";
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
   },
-  nav: {}
+  nav: {},
 }));
 
 function TabPanel(props) {
@@ -41,13 +41,13 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -62,7 +62,6 @@ const Dashboard = () => {
 
   return (
     <Paper elevation={0} className={classes.root}>
-      <Popup />
       <Serial />
       <div className={classes.root}>
         <AppBar position="static" className={classes.nav}>
