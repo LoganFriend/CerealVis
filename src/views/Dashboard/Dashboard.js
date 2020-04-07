@@ -12,8 +12,6 @@ import {
   Box
 } from "@material-ui/core";
 
-import "./components/SnackBar/style.css";
-
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(4)
@@ -64,6 +62,7 @@ const Dashboard = () => {
     <Paper elevation={0} className={classes.root}>
       <Popup />
       <Serial />
+      <SnackBar />
       <div className={classes.root}>
         <AppBar position="static" className={classes.nav}>
           <Tabs

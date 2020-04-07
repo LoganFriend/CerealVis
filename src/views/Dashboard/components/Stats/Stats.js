@@ -40,7 +40,7 @@ export default () => {
     window.ipcRenderer.on("datastream", stats);
 
     return function cleanup() {
-      window.ipcRenderer.removeListener("datastream", stats)
+      window.ipcRenderer.removeListener("datastream", stats);
     }
   }, []);
 
