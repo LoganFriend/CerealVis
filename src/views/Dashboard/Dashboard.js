@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { LineChart, Serial, Stats, Popup, P5, SnackBar } from "./components";
+import { LineChart, Serial, Stats, P5, SnackBar } from "./components";
 import {
   Grid,
   Paper,
@@ -14,7 +14,7 @@ import {
 
 import "./components/SnackBar/style.css";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(4),
   },
