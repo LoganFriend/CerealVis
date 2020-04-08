@@ -7,7 +7,7 @@ function base(s) {
     s.onSetAppState = () => {}
 
     s.setup = function() {
-        s.createCanvas(200, 300)
+        s.createCanvas(300, 300)
     }
 
     s.draw = function() {
@@ -15,13 +15,13 @@ function base(s) {
             s.onSetAppState({ frameRate: s.frameRate().toFixed(1) })
         }
 
-        s.background(250, 250, 250)
+        s.background(255, 255, 255)
         const weight = s.map(s.props.slider, 5, 290, 0, 8)
         s.strokeWeight(weight)
         s.stroke(2, 169, 244)
         const alpha = s.map(s.props.slider, 5, 290, 255, 0)
         s.fill(3, 169, 244, alpha)
-        s.ellipse(s.width / 2, s.height / 2, s.props.slider)
+        s.ellipse(s.width / 2, s.height / 2, s.props.slider * 2)
     }
 }
 
