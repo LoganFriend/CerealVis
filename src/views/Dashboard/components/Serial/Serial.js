@@ -1,16 +1,14 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
 
-
 import Popup from "reactjs-popup";
-import "../Popup/style.css";
+import "../Serial/style.css";
 
 function startstop(e) {
   // This functions sends commands through the serialport IPC channel
   // to start or start/stop reading data from the port
   // it relies on the state of the component
-  if (e != null)
-    e.preventDefault();
+  if (e != null) e.preventDefault();
 
   var args = {};
 
@@ -172,7 +170,7 @@ class Serial extends Component {
           size="large"
           style={{
             marginBottom: 10,
-            marginTop: 0
+            marginTop: 0,
           }}
         >
           {this.state.text}
