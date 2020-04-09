@@ -20,6 +20,10 @@ const useStyles = makeStyles((theme) => ({
 const SnackBar = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
+  const [msg, setMsg] = useState("");
+  const [severity, setSeverity] = useState("info")
+
+  const SnackBarContainer = useRef(null);
 
   const handleOpen = () => {
     setOpen(true);
@@ -32,20 +36,19 @@ const SnackBar = () => {
     setOpen(false);
   };
 
-  const SnackBarContainer = useRef(null);
-
   useEffect(() => {
-    window.ipcRenderer.on("log", (event, arg) => {
-      console.log("Hit");
+    window.ipcRenderer.on("log", (event, severity, message ) => {
+      setMsg(message);
+      setSeverity(severity);
       setOpen(true);
     });
   }, [SnackBarContainer]);
 
   return (
-    <div className={classes.root} ref={SnackBarContainer}>
+    <div className={classes.root} ref={SnackBarContainer} id="notif">
       <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
-        <Alert onClose={handleClose} severity="success">
-          This is a success message!
+        <Alert onClose={handleClose} severity={severity}>
+          {msg}
         </Alert>
       </Snackbar>
     </div>

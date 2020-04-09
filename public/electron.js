@@ -71,10 +71,12 @@ serial = new sp.SerialPortClass();
 //IPC Channels
 //-------------------------------------------------------------------------------------------------
 
-ipcMain.on("log", (event, arg) => {
-  console.log("Logging Channel: " + arg);
+//render processes can send logs to the main ipc channel with the pattern:
+// window.ipcRenderer.send("log", severity, message)
+ipcMain.on("log", (event, severity, message) => {
+  console.log("Logging Channel: " + severity + ": " + message);
   //Pass log on to other renderer object so they may see them
-  event.reply("log", "Logging Channel: " + arg)
+  event.reply("log", severity, message)
 });
 
 ipcMain.on("serialport", (event, arg) => {

@@ -20,12 +20,14 @@ function startstop(e) {
       text: "Stop",
       color: "secondary",
     });
+    window.ipcRenderer.send("log", "info", "Opening Connection");
   } else {
     args.cmd = "stop";
     this.setState({
       text: "Start",
       color: "primary",
     });
+    window.ipcRenderer.send("log", "info", "Closing Connection");
   }
 
   window.ipcRenderer.send("serialport", args);
@@ -58,7 +60,6 @@ function connect(path) {
   if (path == null) {
     args.port = "AUTO";
   } else {
-    window.ipcRenderer.send("log", path);
     args.port = path;
   }
   window.ipcRenderer.send("serialport", args);
@@ -66,7 +67,15 @@ function connect(path) {
   // it also waits for a boolean to verify the connection
   // was made sucessfully and will close the pop up if it was
   window.ipcRenderer.once("serialport", (event, arg) => {
-    arg ? this.closeModal() : this.setState({ msg: "Please, try again" });
+    
+    if(arg){
+      window.ipcRenderer.send("log", "success", "Connection established!");
+      this.closeModal()
+    }else{
+      window.ipcRenderer.send("log", "error", "Unable to establish a connection");
+      this.setState({ msg: "Please, try again" });
+    }
+  
   });
 }
 
