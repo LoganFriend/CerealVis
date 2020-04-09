@@ -128,7 +128,8 @@ class Serial extends Component {
         
         <Popup
           open={this.state.open}
-          closeOnDocumentClick
+          closeOnDocumentClick={false}
+          closeOnEscape={false}
           onClose={this.closeModal}
         >
           <div className="modal">
