@@ -1,5 +1,6 @@
 const SerialPort = require("serialport");
 const Readline = require("@serialport/parser-readline");
+const ipcMain = require("electron")
 
 class SerialPortClass {
   constructor() {
@@ -66,7 +67,11 @@ class SerialPortClass {
     }
 
     if (valid_port) {
-      this.port = new SerialPort(path, { baudRate: this.baudRate });
+      this.port = new SerialPort(path, { baudRate: this.baudRate }, function (err) {
+        if (err) {
+          ipcMain.send("log", "error", err.message)
+        }
+      });
       this.parser = this.port.pipe(new Readline({ delimiter: "\r\n" }));
       this.parser.on("data", event);
       this.SetConfig(config);
@@ -80,8 +85,10 @@ class SerialPortClass {
   Disconnect() {
     if (!this.connected()) return;
     this.port.write("p");
+    this.port.close();
     this.port = null;
     this.parser = null;
+    this.currentPath = null;
     console.log("SerialPort: Port closed");
   }
 

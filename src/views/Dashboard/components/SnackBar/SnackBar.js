@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import Button from '@material-ui/core/Button';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
@@ -54,13 +53,6 @@ const SnackBar = () => {
     </div>
   );
 
-}
-
-function SnackBarMessage(msg) {
-  var x = document.getElementById("snackbar");
-  document.getElementById("snackbar").innerHTML = msg;
-  x.className = "show";
-  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }
 
 export default SnackBar;
