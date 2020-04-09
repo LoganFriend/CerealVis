@@ -9,7 +9,7 @@ class SerialPortClass {
     this.CreatePortList();
     this.connected = () => {
       if (this.port == null) {
-        console.log("No port established");
+        console.log("SerialPort: No port established");
         return false;
       }
       return true;
@@ -61,7 +61,7 @@ class SerialPortClass {
     }
 
     if (this.currentPath == path) {
-      console.log("Connection with port already has already been established");
+      console.log("SerialPort: Connection with port already has already been established");
       return false;
     }
 
@@ -82,25 +82,25 @@ class SerialPortClass {
     this.port.write("p");
     this.port = null;
     this.parser = null;
-    console.log("Port closed");
+    console.log("SerialPort: Port closed");
   }
 
   Start() {
     if (!this.connected()) return;
     this.port.write("g");
-    console.log("Start Data Flow");
+    console.log("SerialPort: Starting Data Flow");
   }
 
   Stop() {
     if (!this.connected()) return;
     this.port.write("p");
-    console.log("Stop Data Flow");
+    console.log("SerialPort: Stopping Data Flow");
   }
 
   SetConfig(config) {
     if (!this.connected()) return;
     this.port.write(config[0] + "," + config[1]);
-    console.log("Frequency : Multiplier => " + config[0] + " : " + config[1]);
+    console.log("SerialPort: Frequency : Multiplier => " + config[0] + " : " + config[1]);
   }
 }
 

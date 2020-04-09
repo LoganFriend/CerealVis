@@ -72,7 +72,9 @@ serial = new sp.SerialPortClass();
 //-------------------------------------------------------------------------------------------------
 
 ipcMain.on("log", (event, arg) => {
-  console.log(arg);
+  console.log("Logging Channel: " + arg);
+  //Pass log on to other renderer object so they may see them
+  event.reply("log", "Logging Channel: " + arg)
 });
 
 ipcMain.on("serialport", (event, arg) => {

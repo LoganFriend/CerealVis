@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
-import SnackBarMessage from "../SnackBar"
+
 
 import Popup from "reactjs-popup";
 import "../Popup/style.css";
@@ -58,7 +58,7 @@ function connect(path) {
   if (path == null) {
     args.port = "AUTO";
   } else {
-    console.log(path);
+    window.ipcRenderer.send("log", path);
     args.port = path;
   }
   window.ipcRenderer.send("serialport", args);
@@ -83,8 +83,6 @@ class Serial extends Component {
 
     this.startstop = startstop.bind(this);
 
-    this.snackbar = SnackBarMessage;
-    
     this.disconnect = disconnect.bind(this);
     this.connect = connect.bind(this);
 
@@ -118,7 +116,7 @@ class Serial extends Component {
   render() {
     return (
       <div>
-        <div id="snackbar"></div>
+        
         <Popup
           open={this.state.open}
           closeOnDocumentClick
@@ -160,11 +158,6 @@ class Serial extends Component {
           color={this.state.color}
           onClick={() => {
             var message = this.startstop(null);
-            if (message == "start") {
-              this.snackbar("Starting data flow.");
-            } else {
-              this.snackbar("Stopping data flow.")
-            }
           }}
           size="large"
           style={{
