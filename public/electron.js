@@ -94,6 +94,10 @@ ipcMain.on("serialport", (event, arg) => {
 ipcMain.on("close", (event, arg) => {
   serial.Disconnect();
 });
+
+ipcMain.on("snackbar", (event, arg) => {
+  event.reply("msg", arg.msg);
+});
 //-------------------------------------------------------------------------------------------------
 
 app.on("window-all-closed", () => {

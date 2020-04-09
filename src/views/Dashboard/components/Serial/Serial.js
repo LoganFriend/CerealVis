@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Button } from "@material-ui/core";
-import SnackBarMessage from "../SnackBar"
 
 function startstop(e) {
   if (e != null)
@@ -22,7 +21,14 @@ function startstop(e) {
     });
   }
 
+  if (args.cmd == "start") {
+    args.msg = "Starting data flow.";
+  } else {
+    args.msg = "Stopping data flow.";
+  }
+
   window.ipcRenderer.send("serialport", args);
+  window.ipcRenderer.send("snackbar", args);
   return args.cmd;
 }
 
@@ -35,24 +41,15 @@ class SerialButton extends Component {
       color: "primary"
     };
     this.startstop = startstop.bind(this);
-    this.snackbar = SnackBarMessage;
   }
 
   render() {
     return (
       <div>
-        <div id="snackbar"></div>
         <Button
           variant="contained"
           color={this.state.color}
-          onClick={() => {
-            var message = this.startstop(null);
-            if (message == "start") {
-              this.snackbar("Starting data flow.");
-            } else {
-              this.snackbar("Stopping data flow.")
-            }
-          }}
+          onClick={this.startstop}
           size="large"
           style={{
             marginBottom: 10,

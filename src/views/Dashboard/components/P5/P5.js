@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import { CircleSketch } from './CircleSketch'
 
+
 class P5 extends Component {
     constructor() {
         super()
@@ -9,12 +10,18 @@ class P5 extends Component {
             data: 100,
             frameRate: null,
         }
+    }
 
-        window.ipcRenderer.on("datastream", (event, arg) => {
-            
-            this.setState({ data: Math.floor(arg / 1024 * 100)});
+    stream = (event, data) => {
+        this.setState({ data: Math.floor(data / 1024 * 100)});
+    }
 
-          });
+    componentDidMount() {
+        window.ipcRenderer.on("datastream", this.stream);
+    }
+
+    componentWillUnmount() {
+        window.ipcRenderer.removeListener("datastream", this.stream);
     }
 
     onSetAppState = (newState, cb) => this.setState(newState, cb)

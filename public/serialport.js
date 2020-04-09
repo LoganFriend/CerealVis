@@ -76,6 +76,7 @@ class SerialPortClass {
     if (!this.connected()) return;
     this.port.write("p");
     this.port = null;
+    this.currentPath = null;
     this.parser = null;
     console.log("Port closed");
   }
