@@ -73,40 +73,36 @@ const Dashboard = () => {
       </Grid>
 
       <SnackBar />
+
       <div className={classes.root}>
-        <AppBar position="static" className={classes.nav}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="simple tabs example"
-          >
-            <Tab label="Line Chart" {...a11yProps(0)} />
-            <Tab label="P5" {...a11yProps(1)} />
-          </Tabs>
-        </AppBar>
-
-        <TabPanel value={value} index={0}>
-          <Grid container spacing={4}>
-            <Grid item xs={2}>
-              <Stats />
-            </Grid>
-
-            <Grid item xs={10}>
-              <LineChart />
-            </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={2}>
+            <Stats />
           </Grid>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Grid container spacing={4}>
-            <Grid item xs={2}>
-              <Stats />
-            </Grid>
+          <Grid item xs={10} sm={10}>
+            <AppBar position="static" className={classes.nav}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="simple tabs example"
+              >
+                <Tab label="Line Chart" {...a11yProps(0)} />
+                <Tab label="P5" {...a11yProps(1)} />
+              </Tabs>
+            </AppBar>
 
-            <Grid item xs={10}>
-              <P5 />
-            </Grid>
+            <TabPanel value={value} index={0}>   
+              <Grid item xs={12}>
+                <LineChart />
+              </Grid>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <Grid item xs={12}>
+                <P5 />
+              </Grid>
+            </TabPanel>
           </Grid>
-        </TabPanel>
+        </Grid>
       </div>
     </Paper>
   );
