@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { LineChart, Serial, Stats, P5, SnackBar } from "./components";
+import { LineChart, Serial, Stats, P5, SnackBar, CheckBox } from "./components";
 import {
   Grid,
   Paper,
@@ -62,7 +62,16 @@ const Dashboard = () => {
 
   return (
     <Paper elevation={0} className={classes.root}>
-      <Serial />
+      <Grid container spacing={2}>
+        <Grid item>
+          <Serial />
+        </Grid>
+
+        <Grid item>
+          <CheckBox />
+        </Grid>
+      </Grid>
+
       <SnackBar />
       <div className={classes.root}>
         <AppBar position="static" className={classes.nav}>

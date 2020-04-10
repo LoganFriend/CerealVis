@@ -61,14 +61,18 @@ class SerialPortClass {
     }
 
     if (this.currentPath == path) {
-      console.log("SerialPort: Connection with port already has already been established");
+      console.log(
+        "SerialPort: Connection with port already has already been established"
+      );
       return false;
     }
 
     if (valid_port) {
-      this.port = new SerialPort(path, { baudRate: this.baudRate }, function (err) {
+      this.port = new SerialPort(path, { baudRate: this.baudRate }, function (
+        err
+      ) {
         if (err) {
-          console.log("Error: " + err.message)
+          console.log("Error: " + err.message);
         }
       });
       this.parser = this.port.pipe(new Readline({ delimiter: "\r\n" }));
@@ -106,7 +110,9 @@ class SerialPortClass {
   SetConfig(config) {
     if (!this.connected()) return;
     this.port.write(config[0] + "," + config[1]);
-    console.log("SerialPort: Frequency : Multiplier => " + config[0] + " : " + config[1]);
+    console.log(
+      "SerialPort: Frequency : Multiplier => " + config[0] + " : " + config[1]
+    );
   }
 }
 
