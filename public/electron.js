@@ -100,7 +100,10 @@ ipcMain.on("serialport", (event, arg) => {
   } else if (arg.cmd == "stop") {
     serial.Stop();
   } else if (arg.cmd == "getportlist") {
-    event.reply("serialport", serial.GetPortList());
+    (async function () {
+      await serial.CreatePortList();
+      event.reply("serialport", serial.GetPortList());
+    }());
   } else if (arg.cmd == "disconnect") {
     serial.Disconnect();
   }
