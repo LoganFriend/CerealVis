@@ -39,6 +39,7 @@ function disconnect() {
   args.cmd = "disconnect";
   window.ipcRenderer.send("serialport", args);
 
+  this.devices = "";
   this.setState({ open: true });
 }
 
@@ -48,6 +49,16 @@ function getdevices() {
   var args = {};
   args.cmd = "getportlist";
   window.ipcRenderer.send("serialport", args);
+
+  window.ipcRenderer.once("serialport", (event, args) => {
+    this.devices = args;
+    // If there is only one device connected, go ahead and connect to that one
+    if (Object.keys(this.devices).length === 1) {
+      this.connect(this.devices.path);
+    } else {
+      this.forceUpdate();
+    }
+  });
 }
 
 function connect(path) {
@@ -65,15 +76,17 @@ function connect(path) {
   // it also waits for a boolean to verify the connection
   // was made sucessfully and will close the pop up if it was
   window.ipcRenderer.once("serialport", (event, arg) => {
-    
-    if(arg){
+    if (arg) {
       window.ipcRenderer.send("log", "success", "Connection established!");
-      this.closeModal()
-    }else{
-      window.ipcRenderer.send("log", "error", "Unable to establish a connection");
+      this.closeModal();
+    } else {
+      window.ipcRenderer.send(
+        "log",
+        "error",
+        "Unable to establish a connection"
+      );
       this.setState({ msg: "Please, try again" });
     }
-  
   });
 }
 
@@ -100,12 +113,6 @@ class Serial extends Component {
 
     this.devices = "";
 
-    window.ipcRenderer.on("serialport", (event, args) => {
-      this.devices = args;
-      console.log(this.devices);
-      this.forceUpdate();
-    });
-
     // this create an issue when data is being graphed and the
     // disconnect button is clicked, it prevents the popup to re-appear
     window.ipcRenderer.on("datastream", (event, args) => {
@@ -123,7 +130,6 @@ class Serial extends Component {
   render() {
     return (
       <div>
-        
         <Popup
           open={this.state.open}
           closeOnDocumentClick={false}

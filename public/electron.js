@@ -92,9 +92,7 @@ ipcMain.on("serialport", (event, arg) => {
   };
 
   if (arg.cmd == "connect") {
-    var bool;
-    bool = serial.Connect(streamtochart, arg.port);
-    event.reply("serialport", bool);
+    event.reply("serialport", serial.Connect(streamtochart, arg.port));
   } else if (arg.cmd == "start") {
     serial.Start();
   } else if (arg.cmd == "stop") {
