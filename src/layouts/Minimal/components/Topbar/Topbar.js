@@ -7,22 +7,23 @@ import { AppBar, Toolbar, colors } from "@material-ui/core";
 import SettingsIcon from "@material-ui/icons/Settings";
 import GroupIcon from "@material-ui/icons/Group";
 import HomeIcon from "@material-ui/icons/Home";
+import HelpIcon from "@material-ui/icons/Help";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {},
   flexGrow: {
-    flexGrow: 1
+    flexGrow: 1,
   },
   Button: {
     color: colors.grey[50],
     textTransform: "none",
     fontWeight: theme.typography.fontWeightLight,
     fontSize: 25,
-    margin: 10
-  }
+    margin: 10,
+  },
 }));
 
-const Topbar = props => {
+const Topbar = (props) => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
@@ -48,13 +49,16 @@ const Topbar = props => {
         <RouterLink to="/settings">
           <SettingsIcon className={classes.Button}></SettingsIcon>
         </RouterLink>
+        <RouterLink to="/help">
+          <HelpIcon className={classes.Button}></HelpIcon>
+        </RouterLink>
       </Toolbar>
     </AppBar>
   );
 };
 
 Topbar.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
 };
 
 export default Topbar;

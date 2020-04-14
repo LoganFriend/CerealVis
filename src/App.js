@@ -14,7 +14,8 @@ import { Minimal as MinimalLayout } from "./layouts";
 import {
   Dashboard as DashboardView,
   UserList as UserListView,
-  Settings as SettingsView
+  Settings as SettingsView,
+  Help as HelpView,
 } from "./views";
 
 export default class App extends Component {
@@ -41,6 +42,12 @@ export default class App extends Component {
               exact
               layout={MinimalLayout}
               path="/settings"
+            />
+            <Routes
+              component={HelpView}
+              exact
+              layout={MinimalLayout}
+              path="/help"
             />
           </Switch>
         </MemoryRouter>
