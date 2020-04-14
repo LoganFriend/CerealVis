@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { LineChart, Serial, Stats, Popup, P5, SnackBar } from "./components";
+import { LineChart, Serial, Stats, P5, SnackBar, CheckBox } from "./components";
 import {
   Grid,
   Paper,
@@ -9,14 +9,16 @@ import {
   Tab,
   AppBar,
   Typography,
-  Box
+  Box,
 } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+import "./components/SnackBar/style.css";
+
+const useStyles = makeStyles((theme) => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
   },
-  nav: {}
+  nav: {},
 }));
 
 function TabPanel(props) {
@@ -39,13 +41,13 @@ function TabPanel(props) {
 TabPanel.propTypes = {
   children: PropTypes.node,
   index: PropTypes.any.isRequired,
-  value: PropTypes.any.isRequired
+  value: PropTypes.any.isRequired,
 };
 
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
-    "aria-controls": `simple-tabpanel-${index}`
+    "aria-controls": `simple-tabpanel-${index}`,
   };
 }
 
@@ -60,43 +62,47 @@ const Dashboard = () => {
 
   return (
     <Paper elevation={0} className={classes.root}>
-      <Popup />
-      <Serial />
+      <Grid container spacing={2}>
+        <Grid item>
+          <Serial />
+        </Grid>
+
+        <Grid item>
+          <CheckBox />
+        </Grid>
+      </Grid>
+
       <SnackBar />
+
       <div className={classes.root}>
-        <AppBar position="static" className={classes.nav}>
-          <Tabs
-            value={value}
-            onChange={handleChange}
-            aria-label="simple tabs example"
-          >
-            <Tab label="Line Chart" {...a11yProps(0)} />
-            <Tab label="P5" {...a11yProps(1)} />
-          </Tabs>
-        </AppBar>
-
-        <TabPanel value={value} index={0}>
-          <Grid container spacing={4}>
-            <Grid item xs={2}>
-              <Stats />
-            </Grid>
-
-            <Grid item xs={10}>
-              <LineChart />
-            </Grid>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={2}>
+            <Stats />
           </Grid>
-        </TabPanel>
-        <TabPanel value={value} index={1}>
-          <Grid container spacing={4}>
-            <Grid item xs={2}>
-              <Stats />
-            </Grid>
+          <Grid item xs={10} sm={10}>
+            <AppBar position="static" className={classes.nav}>
+              <Tabs
+                value={value}
+                onChange={handleChange}
+                aria-label="simple tabs example"
+              >
+                <Tab label="Line Chart" {...a11yProps(0)} />
+                <Tab label="P5" {...a11yProps(1)} />
+              </Tabs>
+            </AppBar>
 
-            <Grid item xs={10}>
-              <P5 />
-            </Grid>
+            <TabPanel value={value} index={0}>   
+              <Grid item xs={12}>
+                <LineChart />
+              </Grid>
+            </TabPanel>
+            <TabPanel value={value} index={1}>
+              <Grid item xs={12}>
+                <P5 />
+              </Grid>
+            </TabPanel>
           </Grid>
-        </TabPanel>
+        </Grid>
       </div>
     </Paper>
   );

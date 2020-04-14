@@ -9,11 +9,11 @@ class SerialPortClass {
     this.CreatePortList();
     this.connected = () => {
       if (this.port == null) {
-        console.log("No port established");
+        console.log("SerialPort: No port established");
         return false;
       }
       return true;
-    }
+    };
   }
 
   async CreatePortList() {
@@ -23,7 +23,10 @@ class SerialPortClass {
     var ports = await SerialPort.list();
     for (var i = 0; i < ports.length; i++) {
       if (ports[i].manufacturer != undefined) {
-        this.possible_ports.push({ manufacturer: ports[i].manufacturer, path: ports[i].path });
+        this.possible_ports.push({
+          manufacturer: ports[i].manufacturer,
+          path: ports[i].path,
+        });
       }
     }
   }
@@ -41,8 +44,10 @@ class SerialPortClass {
 
     for (var i = 0; i < this.possible_ports.length; i++) {
       if (path == "AUTO") {
-        if (this.possible_ports[i].manufacturer.includes("Arduino") ||
-          this.possible_ports[i].manufacturer.includes("Silicon Labs")) {
+        if (
+          this.possible_ports[i].manufacturer.includes("Arduino") ||
+          this.possible_ports[i].manufacturer.includes("Silicon Labs")
+        ) {
           path = this.possible_ports[i].path;
           valid_port = true;
           break;
@@ -56,12 +61,20 @@ class SerialPortClass {
     }
 
     if (this.currentPath == path) {
-      console.log("Connection with port already has already been established");
+      console.log(
+        "SerialPort: Connection with port already has already been established"
+      );
       return false;
     }
 
     if (valid_port) {
-      this.port = new SerialPort(path, { baudRate: this.baudRate });
+      this.port = new SerialPort(path, { baudRate: this.baudRate }, function (
+        err
+      ) {
+        if (err) {
+          console.log("Error: " + err.message);
+        }
+      });
       this.parser = this.port.pipe(new Readline({ delimiter: "\r\n" }));
       this.parser.on("data", event);
       this.SetConfig(config);
@@ -75,28 +88,32 @@ class SerialPortClass {
   Disconnect() {
     if (!this.connected()) return;
     this.port.write("p");
+    this.port.close();
     this.port = null;
     this.currentPath = null;
     this.parser = null;
-    console.log("Port closed");
+    this.currentPath = null;
+    console.log("SerialPort: Port closed");
   }
 
   Start() {
     if (!this.connected()) return;
     this.port.write("g");
-    console.log("Start Data Flow");
+    console.log("SerialPort: Starting Data Flow");
   }
 
   Stop() {
     if (!this.connected()) return;
     this.port.write("p");
-    console.log("Stop Data Flow");
+    console.log("SerialPort: Stopping Data Flow");
   }
 
   SetConfig(config) {
     if (!this.connected()) return;
     this.port.write(config[0] + "," + config[1]);
-    console.log("Frequency : Multiplier => " + config[0] + " : " + config[1]);
+    console.log(
+      "SerialPort: Frequency : Multiplier => " + config[0] + " : " + config[1]
+    );
   }
 }
 

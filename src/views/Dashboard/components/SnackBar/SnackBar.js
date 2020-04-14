@@ -1,15 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CloseIcon from '@material-ui/icons/Close';
-import { SnackbarContent } from '@material-ui/core';
+import MuiAlert from '@material-ui/lab/Alert';
+import { makeStyles } from '@material-ui/core/styles';
 
-export default () => {
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    width: '100%',
+    '& > * + *': {
+      marginTop: theme.spacing(2),
+    },
+  },
+}));
+
+const SnackBar = () => {
+  const classes = useStyles();
   const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState("");
+  const [msg, setMsg] = useState("");
+  const [severity, setSeverity] = useState("info")
 
-  const handleClick = (event, msg) => {
-    setMessage(msg);
+  const SnackBarContainer = useRef(null);
+
+  const handleOpen = () => {
     setOpen(true);
   };
 
@@ -17,43 +32,27 @@ export default () => {
     if (reason === 'clickaway') {
       return;
     }
-
     setOpen(false);
   };
 
   useEffect(() => {
-    window.ipcRenderer.on("msg", handleClick);
-
-    return () => {
-      window.ipcRenderer.removeListener("datastream", handleClick);
-    }
-  }, []);
+    window.ipcRenderer.on("log", (event, severity, message ) => {
+      setMsg(message);
+      setSeverity(severity);
+      setOpen(true);
+    });
+  }, [SnackBarContainer]);
 
   return (
-    <div>
-      <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-      >
-        <SnackbarContent
-          style={{
-            backgroundColor: "#03a9f4"
-          }}
-          message={message}
-          action={
-          <React.Fragment>
-            <IconButton size="small" aria-label="close" color="inherit" onClick={handleClose}>
-              <CloseIcon fontSize="small" />
-            </IconButton>
-          </React.Fragment>
-          }
-        />
-      </Snackbar> 
+    <div className={classes.root} ref={SnackBarContainer} id="notif">
+      <Snackbar open={open} autoHideDuration={3000} onClose={handleClose}>
+        <Alert onClose={handleClose} severity={severity}>
+          {msg}
+        </Alert>
+      </Snackbar>
     </div>
   );
+
 }
+
+export default SnackBar;
