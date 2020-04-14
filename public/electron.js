@@ -7,6 +7,10 @@ Menu.setApplicationMenu(null);
 // be closed automatically when the JavaScript object is garbage collected
 let mainWindow;
 
+var fs = require("fs");
+var date = new Date();
+var points = [];
+
 function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1350,
@@ -80,6 +84,12 @@ serial = new sp.SerialPortClass();
 // warning
 // error
 //
+var checker = false;
+
+ipcMain.on("checkbox", (event, arg) => {
+  checker = !checker;
+});
+
 ipcMain.on("log", (event, severity, message) => {
   console.log("Logging Channel: " + severity + ": " + message);
   //Pass log on to other renderer object so they may see them
@@ -89,14 +99,32 @@ ipcMain.on("log", (event, severity, message) => {
 ipcMain.on("serialport", (event, arg) => {
   streamtochart = function (data) {
     event.reply("datastream", data);
+
+    points.push({
+      x: Date.now(),
+      y: data,
+    });
   };
 
   if (arg.cmd == "connect") {
     event.reply("serialport", serial.Connect(streamtochart, arg.port));
   } else if (arg.cmd == "start") {
     serial.Start();
+    if (checker) {
+      points = [];
+      date = new Date();
+    }
   } else if (arg.cmd == "stop") {
     serial.Stop();
+    if (checker) {
+      let dataSet = JSON.stringify(points, null, 2);
+      fs.writeFile(date + "_data.json", dataSet, function (err) {
+        if (err) {
+          return console.log("Error: ", err);
+        }
+        console.log("File was saved");
+      });
+    }
   } else if (arg.cmd == "getportlist") {
     (async () => {
       await serial.CreatePortList();

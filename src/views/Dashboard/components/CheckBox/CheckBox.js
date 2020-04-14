@@ -8,13 +8,15 @@ export default function CheckboxLabels() {
     saveData: false,
   });
 
-  function saveData() {}
+  function saveData() {
+    var args = {};
+    args.cmd = "switch";
+    window.ipcRenderer.send("checkbox", args);
+  }
 
   const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-
-    // Database commands should be called from here
     saveData();
+    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   return (
