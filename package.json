@@ -9,6 +9,7 @@
     "files": [
       "src/**/*",
       "public/**/*",
+      "public/images/logos/*",
       "build/**/*",
       "node_modules/**/*"
     ],
