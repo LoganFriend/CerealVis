@@ -82,10 +82,10 @@ const Dashboard = () => {
               <Tabs
                 value={value}
                 onChange={handleChange}
-                aria-label="simple tabs example"
+                aria-label="Tabs"
               >
                 <Tab label="Line Chart" {...a11yProps(0)} />
-                <Tab label="P5" {...a11yProps(1)} />
+                <Tab label="Circle" {...a11yProps(1)} />
               </Tabs>
             </AppBar>
 

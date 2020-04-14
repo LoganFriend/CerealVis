@@ -58,6 +58,15 @@ function getdevices() {
     } else {
       this.forceUpdate();
     }
+
+    //Check if one of the ports has the arduino manufacturer
+    for (var i = 0; i < this.devices.length; i++){
+      if(
+        this.devices[i].manufacturer.includes("Arduino") ||
+        this.devices[i].manufacturer.includes("Silicon Labs")
+      ) this.connect(this.devices[i].path)
+    }
+
   });
 }
 

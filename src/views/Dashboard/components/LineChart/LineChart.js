@@ -8,7 +8,7 @@ const chartConfig = {
   type: 'line',
   data: {
     datasets: [{
-      label: "Dataset 1",
+      label: "Realtime Data Stream",
       borderColor: "#0277bd",
       backgroundColor: "#fbfcfd",
       data: points

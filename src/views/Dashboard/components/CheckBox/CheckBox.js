@@ -30,7 +30,7 @@ export default function CheckboxLabels() {
             name="saveData"
           />
         }
-        label="Check to save run"
+        label="Save Device Data"
       />
     </FormGroup>
   );
