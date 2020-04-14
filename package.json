@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "description": "CerealVis",
-  "author": "Logan Friend",
+  "author": "Brian Crook, Tran Nguyen, Emilio Quintana, Brenden Roland, Logan Friend, Ero Doce",
   "build": {
     "appId": "CerealVis",
     "files": [
