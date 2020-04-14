@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain, Menu } = require("electron");
+const { app, BrowserWindow, ipcMain, Menu, session } = require("electron");
 const path = require("path");
 const isDev = require("electron-is-dev");
 Menu.setApplicationMenu(null);
@@ -15,9 +15,9 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1350,
     height: 800,
-    nodeIntegration: false, // is default value after Electron v5
-    contextIsolation: true, // protect against prototype pollution
-    enableRemoteModule: false, // turn off remote
+    nodeIntegration: false, // this should not be enabled for any window that loads remote content
+    contextIsolation: true, // protect against prototype pollution and prevents global objects by scripts running in the render process
+    enableRemoteModule: false, // turn off remote, this helps lock down the internal IPC channels
     webPreferences: {
       preload: path.join(app.getAppPath(), "./src/app-preload.js"), //Use a preload script
     },
@@ -29,8 +29,40 @@ function createWindow() {
       : `file://${path.join(app.getAppPath(), "./build/index.html")}`
   );
 
+  session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+    callback({
+      responseHeaders: {
+        ...details.responseHeaders,
+        'Content-Security-Policy': ['script-src \'self\' filesystem: \'report-sample\' \'unsafe-inline\' \'unsafe-eval\'']
+      }
+    })
+  })
+
   // Open the DevTools on start (if in development)
-  if (isDev) mainWindow.webContents.openDevTools();
+  if (isDev) {
+    mainWindow.webContents.openDevTools();
+
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+      callback({
+        responseHeaders: {
+          ...details.responseHeaders,
+          'Content-Security-Policy': ['script-src \'self\' filesystem: \'report-sample\' \'unsafe-inline\' \'unsafe-eval\'']
+        }
+      })
+    })
+
+  } else {
+
+    session.defaultSession.webRequest.onHeadersReceived((details, callback) => {
+      callback({
+        responseHeaders: {
+          ...details.responseHeaders,
+          'Content-Security-Policy': ['script-src \'self\' filesystem:']
+        }
+      })
+    })
+
+  }
 
   // Emitted when the window is closed
   mainWindow.on("closed", function () {
