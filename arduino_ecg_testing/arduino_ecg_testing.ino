@@ -25,11 +25,11 @@ void loop()
 
     for(int i = 0; i < frequency; i++)
     {
-      final_reading += random(1024) * multiplier;
+      final_reading = random(1024);
       delay(2);
     }
 
-    final_reading /= frequency;
+    //final_reading /= frequency;
 
     Serial.println(final_reading);
   }

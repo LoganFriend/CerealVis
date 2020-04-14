@@ -6,22 +6,32 @@ function base(s) {
     s.props = {}
     s.onSetAppState = () => {}
 
+    var xprev;
+    var x;
+    var lerp;
+
     s.setup = function() {
         s.createCanvas(300, 300)
+        lerp = s.props.data;
     }
 
     s.draw = function() {
-        if (s.frameCount % 60 === 1) {
-            s.onSetAppState({ frameRate: s.frameRate().toFixed(1) })
-        }
+        xprev = s.props.prevdata
+        x = s.props.data
+
+        if (isNaN(lerp)) lerp = xprev;
+        
+        lerp = s.lerp(lerp, x, 0.1)
 
         s.background(255, 255, 255)
-        const weight = s.map(s.props.slider, 5, 290, 0, 8)
+        const weight = s.map(s.props.data, 5, 290, 0, 8)
         s.strokeWeight(weight)
         s.stroke(2, 169, 244)
-        const alpha = s.map(s.props.slider, 5, 290, 255, 0)
+        const alpha = s.map(s.props.data, 5, 290, 255, 0)
         s.fill(3, 169, 244, alpha)
-        s.ellipse(s.width / 2, s.height / 2, s.props.slider * 2)
+
+        s.ellipse(s.width / 2, s.height / 2, lerp)
+
     }
 }
 
@@ -46,7 +56,6 @@ class CircleSketch extends Component {
 
     componentWillUnmount() {
         this.canvas.remove()
-
     }
 
     render() {

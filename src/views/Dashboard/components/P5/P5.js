@@ -7,13 +7,16 @@ class P5 extends Component {
     constructor() {
         super()
         this.state = {
-            data: 100,
+            prevdata: 100,
             frameRate: null,
+            data: 100
         }
     }
 
     stream = (event, data) => {
+        this.setState({prevdata: this.state.data});
         this.setState({ data: Math.floor(data / 1024 * 100)});
+
     }
 
     componentDidMount() {
@@ -30,14 +33,9 @@ class P5 extends Component {
         return (
             <>
                 <CircleSketch
-                    p5Props={{ slider: this.state.data }}
+                    p5Props={{ prevdata: this.state.prevdata, data: this.state.data }}
                     onSetAppState={this.onSetAppState}
                 />
-                <p style={{ textAlign: 'center' }}>
-                    Sketch frame rate:&nbsp;
-                    <big><strong>{this.state.frameRate}</strong></big>
-                    &nbsp;fps
-                </p>
             </>
         )
     }
