@@ -2,7 +2,7 @@
   "name": "CerealVis",
   "version": "0.1.0",
   "private": true,
-  "description": "CerealVis",
+  "description": "Electron App made to read in and visualize data coming from a serial connection.",
   "author": "Brian Crook, Tran Nguyen, Emilio Quintana, Brenden Roland, Logan Friend, Ero Doce",
   "build": {
     "appId": "CerealVis",
