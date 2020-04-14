@@ -12,8 +12,6 @@ import {
   Box,
 } from "@material-ui/core";
 
-import "./components/SnackBar/style.css";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: theme.spacing(4),
