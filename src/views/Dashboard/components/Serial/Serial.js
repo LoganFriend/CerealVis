@@ -1,211 +1,150 @@
-import React, { Component } from "react";
-import { Button } from "@material-ui/core";
+import React, { useState, useEffect } from 'react';
+import { Button } from '@material-ui/core';
+import Popup from 'reactjs-popup';
 
-import Popup from "reactjs-popup";
 import "../Serial/style.css";
 
-function startstop(e) {
-  // This functions sends commands through the serialport IPC channel
-  // to start or start/stop reading data from the port
-  // it relies on the state of the component
-  if (e != null) e.preventDefault();
+export default () => {
+  const [ text, setText ] = useState('Start');
+  const [ color, setColor ] = useState('primary');
+  const [ isOpen, setIsOpen ] = useState(true);
+  const [ message, setMessage ] = useState('Connect to your device to continue');
+  const [ devices, setDevices ] = useState([]);
 
-  var args = {};
-
-  if (this.state.text === "Start") {
-    args.cmd = "start";
-    this.setState({
-      text: "Stop",
-      color: "secondary",
-    });
-    window.ipcRenderer.send("log", "info", "Opening Connection");
-  } else {
-    args.cmd = "stop";
-    this.setState({
-      text: "Start",
-      color: "primary",
-    });
-    window.ipcRenderer.send("log", "info", "Closing Connection");
+  const serialport = (event, args) => {
+    setDevices(args);
   }
 
-  window.ipcRenderer.send("serialport", args);
-  return args.cmd;
-}
+  useEffect(() => {
+    window.ipcRenderer.on('serialport', serialport);
+    window.ipcRenderer.on('datastream', closeModal);
 
-function disconnect() {
-  // This functions sends a command through the serialport IPC channel
-  // to close the port and bring back the pop-up
-  var args = {};
-  args.cmd = "disconnect";
-  window.ipcRenderer.send("serialport", args);
+    return () => {
+      window.ipcRenderer.removeListener('serialport', serialport);
+      window.ipcRenderer.removeListener('datastream', closeModal);
+    }
+  }, []);
 
-  this.devices = "";
-  this.setState({ open: true });
-}
+  const startstop = () => {
+    var args = {};
 
-function getdevices() {
-  // this functions sends a command through the serialport IPC channel
-  // to get a list of available devices
-  var args = {};
-  args.cmd = "getportlist";
-  window.ipcRenderer.send("serialport", args);
-
-  window.ipcRenderer.once("serialport", (event, args) => {
-    this.devices = args;
-    // If there is only one device connected, go ahead and connect to that one
-    if (Object.keys(this.devices).length === 1) {
-      this.connect(this.devices.path);
+    if (text === 'Start') {
+      args.cmd = 'start';
+      setText('Stop');
+      setColor('secondary');
+      window.ipcRenderer.send("log", "info", "Opening Connection");
     } else {
-      this.forceUpdate();
+      args.cmd = 'stop';
+      setText('Start');
+      setColor('primary');
+      window.ipcRenderer.send("log", "info", "Closing Connection");
     }
-
-    //Check if one of the ports has the arduino manufacturer
-    for (var i = 0; i < this.devices.length; i++){
-      if(
-        this.devices[i].manufacturer.includes("Arduino") ||
-        this.devices[i].manufacturer.includes("Silicon Labs")
-      ) this.connect(this.devices[i].path)
-    }
-
-  });
-}
-
-function connect(path) {
-  // this functions sends a command through the serialport IPC channel
-  // to connect to a device
-  var args = {};
-  args.cmd = "connect";
-  if (path == null) {
-    args.port = "AUTO";
-  } else {
-    args.port = path;
+  
+    window.ipcRenderer.send("serialport", args);
   }
-  window.ipcRenderer.send("serialport", args);
 
-  // it also waits for a boolean to verify the connection
-  // was made sucessfully and will close the pop up if it was
-  window.ipcRenderer.once("serialport", (event, arg) => {
-    if (arg) {
-      window.ipcRenderer.send("log", "success", "Connection established!");
-      this.closeModal();
+  const connect = (path) => {
+    var args = {};
+    args.cmd = "connect";
+
+    if (path == null) {
+      args.port = "AUTO";
     } else {
-      window.ipcRenderer.send(
-        "log",
-        "error",
-        "Unable to establish a connection"
-      );
-      this.setState({ msg: "Please, try again" });
+      args.port = path;
     }
-  });
-}
 
-class Serial extends Component {
-  constructor(props) {
-    super(props);
+    window.ipcRenderer.send("serialport", args);
 
-    this.state = {
-      text: "Start",
-      color: "primary",
-      open: true,
-      msg: "Connect to your device to continue",
-    };
-
-    this.startstop = startstop.bind(this);
-
-    this.disconnect = disconnect.bind(this);
-    this.connect = connect.bind(this);
-
-    this.openModal = this.openModal.bind(this);
-    this.closeModal = this.closeModal.bind(this);
-
-    this.getdevices = getdevices.bind(this);
-
-    this.devices = "";
-
-    // this create an issue when data is being graphed and the
-    // disconnect button is clicked, it prevents the popup to re-appear
-    window.ipcRenderer.on("datastream", (event, args) => {
-      this.setState({ open: false });
+    window.ipcRenderer.once("serialport", (_, arg) => {
+      if (arg) {
+        window.ipcRenderer.send("log", "success", "Connection established!");
+        closeModal();
+      } else {
+        window.ipcRenderer.send("log", "error", "Unable to establish a connection");
+        setMessage("Please, try again");
+      }
     });
   }
 
-  openModal() {
-    this.setState({ open: true });
-  }
-  closeModal() {
-    this.setState({ open: false });
+  const disconnect = () => {
+    var args = {};
+    args.cmd = "disconnect";
+    window.ipcRenderer.send("serialport", args);
+    setIsOpen(true);
   }
 
-  render() {
-    return (
-      <div>
-        <Popup
-          open={this.state.open}
-          closeOnDocumentClick={false}
-          closeOnEscape={false}
-          onClose={this.closeModal}
-        >
-          <div className="modal">
-            <div className="header">{this.state.msg}</div>
-            <div className="actions">
-              <Button
-                className="button"
-                color="primary"
-                variant="contained"
-                onClick={this.getdevices}
-              >
-                Search devices
-              </Button>
-            </div>
-            <div className="devices">
-              {Object.keys(this.devices).map((keyName, i) => (
-                <div key={i}>
-                  <Button
-                    className="button"
-                    color="primary"
-                    variant="contained"
-                    // this creates some performance issues as a different function reference
-                    // for connect is created for each device in the list
-                    onClick={() => this.connect(this.devices[keyName].path)}
-                  >
-                    {this.devices[keyName].manufacturer} on{" "}
-                    {this.devices[keyName].path}
-                  </Button>
-                </div>
-              ))}
-            </div>
+  const getdevices = () => {
+    var args = {};
+    args.cmd = "getportlist";
+    window.ipcRenderer.send("serialport", args);
+  }
+
+  const closeModal = () => {
+    setIsOpen(false);
+  }
+
+  return (
+    <div>
+      <Popup
+        open={isOpen}
+        closeOnDocumentClick={false}
+        closeOnEscape={false}
+        onClose={closeModal}
+      >
+        <div className="modal">
+          <div className="header">{message}</div>
+          <div className="actions">
+            <Button
+              className="button"
+              color="primary"
+              variant="contained"
+              onClick={getdevices}
+            >
+              Search devices
+            </Button>
           </div>
-        </Popup>
-        <Button
-          variant="contained"
-          color={this.state.color}
-          onClick={() => {
-            var message = this.startstop(null);
-          }}
-          size="large"
-          style={{
-            marginBottom: 10,
-            marginTop: 0,
-          }}
-        >
-          {this.state.text}
-        </Button>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={this.disconnect}
-          size="large"
-          style={{
-            marginBottom: 10,
-            marginTop: 0,
-            marginLeft: 5,
-          }}
-        >
-          Disconnect
-        </Button>
-      </div>
-    );
-  }
+          <div className="devices">
+            {Object.keys(devices).map((keyName, i) => (
+              <div key={i}>
+                <Button
+                  className="button"
+                  color="primary"
+                  variant="contained"
+                  onClick={() => connect(devices[keyName].path)}
+                >
+                  {devices[keyName].manufacturer} on{" "}
+                  {devices[keyName].path}
+                </Button>
+              </div>
+            ))}
+          </div>
+        </div>
+      </Popup>
+      <Button
+        variant="contained"
+        color={color}
+        onClick={startstop}
+        size="large"
+        style={{
+          marginBottom: 10,
+          marginTop: 0,
+        }}
+      >
+        {text}
+      </Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={disconnect}
+        size="large"
+        style={{
+          marginBottom: 10,
+          marginTop: 0,
+          marginLeft: 5,
+        }}
+      >
+        Disconnect
+      </Button>
+    </div>  
+  );
 }
-
-export default Serial;

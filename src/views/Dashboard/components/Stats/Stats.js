@@ -36,11 +36,22 @@ export default () => {
     setAverage(average);
   }
 
+  const refresh = () => {
+    max = 0;
+    current = 0;
+    average = 0;
+    setMax(0);
+    setCurrent(0);
+    setAverage(0);
+  }
+
   useEffect(() => {
     window.ipcRenderer.on("datastream", stats);
+    window.ipcRenderer.on("serialport", refresh);
 
     return function cleanup() {
-      window.ipcRenderer.removeListener("datastream", stats);
+      window.ipcRenderer.removeListener("datastream", stats)
+      window.ipcRenderer.removeListener("serialport", refresh)
     }
   }, []);
 

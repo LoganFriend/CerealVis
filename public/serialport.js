@@ -61,10 +61,7 @@ class SerialPortClass {
     }
 
     if (this.currentPath == path) {
-      console.log(
-        "SerialPort: Connection with port already has already been established"
-      );
-      return false;
+      return true;
     }
 
     if (valid_port) {
@@ -90,7 +87,6 @@ class SerialPortClass {
     this.port.write("p");
     this.port.close();
     this.port = null;
-    this.currentPath = null;
     this.parser = null;
     this.currentPath = null;
     console.log("SerialPort: Port closed");

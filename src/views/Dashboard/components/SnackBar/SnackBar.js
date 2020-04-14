@@ -24,10 +24,6 @@ const SnackBar = () => {
 
   const SnackBarContainer = useRef(null);
 
-  const handleOpen = () => {
-    setOpen(true);
-  };
-
   const handleClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
@@ -35,12 +31,18 @@ const SnackBar = () => {
     setOpen(false);
   };
 
+  const message = (event, severity, message) => {
+    setMsg(message);
+    setSeverity(severity);
+    setOpen(true);
+  }
+
   useEffect(() => {
-    window.ipcRenderer.on("log", (event, severity, message ) => {
-      setMsg(message);
-      setSeverity(severity);
-      setOpen(true);
-    });
+    window.ipcRenderer.on("log", message);
+
+    return () => {
+      window.ipcRenderer.removeListener("log", message);
+    }
   }, [SnackBarContainer]);
 
   return (
