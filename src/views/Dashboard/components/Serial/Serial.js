@@ -74,9 +74,22 @@ export default () => {
   }
 
   const getdevices = () => {
+    // this functions sends a command through the serialport IPC channel
+    // to get a list of available devices
     var args = {};
     args.cmd = "getportlist";
     window.ipcRenderer.send("serialport", args);
+  
+    window.ipcRenderer.once("serialport", (event, args) => {
+      //Check if one of the ports has the arduino manufacturer
+      for (var i = 0; i < args.length; i++){
+        if(
+          args[i].manufacturer.includes("Arduino") ||
+          args[i].manufacturer.includes("Silicon Labs")
+        ) connect(args[i].path)
+      }
+  
+    });
   }
 
   const closeModal = () => {
