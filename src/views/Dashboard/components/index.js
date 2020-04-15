@@ -5,3 +5,4 @@ export { default as Stats } from "./Stats";
 export { default as SnackBar } from "./SnackBar";
 export { default as CheckBox } from "./CheckBox";
 export { default as P5FillUpBar } from "./P5FillUpBar";
+export { default as P5Game } from "./P5Game";

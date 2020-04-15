@@ -23,7 +23,7 @@ class FillUpBarSketch extends Component {
     var colors = ['#469a2b', '#92d03f', '#f8ee4f', '#ea8430', '#e43321'];
   
     s.setup = function() {
-      s.createCanvas(300, 300)
+      s.createCanvas(300, 300);
     }
   
     s.draw = function() {
