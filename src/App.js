@@ -32,18 +32,6 @@ export default class App extends Component {
               path="/dashboard"
             />
             <Routes
-              component={UserListView}
-              exact
-              layout={MinimalLayout}
-              path="/users"
-            />
-            <Routes
-              component={SettingsView}
-              exact
-              layout={MinimalLayout}
-              path="/settings"
-            />
-            <Routes
               component={HelpView}
               exact
               layout={MinimalLayout}

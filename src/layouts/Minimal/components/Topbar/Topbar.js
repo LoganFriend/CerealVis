@@ -36,18 +36,12 @@ const Topbar = (props) => {
       position="fixed"
     >
       <Toolbar variant="dense">
-        <RouterLink to="/">
-          <img alt="Logo" src="./images/logos/logo.svg" />
-        </RouterLink>
+
+        <img alt="Logo" src="./images/logos/logo.svg" />
+        
         <div className={classes.flexGrow} />
         <RouterLink to="/">
           <HomeIcon className={classes.Button}></HomeIcon>
-        </RouterLink>
-        <RouterLink to="/users">
-          <GroupIcon className={classes.Button}></GroupIcon>
-        </RouterLink>
-        <RouterLink to="/settings">
-          <SettingsIcon className={classes.Button}></SettingsIcon>
         </RouterLink>
         <RouterLink to="/help">
           <HelpIcon className={classes.Button}></HelpIcon>

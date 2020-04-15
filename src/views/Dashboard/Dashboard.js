@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { LineChart, Serial, Stats, P5Circle, SnackBar, CheckBox, P5FillUpBar } from "./components";
+import { LineChart, Serial, Stats, P5Circle, SnackBar, P5FillUpBar } from "./components";
 import {
   Grid,
   Paper,
@@ -63,10 +63,6 @@ const Dashboard = () => {
       <Grid container spacing={2}>
         <Grid item>
           <Serial />
-        </Grid>
-
-        <Grid item>
-          <CheckBox />
         </Grid>
       </Grid>
 
