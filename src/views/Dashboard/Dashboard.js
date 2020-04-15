@@ -1,11 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-<<<<<<< HEAD
-import { LineChart, Serial, Stats, P5Circle, SnackBar, CheckBox, P5FillUpBar, P5Game } from "./components";
-=======
-import { LineChart, Serial, Stats, P5Circle, SnackBar, P5FillUpBar } from "./components";
->>>>>>> sprint
+import { LineChart, Serial, Stats, P5Circle, SnackBar, P5FillUpBar, P5Game } from "./components";
+
 import {
   Grid,
   Paper,
