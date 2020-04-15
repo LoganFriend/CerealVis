@@ -3,7 +3,7 @@ import React, { Component } from 'react'
 import { CircleSketch } from './CircleSketch'
 
 
-class P5 extends Component {
+class P5Circle extends Component {
     constructor() {
         super()
         this.state = {
@@ -41,4 +41,4 @@ class P5 extends Component {
     }
 }
 
-export default P5
+export default P5Circle
