@@ -44,10 +44,6 @@ class GameSketch extends Component {
       if (xPos < 30) {
         neg++;
       }
-
-      if (s.frameCount % 60 == 0 && neg > 60 & xPos < 30) {
-        score--;
-      }
       
       if (s.frameCount % 180 == 0) {
         if (flag) {
@@ -72,6 +68,9 @@ class GameSketch extends Component {
       }
 
       if (time > 0) {
+        if (s.frameCount % 60 == 0 && neg > 60 & xPos < 30) {
+          score--;
+        }
         s.fill('blue');
         s.noStroke();
         s.textAlign(s.CENTER, s.CENTER)
