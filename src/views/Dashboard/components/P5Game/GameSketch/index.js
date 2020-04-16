@@ -22,15 +22,16 @@ class GameSketch extends Component {
 
     var time = 60;
     var score = 0;
-    var xPos = 0;
+    var xPos = 30;
     var maxFrames = 600;
     var randomX = 0;
     var flag = false;
+    var neg = 0;
   
     s.setup = function() {
       s.createCanvas(300, 300);
       s.frameRate(60);
-      randomX = s.floor(s.random(0, 285));
+      randomX = s.floor(s.random(60, 285));
     }
   
     s.draw = function() {
@@ -39,12 +40,20 @@ class GameSketch extends Component {
       s.rectMode(s.CORNER);
 
       xPos = s.props.data;
+
+      if (xPos < 30) {
+        neg++;
+      }
+
+      if (s.frameCount % 60 == 0 && neg > 60 & xPos < 30) {
+        score--;
+      }
       
       if (s.frameCount % 180 == 0) {
         if (flag) {
           flag = false;
         } else {
-          randomX = s.floor(s.random(0, 285));
+          randomX = s.floor(s.random(60, 285));
         }
       }
 
@@ -55,7 +64,7 @@ class GameSketch extends Component {
         s.textSize(20);
         s.text('Touch the randomly moving\nsquare as many times\n as you can in 60 seconds.', s.width / 2, 50);
         s.textSize(15);
-        s.text('Be careful, its easy to\nunder/overshoot your goal\n and the ball moves every 3 seconds\nor when you touch it!', s.width / 2, s.height / 2 - 20);
+        s.text('Be careful, going behind the red line\ncosts you points when you stay too long\nand the ball moves every 3 seconds\nor when you touch it!', s.width / 2, s.height / 2 - 20);
       }
 
       if (s.frameCount % 60 == 0 && time > 0) {
@@ -91,7 +100,7 @@ class GameSketch extends Component {
             score++;
             flag = true;
             if (xPos > 135) {
-              randomX = s.floor(s.random(0, 90));
+              randomX = s.floor(s.random(60, 90));
             } else {
               randomX = s.floor(s.random(140, 285))
             }
@@ -101,12 +110,16 @@ class GameSketch extends Component {
             score++;
             flag = true;
             if (xPos > 135) {
-              randomX = s.floor(s.random(0, 90));
+              randomX = s.floor(s.random(60, 90));
             } else {
               randomX = s.floor(s.random(140, 285))
             }
           }
         }
+
+        s.stroke('red');
+        s.strokeWeight(2);
+        s.line(58, s.height - 50, 58, 200);
         
         s.stroke('black');
         s.strokeWeight(6);
@@ -117,7 +130,6 @@ class GameSketch extends Component {
         s.fill('black');
         s.text('min', 20, s.height - 35);
         s.text('max', 280, s.height - 35);
-
       } else {
         s.noStroke();
         s.textSize(35);
