@@ -40,7 +40,8 @@ const chartConfig = {
           unit: "second"
         },
         realtime: {
-          delay: 2000
+          delay: 2000,
+          ttl: 22000
         }
       }]
     },
@@ -62,12 +63,6 @@ const Chart = () => {
         x: Date.now(),
         y: Math.floor(arg / 1024 * 100)
       });
-
-      // if (points.length > 15) {
-      //   points.shift();
-      // }
-
-      // updateData(points);
     });
   }, [chartContainer]);
 
