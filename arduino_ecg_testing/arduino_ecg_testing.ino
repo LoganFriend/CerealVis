@@ -1,7 +1,9 @@
 #include <Random>
+#include <math.h>
 
-int frequency = 15;
+
 bool allow_data = false;
+double count = 0.0;
  
 void setup()
 {
@@ -10,24 +12,19 @@ void setup()
 
 void loop()
 {
-  if (Serial.available()) // needed when not using the Ardunino
+  if (Serial.available()) 
   {
     serialEvent();
   }
   
   if (allow_data)
   {
-    int final_reading = 0;
+    delay(15);
+    Serial.println(512 * sin(2*M_PI*count) + 512);
 
-    for(int i = 0; i < frequency; i++)
-    {
-      final_reading += random(1024);
-      delay(15);
-    }
+    count += .01;
+    if(count >= 1) count = 0;
 
-    final_reading /= frequency;
-
-    Serial.println(final_reading);
   }
 }
 

@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import Chartjs from 'chart.js';
 import "chartjs-plugin-streaming";
 
-let points = [];
 
 const chartConfig = {
   type: 'line',
@@ -11,7 +10,7 @@ const chartConfig = {
       label: "Realtime Data Stream",
       borderColor: "#0277bd",
       backgroundColor: "#fbfcfd",
-      data: points
+      data: []
     }]
   },
   options: {
@@ -40,8 +39,8 @@ const chartConfig = {
           unit: "second"
         },
         realtime: {
-          delay: 2000,
-          ttl: 22000
+          delay: 1000,
+          ttl: 15000
         }
       }]
     },
@@ -58,17 +57,26 @@ const Chart = () => {
       chartInstance = new Chartjs(chartContainer.current, chartConfig);
     }
 
-    window.ipcRenderer.on("datastream", (event, arg) => {  
-      points.push({
-        x: Date.now(),
-        y: Math.floor(arg / 1024 * 100)
-      });
-    });
+    window.ipcRenderer.on('datastream', onReceive);
+
+    return () => {
+      window.ipcRenderer.removeListener('datastream', onReceive);
+    }
+
   }, [chartContainer]);
 
-  const updateData = (arg) => {
-    chartInstance.data.datasets[0].data = arg;
-    chartInstance.update();
+  function onReceive(event, args) {
+
+    // append the new data to the existing chart data
+    chartInstance.data.datasets[0].data.push({
+      x: Date.now(),
+      y: Math.floor(args / 1024 * 100)
+    });
+
+    // update chart datasets keeping the current animation
+    chartInstance.update({
+        preservation: true
+    });
   }
 
   return (
