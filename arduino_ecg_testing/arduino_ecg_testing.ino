@@ -1,10 +1,6 @@
 #include <Random>
 
-#define MAX 300
-#define MIN 5
-
-int frequency = 10;
-float multiplier = 1.0f;
+int frequency = 15;
 bool allow_data = false;
  
 void setup()
@@ -25,11 +21,11 @@ void loop()
 
     for(int i = 0; i < frequency; i++)
     {
-      final_reading = random(1024);
-      delay(2);
+      final_reading += random(1024);
+      delay(15);
     }
 
-    //final_reading /= frequency;
+    final_reading /= frequency;
 
     Serial.println(final_reading);
   }
@@ -43,24 +39,6 @@ void serialEvent()
   {
     case 'g': allow_data = true; break;
     case 'p': allow_data= false; break;
-    case 'q': Serial.end(); break;
-    default: Set_Config(raw_input);
+    default: break;
   }
-}
-
-void Set_Config(String input)
-{
-  int index = 0;
-  
-  for (char i : input)
-  {
-    if (i == ',')
-    {
-      frequency = constrain(input.substring(0, index).toInt(), MIN, MAX);
-      break;
-    }
-    index++;
-  }
-  
-  multiplier = input.substring(index + 1, input.length()).toFloat();
 }

@@ -36,7 +36,7 @@ class SerialPortClass {
     return this.possible_ports;
   }
 
-  Connect(event, path = "AUTO", config = [30, 1.0]) {
+  Connect(event, path = "AUTO") {
     // this function attempts to create a connection with a specified port
     // if no port is specified the function attempts to create a connection with an arduino module
     // returns true when a was connection made, false when a connection was not made
@@ -74,7 +74,6 @@ class SerialPortClass {
       });
       this.parser = this.port.pipe(new Readline({ delimiter: "\r\n" }));
       this.parser.on("data", event);
-      this.SetConfig(config);
       this.currentPath = path;
       return true;
     }
@@ -102,14 +101,6 @@ class SerialPortClass {
     if (!this.connected()) return;
     this.port.write("p");
     console.log("SerialPort: Stopping Data Flow");
-  }
-
-  SetConfig(config) {
-    if (!this.connected()) return;
-    this.port.write(config[0] + "," + config[1]);
-    console.log(
-      "SerialPort: Frequency : Multiplier => " + config[0] + " : " + config[1]
-    );
   }
 }
 
