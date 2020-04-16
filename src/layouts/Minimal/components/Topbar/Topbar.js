@@ -4,8 +4,6 @@ import clsx from "clsx";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
 import { AppBar, Toolbar, colors } from "@material-ui/core";
-import SettingsIcon from "@material-ui/icons/Settings";
-import GroupIcon from "@material-ui/icons/Group";
 import HomeIcon from "@material-ui/icons/Home";
 import HelpIcon from "@material-ui/icons/Help";
 
@@ -36,7 +34,6 @@ const Topbar = (props) => {
       position="fixed"
     >
       <Toolbar variant="dense">
-
         <img alt="Logo" src="./images/logos/logo.svg" />
         
         <div className={classes.flexGrow} />

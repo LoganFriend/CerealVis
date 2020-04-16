@@ -25,6 +25,12 @@ function base(s) {
 
     s.draw = function() {
 
+        if(bx != s.windowWidth/2 && by != s.windowHeight/2){
+            bx = s.windowWidth/2
+            by = s.windowHeight/2
+            s.resizeCanvas(bx,by)
+        }
+
         //in case initial lerp value is null
         if (isNaN(lerp)) lerp = s.props.prevdata;
         
@@ -61,13 +67,12 @@ function base(s) {
         s.text('50%', bx * .05, by * .65 + 7)
         s.text('100%', bx * .05, by * .8 + 7)
 
-
+        //circle
         const weight = s.map(s.props.data, 5, 290, 0, 8)
         s.strokeWeight(weight)
         s.stroke(2, 169, 244)
         const alpha = s.map(s.props.data, 5, 290, 255, 150)
         s.fill(3, 169, 244, alpha)
-
         s.ellipse(s.width / 2, s.height / 2, lerp / 100 * by * 0.6)
 
     }
@@ -94,7 +99,6 @@ class CircleSketch extends Component {
 
     shouldComponentUpdate(nextProps) {
         this.canvas.props = nextProps.p5Props
-
         return false
     }
 

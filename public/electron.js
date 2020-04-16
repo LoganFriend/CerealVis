@@ -15,6 +15,8 @@ function createWindow() {
   mainWindow = new BrowserWindow({
     width: 1350,
     height: 800,
+    minHeight: 600,
+    minWidth: 800,
     nodeIntegration: false, // this should not be enabled for any window that loads remote content
     contextIsolation: true, // protect against prototype pollution and prevents global objects by scripts running in the render process
     enableRemoteModule: false, // turn off remote, this helps lock down the internal IPC channels
