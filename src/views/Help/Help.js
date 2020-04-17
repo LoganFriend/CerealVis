@@ -1,24 +1,24 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/styles";
-import PropTypes from "prop-types";
-import clsx from "clsx";
 import {
   Card,
   CardHeader,
   CardContent,
-  CardActions,
   Grid,
   Divider,
-  FormControlLabel,
-  Checkbox,
   Typography,
-  Button,
+  Paper,
 } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
+    fontFamily: "sans-serif",
     padding: theme.spacing(3),
-    margin: 25,
+  },
+  content: {
+    paddingBottom: theme.spacing(1),
+    fontFamily: "sans-serif",
+    fontWeight: theme.typography.fontWeightLight,
   },
 }));
 
@@ -26,18 +26,68 @@ const Help = () => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <form>
-        <CardHeader subheader="User Manual" title="Help" />
-        <Divider />
-        <CardContent>
-          Test
-          <Grid container spacing={6} wrap="wrap">
-            <Grid className={classes.item} item md={4} sm={6} xs={12}></Grid>
-          </Grid>
-        </CardContent>
-      </form>
-    </Card>
+    <Paper elevation={0} className={classes.root}>
+      <Grid container spacing={5}>
+        <Grid item sm={5}>
+          <Card className={classes.root}>
+            <CardHeader title="About Cereal Vis"></CardHeader>
+            <Divider />
+            <CardContent>
+              <Typography variant="body1" className={classes.content}>
+                CerealVis is a portable desktop application made to read in and
+                display EMG sensor data from an Arduino Uno. CerealVis can
+                connect to a variety of devices and start reading and displaying
+                data from it. Features like auto connect and different types of
+                visualization is what makes CerealVis a great tool for anyone
+                looking to visualize sensor data.
+              </Typography>
+
+              <Typography variant="h6" className={classes.content}>
+                CerealVis was developed under the MIT license.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+
+        <Grid item sm={5}>
+          <Card className={classes.root}>
+            <CardHeader title="How to use" />
+            <Divider />
+            <CardContent>
+              <Typography variant="h6">Step one:</Typography>
+              <Typography variant="body1" className={classes.content}>
+                Connect your device to any of your USB ports.
+              </Typography>
+
+              <Typography variant="h6">Step two:</Typography>
+              <Typography variant="body1" className={classes.content}>
+                Click the "Search" button in order to connect to your device.
+              </Typography>
+
+              <Typography variant="h6">Step three:</Typography>
+              <Typography variant="body1" className={classes.content}>
+                Click the "Start" button in order to read and display data.
+              </Typography>
+
+              <Typography variant="h6">Step four:</Typography>
+              <Typography variant="body1" className={classes.content}>
+                Switch between tabs to see different visualizations.
+              </Typography>
+
+              <Typography variant="h6">Step five:</Typography>
+              <Typography variant="body1" className={classes.content}>
+                Click the "Stop" button to stop displaying data.
+              </Typography>
+
+              <Typography variant="h6">Step six:</Typography>
+              <Typography variant="body1" className={classes.content}>
+                Click the "Disconnect" button to disconnect from the device.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+      </Grid>
+    </Paper>
   );
 };
 
