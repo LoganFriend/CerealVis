@@ -1,7 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { makeStyles } from "@material-ui/styles";
-import { LineChart, Serial, Stats, P5Circle, SnackBar, P5FillUpBar, P5Game } from "./components";
+import {
+  LineChart,
+  Serial,
+  Stats,
+  P5Circle,
+  SnackBar,
+  P5FillUpBar,
+  P5Game,
+} from "./components";
 
 import {
   Grid,
@@ -80,6 +88,7 @@ const Dashboard = () => {
                 value={value}
                 onChange={handleChange}
                 aria-label="Tabs"
+                variant="fullWidth"
               >
                 <Tab label="Line Chart" {...a11yProps(0)} />
                 <Tab label="Circle" {...a11yProps(1)} />
@@ -88,7 +97,7 @@ const Dashboard = () => {
               </Tabs>
             </AppBar>
 
-            <TabPanel value={value} index={0}>   
+            <TabPanel value={value} index={0}>
               <Grid item xs={12}>
                 <LineChart />
               </Grid>

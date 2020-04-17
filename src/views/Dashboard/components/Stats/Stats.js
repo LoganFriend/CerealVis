@@ -1,14 +1,22 @@
-import React, {useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Card, CardContent, Typography } from "@material-ui/core";
+import Divider from "@material-ui/core/Divider";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    height: "100%"
+    height: "100%",
+    borderRadius: 12,
+    padding: 5,
+    margin: "auto",
   },
   title: {
-    fontWeight: 1000
-  }
+    fontWeight: 1000,
+  },
+  divider: {
+    margin: 5,
+    color: "#000000",
+  },
 }));
 
 export default () => {
@@ -22,7 +30,7 @@ export default () => {
   var [average, setAverage] = useState(0);
 
   const stats = (event, data) => {
-    current = Math.floor(data / 1024 * 100);
+    current = Math.floor((data / 1024) * 100);
     setCurrent(current);
 
     if (current > max) {
@@ -34,7 +42,7 @@ export default () => {
 
     average = Math.floor(sum / ++count);
     setAverage(average);
-  }
+  };
 
   const refresh = () => {
     max = 0;
@@ -43,16 +51,16 @@ export default () => {
     setMax(0);
     setCurrent(0);
     setAverage(0);
-  }
+  };
 
   useEffect(() => {
     window.ipcRenderer.on("datastream", stats);
     window.ipcRenderer.on("serialport", refresh);
 
     return function cleanup() {
-      window.ipcRenderer.removeListener("datastream", stats)
-      window.ipcRenderer.removeListener("serialport", refresh)
-    }
+      window.ipcRenderer.removeListener("datastream", stats);
+      window.ipcRenderer.removeListener("serialport", refresh);
+    };
   }, []);
 
   return (
@@ -60,29 +68,50 @@ export default () => {
       <Card className={classes.root}>
         <CardContent>
           <div>
-            <Typography color="textSecondary" variant="h6" align="center" gutterBottom>
+            <Typography
+              color="textSecondary"
+              variant="h6"
+              align="center"
+              paragraph
+            >
               MAXIMUM
             </Typography>
+
             <Typography variant="h1" align="center">
-              {max}{"%"}
+              {max}
+              {"%"}
             </Typography>
+            <Divider className={classes.divider} dark />
             <br />
           </div>
           <div>
-            <Typography color="textSecondary" variant="h6" align="center" gutterBottom>
+            <Typography
+              color="textSecondary"
+              variant="h6"
+              align="center"
+              paragraph
+            >
               CURRENT
             </Typography>
             <Typography variant="h1" align="center">
-              {current}{"%"}
+              {current}
+              {"%"}
             </Typography>
+            <Divider className={classes.divider} dark />
             <br />
           </div>
           <div>
-            <Typography color="textSecondary" variant="h6" align="center" gutterBottom>
+            <Typography
+              color="textSecondary"
+              variant="h6"
+              align="center"
+              paragraph
+            >
               AVERAGE
             </Typography>
             <Typography variant="h1" align="center">
-              {average}{"%"}
+              {average}
+              {"%"}
             </Typography>
           </div>
         </CardContent>

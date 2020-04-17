@@ -31,6 +31,7 @@ const Help = () => {
         <CardHeader subheader="User Manual" title="Help" />
         <Divider />
         <CardContent>
+          Test
           <Grid container spacing={6} wrap="wrap">
             <Grid className={classes.item} item md={4} sm={6} xs={12}></Grid>
           </Grid>

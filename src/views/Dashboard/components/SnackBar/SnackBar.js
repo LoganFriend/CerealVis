@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useEffect, useRef, useState } from "react";
+import Snackbar from "@material-ui/core/Snackbar";
+import MuiAlert from "@material-ui/lab/Alert";
+import { makeStyles } from "@material-ui/core/styles";
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -9,8 +9,8 @@ function Alert(props) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    '& > * + *': {
+    width: "100%",
+    "& > * + *": {
       marginTop: theme.spacing(2),
     },
   },
@@ -20,12 +20,12 @@ const SnackBar = () => {
   const classes = useStyles();
   const [open, setOpen] = useState(false);
   const [msg, setMsg] = useState("");
-  const [severity, setSeverity] = useState("info")
+  const [severity, setSeverity] = useState("info");
 
   const SnackBarContainer = useRef(null);
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setOpen(false);
@@ -35,14 +35,14 @@ const SnackBar = () => {
     setMsg(message);
     setSeverity(severity);
     setOpen(true);
-  }
+  };
 
   useEffect(() => {
     window.ipcRenderer.on("log", message);
 
     return () => {
       window.ipcRenderer.removeListener("log", message);
-    }
+    };
   }, [SnackBarContainer]);
 
   return (
@@ -54,7 +54,6 @@ const SnackBar = () => {
       </Snackbar>
     </div>
   );
-
-}
+};
 
 export default SnackBar;
