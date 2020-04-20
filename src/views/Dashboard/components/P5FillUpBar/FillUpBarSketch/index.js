@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 /*
-The FillUpBarSketch React Class displays displays the fill up bar and changes
+The FillUpBarSketch React Class displays the fill up bar and changes
 this display based on the live data read in from the connected device.
 
 componentDidMount => called automatically when react first renders this component, creates the p5 canvas
@@ -24,7 +24,7 @@ class FillUpBarSketch extends Component {
     return false;
   }
 
-  // componentWillUnmount is automatically called when react is no longer rendering this componenet
+  // componentWillUnmount is automatically called when react is no longer rendering this component
   componentWillUnmount() {
     this.canvas.remove();
   }
