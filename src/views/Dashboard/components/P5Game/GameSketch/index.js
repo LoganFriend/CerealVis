@@ -49,6 +49,7 @@ class GameSketch extends Component {
         s.fill('white');
         s.textSize(30);
         s.text('Start', s.width / 2, s.height / 2 + 27);
+        maxFrames = s.frameCount + 600;
         return;
       }
 
