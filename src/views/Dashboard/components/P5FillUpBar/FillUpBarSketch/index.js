@@ -56,12 +56,21 @@ class FillUpBarSketch extends Component {
       s.noFill();
       s.rectMode(s.CENTER);
       s.rect(s.width / 2, s.height / 2, 100, 200);
-  
+
+      s.noStroke();
+      s.textSize(16);
+      s.fill('black');
+      s.text("20%", 25, 211);
+      s.text("40%", 25, 171);
+      s.text("60%", 25, 131);
+      s.text("80%", 25, 91);
+
+      s.stroke('black');
       s.strokeWeight(2);
-      s.line(100, 210, 200, 210);
-      s.line(100, 170, 200, 170);
-      s.line(100, 130, 200, 130);
-      s.line(100, 90, 200, 90);
+      s.line(50, 210, 200, 210);
+      s.line(50, 170, 200, 170);
+      s.line(50, 130, 200, 130);
+      s.line(50, 90, 200, 90);
     }
   }
 
