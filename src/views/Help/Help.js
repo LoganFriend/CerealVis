@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
@@ -24,6 +24,12 @@ const useStyles = makeStyles((theme) => ({
 
 const Help = () => {
   const classes = useStyles();
+
+  useEffect(() => {
+    var args = {};
+    args.cmd = "stop";
+    window.ipcRenderer.send("serialport", args);
+  }, []);
 
   return (
     <Paper elevation={0} className={classes.root}>

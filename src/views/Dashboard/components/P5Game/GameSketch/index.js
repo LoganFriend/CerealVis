@@ -48,7 +48,7 @@ class GameSketch extends Component {
         s.rect(s.width / 2 - 50, s.height / 2, 100, 50);
         s.fill('white');
         s.textSize(30);
-        s.text('Start', s.width / 2, s.height / 2 + 25);
+        s.text('Start', s.width / 2, s.height / 2 + 27);
         return;
       }
 
