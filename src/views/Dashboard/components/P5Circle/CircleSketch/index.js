@@ -25,7 +25,7 @@ function base(s) {
 
     s.draw = function() {
 
-        if(bx != s.windowWidth/2 && by != s.windowHeight/2){
+        if(bx !== s.windowWidth/2 && by !== s.windowHeight/2){
             bx = s.windowWidth/2
             by = s.windowHeight/2
             s.resizeCanvas(bx,by)

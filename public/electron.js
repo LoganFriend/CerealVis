@@ -104,7 +104,7 @@ app.on("activate", function () {
 //SerialPort
 //-------------------------------------------------------------------------------------------------
 const sp = require("./serialport");
-serial = new sp.SerialPortClass();
+const serial = new sp.SerialPortClass();
 
 //IPC Channels
 //-------------------------------------------------------------------------------------------------
@@ -131,7 +131,7 @@ ipcMain.on("log", (event, severity, message) => {
 });
 
 ipcMain.on("serialport", (event, arg) => {
-  streamtochart = function (data) {
+  var streamtochart = function (data) {
     event.reply("datastream", data);
 
     points.push({

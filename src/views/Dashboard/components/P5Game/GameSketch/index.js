@@ -45,7 +45,7 @@ class GameSketch extends Component {
         neg++;
       }
       
-      if (s.frameCount % 180 == 0) {
+      if (s.frameCount % 180 === 0) {
         if (flag) {
           flag = false;
         } else {
@@ -63,19 +63,19 @@ class GameSketch extends Component {
         s.text('Be careful, going behind the red line\ncosts you points when you stay too long\nand the ball moves every 3 seconds\nor when you touch it!', s.width / 2, s.height / 2 - 20);
       }
 
-      if (s.frameCount % 60 == 0 && time > 0) {
+      if (s.frameCount % 60 === 0 && time > 0) {
         time--;
       }
 
       if (time > 0) {
-        if (s.frameCount % 60 == 0 && neg > 60 & xPos < 30) {
+        if (s.frameCount % 60 === 0 && neg > 60 & xPos < 30) {
           score--;
         }
         s.fill('blue');
         s.noStroke();
         s.textAlign(s.CENTER, s.CENTER)
         s.textSize(25);
-        if (time != 1) {
+        if (time !== 1) {
           s.text(time + " seconds", s.width / 2, s.height / 2 + 35);
         } else {
           s.text(time + " second", s.width / 2, s.height / 2 + 35);
@@ -144,7 +144,7 @@ class GameSketch extends Component {
     }
 
     s.mousePressed = function() {
-      if (time == 0 && s.mouseX >= 100 && s.mouseX <= 200 && s.mouseY >= 150 && s.mouseY <= 200) {
+      if (time === 0 && s.mouseX >= 100 && s.mouseX <= 200 && s.mouseY >= 150 && s.mouseY <= 200) {
         time = 60;
         maxFrames = s.frameCount + 600;
         score = 0;

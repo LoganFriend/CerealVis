@@ -31,7 +31,7 @@ export default () => {
     if (text === "Start") {
       args.cmd = "start";
       setText("Stop");
-      setColor("secondary");
+      setColor("primary");
       window.ipcRenderer.send("log", "info", "Opening Connection");
     } else {
       args.cmd = "stop";
@@ -70,7 +70,11 @@ export default () => {
     });
   };
 
-  const disconnect = () => {
+  const disconnect = async () => {
+    if ({text}.text === "Stop") {
+      window.ipcRenderer.send("log", "error", "Please stop the data stream before closing the connection.");
+      return;
+    }
     var args = {};
     args.cmd = "disconnect";
     window.ipcRenderer.send("serialport", args);

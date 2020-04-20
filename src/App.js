@@ -13,8 +13,8 @@ import { Minimal as MinimalLayout } from "./layouts";
 
 import {
   Dashboard as DashboardView,
-  UserList as UserListView,
-  Settings as SettingsView,
+  // UserList as UserListView,
+  // Settings as SettingsView,
   Help as HelpView,
 } from "./views";
 

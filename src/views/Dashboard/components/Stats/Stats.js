@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/styles";
 import { Card, CardContent, Typography } from "@material-ui/core";
-import Divider from "@material-ui/core/Divider";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -38,6 +37,11 @@ export default () => {
     if (current > max) {
       max = current;
       setMax(max);
+    }
+
+    if (!sum) {
+      count = 0;
+      sum = 0;
     }
 
     sum += current;

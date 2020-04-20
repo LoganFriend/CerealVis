@@ -81,9 +81,15 @@ class SerialPortClass {
     return false;
   }
 
-  Disconnect() {
+  async EnsureDisconnect() {
+    this.port.write("p").then(() => {
+      return;
+    });
+  }
+
+  async Disconnect() {
     if (!this.connected()) return;
-    this.port.write("p");
+    await this.EnsureDisconnect();
     this.port.close();
     this.port = null;
     this.parser = null;
