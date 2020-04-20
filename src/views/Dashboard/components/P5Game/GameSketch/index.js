@@ -27,6 +27,8 @@ class GameSketch extends Component {
     var randomX = 0;
     var flag = false;
     var neg = 0;
+
+    var start = false;
   
     s.setup = function() {
       s.createCanvas(300, 300);
@@ -36,6 +38,19 @@ class GameSketch extends Component {
   
     s.draw = function() {
       s.background('white');
+
+      if (!start) {
+        s.textAlign(s.CENTER, s.CENTER);
+        s.textSize(22);
+        s.fill('black');
+        s.text("Make sure you have started\nthe data flow before playing.", s.width / 2, 80);
+        s.fill('blue');
+        s.rect(s.width / 2 - 50, s.height / 2, 100, 50);
+        s.fill('white');
+        s.textSize(30);
+        s.text('Start', s.width / 2, s.height / 2 + 25);
+        return;
+      }
 
       s.rectMode(s.CORNER);
 
@@ -68,9 +83,14 @@ class GameSketch extends Component {
       }
 
       if (time > 0) {
-        if (s.frameCount % 60 === 0 && neg > 60 & xPos < 30) {
+        if (neg >= 60 & xPos < 30) {
+          neg = 0;
           score--;
         }
+
+        var t = Math.abs(neg - 60);
+
+        s.text(t, 20, 205);
         s.fill('blue');
         s.noStroke();
         s.textAlign(s.CENTER, s.CENTER)
@@ -148,6 +168,10 @@ class GameSketch extends Component {
         time = 60;
         maxFrames = s.frameCount + 600;
         score = 0;
+      }
+
+      if (!start && s.mouseX >= 100 && s.mouseX <= 200 && s.mouseY >= 150 && s.mouseY <= 200) {
+        start = true;
       }
     }
   }

@@ -78,6 +78,7 @@ export default () => {
     var args = {};
     args.cmd = "disconnect";
     window.ipcRenderer.send("serialport", args);
+    window.ipcRenderer.send("log", "success", "Connection terminated!");
     setIsOpen(true);
   };
 
