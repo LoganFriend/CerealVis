@@ -1,9 +1,11 @@
-int frequency = 15;
+#define BAUD 9600
+#define MAX 1024
+int frequency = 10;
 bool allow_data = false;
  
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(BAUD);
 }
 
 void loop()
@@ -20,10 +22,10 @@ void loop()
     for(int i = 0; i < frequency; i++)
     {
       final_reading += analogRead(A0);
-      delay(15);
+      delay(2);
     }
 
-    final_reading /= frequency;
+    final_reading = constrain(final_reading / frequency, 0, MAX);
 
     Serial.println(final_reading);
   }
