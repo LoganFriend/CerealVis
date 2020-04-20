@@ -17,7 +17,9 @@
       "buildResources": "assets",
       "output": "dist"
     },
-    "win": {},
+    "win": {
+      "target": "portable"
+    },
     "mac": {}
   },
   "main": "public/electron.js",

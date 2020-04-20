@@ -12,7 +12,7 @@ cd CerealVis
 npm install && npm run build
 ~~~
 
-This will create both an installation tool and an unpacked version that can be run without an installer.
+This will create both an installation tool and an unpacked version in the dist folder that can be run without an installer.
 
 ## Usage
 
