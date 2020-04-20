@@ -9,6 +9,8 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: 12,
     padding: 5,
     margin: "auto",
+    marginBottom: 20,
+    marginTop: 20,
   },
   title: {
     fontWeight: 1000,
@@ -67,53 +69,56 @@ export default () => {
     <div>
       <Card className={classes.root}>
         <CardContent>
-          <div>
-            <Typography
-              color="textSecondary"
-              variant="h6"
-              align="center"
-              paragraph
-            >
-              MAXIMUM
-            </Typography>
+          <Typography
+            color="textSecondary"
+            variant="h6"
+            align="center"
+            paragraph
+          >
+            MAXIMUM
+          </Typography>
 
-            <Typography variant="h1" align="center">
-              {max}
-              {"%"}
-            </Typography>
-            <Divider className={classes.divider} dark />
-            <br />
-          </div>
-          <div>
-            <Typography
-              color="textSecondary"
-              variant="h6"
-              align="center"
-              paragraph
-            >
-              CURRENT
-            </Typography>
-            <Typography variant="h1" align="center">
-              {current}
-              {"%"}
-            </Typography>
-            <Divider className={classes.divider} dark />
-            <br />
-          </div>
-          <div>
-            <Typography
-              color="textSecondary"
-              variant="h6"
-              align="center"
-              paragraph
-            >
-              AVERAGE
-            </Typography>
-            <Typography variant="h1" align="center">
-              {average}
-              {"%"}
-            </Typography>
-          </div>
+          <Typography variant="h1" align="center">
+            {max}
+            {"%"}
+          </Typography>
+
+          <br />
+        </CardContent>
+      </Card>
+      <Card className={classes.root}>
+        <CardContent>
+          <Typography
+            color="textSecondary"
+            variant="h6"
+            align="center"
+            paragraph
+          >
+            CURRENT
+          </Typography>
+          <Typography variant="h1" align="center">
+            {current}
+            {"%"}
+          </Typography>
+
+          <br />
+        </CardContent>
+      </Card>
+      <Card className={classes.root}>
+        <CardContent>
+          <Typography
+            color="textSecondary"
+            variant="h6"
+            align="center"
+            paragraph
+          >
+            AVERAGE
+          </Typography>
+          <Typography variant="h1" align="center">
+            {average}
+            {"%"}
+          </Typography>
+          <br />
         </CardContent>
       </Card>
     </div>
