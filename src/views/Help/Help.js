@@ -33,8 +33,8 @@ const Help = () => {
 
   return (
     <Paper elevation={0} className={classes.root}>
-      <Grid container spacing={5}>
-        <Grid item sm={5}>
+      <Grid container spacing={3}>
+        <Grid item sm={4}>
           <Card className={classes.root}>
             <CardHeader title="About Cereal Vis"></CardHeader>
             <Divider />
@@ -54,8 +54,7 @@ const Help = () => {
             </CardContent>
           </Card>
         </Grid>
-
-        <Grid item sm={5}>
+        <Grid item sm={4}>
           <Card className={classes.root}>
             <CardHeader title="How to use" />
             <Divider />
@@ -88,6 +87,27 @@ const Help = () => {
               <Typography variant="h6">Step six:</Typography>
               <Typography variant="body1" className={classes.content}>
                 Click the "Disconnect" button to disconnect from the device.
+              </Typography>
+            </CardContent>
+          </Card>
+        </Grid>
+        <Grid item sm={4}>
+          <Card className={classes.root}>
+            <CardHeader title="Troubleshooting"></CardHeader>
+            <Divider />
+            <CardContent>
+              <Typography variant="h5">I press start but no data is showing?</Typography>
+              <br/>
+              <Typography variant="body1" className={classes.content}>
+                Assuming that the sensor has been set up and configured 
+                to work with CerealVis, try disconnecting and reconnecting 
+                the device to see if the problem persists.
+              </Typography>
+              <br/>
+              <Typography variant="h5">My device is not showing up?</Typography>
+              <br/>
+              <Typography variant="body1" className={classes.content}>
+                In most cases, your device should connect automatically upon pressing the "Search Device" button. If not, a list will appear of all of the devices connected through serial ports. If you do not see your device in the list, try disconnecting the device, reconnect it to your computer, and press the "Search Device" button again. 
               </Typography>
             </CardContent>
           </Card>
