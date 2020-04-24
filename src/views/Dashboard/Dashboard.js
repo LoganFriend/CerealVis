@@ -28,6 +28,12 @@ const useStyles = makeStyles((theme) => ({
   nav: {},
 }));
 
+/*
+Tabs organize and allow navigation between groups of content that are
+related and at the same level of hierarchy. The TabPanel function returns
+the "Tab panel" that is displayed within the main dashboard
+ */
+
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
 
@@ -51,12 +57,22 @@ TabPanel.propTypes = {
   value: PropTypes.any.isRequired,
 };
 
+/*
+The a11yProps allows for the change of tab within the Tab Panel
+ */
+
 function a11yProps(index) {
   return {
     id: `simple-tab-${index}`,
     "aria-controls": `simple-tabpanel-${index}`,
   };
 }
+
+/*
+The dashboard acts as a container for all the implemented components,
+it also handles the change of tabs along with the functiones described
+above and the handleChange function
+ */
 
 const Dashboard = () => {
   const classes = useStyles();
