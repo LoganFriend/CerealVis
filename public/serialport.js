@@ -74,11 +74,13 @@ class SerialPortClass {
       }
     }
 
-    if (this.currentPath == path) { // true when a connection is already established with the specified port
+    if (this.currentPath == path) {
+      // true when a connection is already established with the specified port
       return true;
     }
 
-    if (valid_port) { // true when a connection can be made
+    if (valid_port) {
+      // true when a connection can be made
       this.port = new SerialPort(path, { baudRate: this.baudRate }, function (
         err
       ) {

@@ -11,12 +11,7 @@ import "./assets/scss/index.scss";
 
 import { Minimal as MinimalLayout } from "./layouts";
 
-import {
-  Dashboard as DashboardView,
-  // UserList as UserListView,
-  // Settings as SettingsView,
-  Help as HelpView,
-} from "./views";
+import { Dashboard as DashboardView, Help as HelpView } from "./views";
 
 export default class App extends Component {
   render() {

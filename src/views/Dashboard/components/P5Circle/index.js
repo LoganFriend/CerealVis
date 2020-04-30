@@ -1,1 +1,1 @@
-export {default} from './P5Circle';
+export { default } from "./P5Circle";

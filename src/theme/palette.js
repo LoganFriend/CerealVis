@@ -11,11 +11,6 @@ export default {
     dark: "#0277bd", //color of button when hover
     main: "#03a9f4",
     light: "#b3e5fc",
-
-    //Default:
-    //dark: colors.indigo[900],
-    //main: colors.indigo[500],
-    //light: colors.indigo[100]
   },
   secondary: {
     contrastText: white,

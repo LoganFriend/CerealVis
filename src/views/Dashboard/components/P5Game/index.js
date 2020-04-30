@@ -1,1 +1,1 @@
-export {default} from './P5Game';
+export { default } from "./P5Game";

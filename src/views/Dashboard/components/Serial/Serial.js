@@ -48,7 +48,8 @@ export default () => {
   const startstop = () => {
     var args = {};
 
-    if (text === "Start") { // true when the button says "Start"
+    if (text === "Start") {
+      // true when the button says "Start"
       args.cmd = "start"; // sets the command to start
       setText("Stop"); // changes the text value of the button to "Stop"
       setColor("primary");
@@ -71,7 +72,8 @@ export default () => {
     var args = {};
     args.cmd = "connect";
 
-    if (path == null) { // determines if the default port value should be used or not
+    if (path == null) {
+      // determines if the default port value should be used or not
       args.port = "AUTO";
     } else {
       args.port = path;
@@ -98,9 +100,14 @@ export default () => {
 
   // disconnect destroys the port connection when conditions are properly met
   const disconnect = async () => {
-    if ({text}.text === "Stop") { // true when the data is still flowing
+    if ({ text }.text === "Stop") {
+      // true when the data is still flowing
       // sends an error message that tells the user to stop the data flow before disconnecting
-      window.ipcRenderer.send("log", "error", "Please stop the data stream before closing the connection.");
+      window.ipcRenderer.send(
+        "log",
+        "error",
+        "Please stop the data stream before closing the connection."
+      );
       return;
     }
     var args = {};

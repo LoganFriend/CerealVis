@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FillUpBarSketch } from './FillUpBarSketch';
+import React, { useState, useEffect } from "react";
+import { FillUpBarSketch } from "./FillUpBarSketch";
 
 /*
 The P5FillUpBar hook passes data to the /FillUpBarSketch/index.js file
@@ -16,24 +16,22 @@ export default () => {
 
   // the implementation of the "datastream" listener
   const stream = (event, data) => {
-    setData((Math.floor(data / 1024 * 100)) * 2);
-  }
+    setData(Math.floor((data / 1024) * 100) * 2);
+  };
 
   // useEffect automatically called when this hook is rendered by react
   useEffect(() => {
-    window.ipcRenderer.on('datastream', stream); // creates listener
+    window.ipcRenderer.on("datastream", stream); // creates listener
 
     // return inside of useEffect is automatically called when this hook is no longer being rendered by react
     return () => {
-      window.ipcRenderer.removeListener('datastream', stream); // destroys listener
-    }
+      window.ipcRenderer.removeListener("datastream", stream); // destroys listener
+    };
   }, []);
 
   return (
     <div>
-      <FillUpBarSketch
-          p5Props={{ data: data }}
-      />
+      <FillUpBarSketch p5Props={{ data: data }} />
     </div>
   );
-}
+};

@@ -41,7 +41,8 @@ const SnackBar = () => {
 
   // handleClose deals determines when to close the message
   const handleClose = (event, reason) => {
-    if (reason === "clickaway") { // ensures that the message wont close when the screen is clicked
+    if (reason === "clickaway") {
+      // ensures that the message wont close when the screen is clicked
       return;
     }
     setOpen(false);

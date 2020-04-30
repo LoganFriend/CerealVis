@@ -1,1 +1,1 @@
-export {default} from './P5FillUpBar';
+export { default } from "./P5FillUpBar";

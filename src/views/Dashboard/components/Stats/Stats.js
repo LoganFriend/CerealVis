@@ -47,12 +47,14 @@ export default () => {
     current = Math.floor((data / 1024) * 100);
     setCurrent(current);
 
-    if (current > max) { // checks for a new max value
+    if (current > max) {
+      // checks for a new max value
       max = current;
       setMax(max);
     }
 
-    if (!sum) { // makes sure sum is no an invalid number
+    if (!sum) {
+      // makes sure sum is no an invalid number
       count = 0;
       sum = 0;
     }

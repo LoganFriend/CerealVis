@@ -35,7 +35,7 @@ const Topbar = (props) => {
     >
       <Toolbar variant="dense">
         <img alt="Logo" src="./images/logos/logo.svg" />
-        
+
         <div className={classes.flexGrow} />
         <RouterLink to="/">
           <HomeIcon className={classes.Button}></HomeIcon>

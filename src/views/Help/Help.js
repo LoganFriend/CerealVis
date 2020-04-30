@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/styles";
 import {
   Card,
@@ -96,18 +96,25 @@ const Help = () => {
             <CardHeader title="Troubleshooting"></CardHeader>
             <Divider />
             <CardContent>
-              <Typography variant="h5">I press start but no data is showing?</Typography>
-              <br/>
-              <Typography variant="body1" className={classes.content}>
-                Assuming that the sensor has been set up and configured 
-                to work with CerealVis, try disconnecting and reconnecting 
-                the device to see if the problem persists.
+              <Typography variant="h5">
+                I press start but no data is showing?
               </Typography>
-              <br/>
-              <Typography variant="h5">My device is not showing up?</Typography>
-              <br/>
+              <br />
               <Typography variant="body1" className={classes.content}>
-                In most cases, your device should connect automatically upon pressing the "Search Device" button. If not, a list will appear of all of the devices connected through serial ports. If you do not see your device in the list, try disconnecting the device, reconnect it to your computer, and press the "Search Device" button again. 
+                Assuming that the sensor has been set up and configured to work
+                with CerealVis, try disconnecting and reconnecting the device to
+                see if the problem persists.
+              </Typography>
+              <br />
+              <Typography variant="h5">My device is not showing up?</Typography>
+              <br />
+              <Typography variant="body1" className={classes.content}>
+                In most cases, your device should connect automatically upon
+                pressing the "Search Device" button. If not, a list will appear
+                of all of the devices connected through serial ports. If you do
+                not see your device in the list, try disconnecting the device,
+                reconnect it to your computer, and press the "Search Device"
+                button again.
               </Typography>
             </CardContent>
           </Card>

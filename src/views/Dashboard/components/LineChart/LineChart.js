@@ -98,7 +98,7 @@ export default () => {
     chartInstance.update({
       preservation: true,
     });
-  }
+  };
 
   return (
     <div>

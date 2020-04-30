@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { GameSketch } from './GameSketch';
+import React, { useState, useEffect } from "react";
+import { GameSketch } from "./GameSketch";
 
 /*
 The P5Game hook passes data to the /GameSketch/index.js file
@@ -16,24 +16,22 @@ export default () => {
 
   // the implementation of the "datastream" listener
   const stream = (event, data) => {
-    setData((Math.floor(data / 1024 * 100)) * 2.7);
-  }
+    setData(Math.floor((data / 1024) * 100) * 2.7);
+  };
 
   // useEffect automatically called when this hook is rendered by react
   useEffect(() => {
-    window.ipcRenderer.on('datastream', stream); // creates listener
+    window.ipcRenderer.on("datastream", stream); // creates listener
 
     // return inside of useEffect is automatically called when this hook is no longer being rendered by react
     return () => {
-      window.ipcRenderer.removeListener('datastream', stream); // destroys listener
-    }
+      window.ipcRenderer.removeListener("datastream", stream); // destroys listener
+    };
   }, []);
 
   return (
     <div>
-      <GameSketch
-          p5Props={{ data: data }}
-      />
+      <GameSketch p5Props={{ data: data }} />
     </div>
   );
-}
+};
