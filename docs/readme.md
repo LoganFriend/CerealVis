@@ -2,7 +2,7 @@
 
 CerealVis is a portable desktop application made to read in and display sensor data via a serial connection. CerealVis can connect to a variety of devices and start reading and displaying data from it. Features like auto connect and different types of visualization is what makes CerealVis a great tool for anyone looking to visualize sensor data.
 
-Here is everything you would need to familiarize yourself with the inernals of the project:
+Here is everything you would need to familiarize yourself with the internals of the project:
 
 ## Links
 
@@ -20,11 +20,11 @@ Electron Uses IPC channels to communicate between a main process (controls the m
 
 The Main Process has access to the node modules in the program, including SerialPort. In order to make calls to that module from the front end, we have to communicate over the IPC Communication Channels. 
 
-Channels have two pieces: an event and an argument. The event is useful when you want to reply to a sent message or find special metadata for a given message, whereas the argument has the important data that is sent along side the message.
+Channels have two pieces: an event and an argument. The event is useful when you want to reply to a sent message or find special metadata for a given message, whereas the argument has the primary important data that is sent along side the message.
 
-In this program, there are 3 main channels created:
+In this program, there are 3 channels:
 * serialport
-  * Sends back and forth an argument object that mainly contains a command, telling the serialport what to do.
+  * Sends back and forth an argument object that contains a command as well as any other significant data, telling the serialport what to do.
 * log
   * Used to pass logging messages back and forth between Processes. Used in the notification bar primarily.
 * datastream
@@ -38,3 +38,12 @@ The program works quite similarly to a standard React.js app. There is a base in
 
 Since Electron is inherently a web browser, the way to move in-between pages is by routing to a different url. This is where Routes.js comes into play, where it specifies what front end components and layout to show when you get redirected to a specific url. 
 
+### Dashboard Components
+
+The dashboard components are where the majority of our front end is located. In it you will find the various charts and front end components required to communicate with the backend. The most important component is Serial, as it is what allows the front end to establish a device connection with the backend. 
+
+In order to modify/add components, you will need to modify the Dashboard.js file.
+
+## Continued development. 
+
+The way the project was designed, there is no inherent API to interface with. While there is a "standard" to the way we communicate between a serial device and the serialport module, that standard can be modified very easily at this time. In the event that further development continues, I encourage you to visit some of the links above. A general knowledge of Electron, React.js, and IOT devices will be very helpful.
